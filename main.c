@@ -4,5 +4,6 @@ int main()
 	printf("go hentai");
 	printf("go");
 	printf("pizdec");
+	printf("logic");
 	return (0);
 }
