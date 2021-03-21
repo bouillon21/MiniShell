@@ -6,7 +6,7 @@
 /*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:55:36 by cshelli           #+#    #+#             */
-/*   Updated: 2020/11/09 16:17:21 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 11:56:49 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*ft_strdup(char *src)
 	char	*buf;
 
 	n = 0;
-	if (!(buf = (char *)malloc(ft_strlen(src) * sizeof(char) + 1)))
+	buf = (char *)malloc(ft_strlen(src) * sizeof(char) + 1);
+	if (!buf)
 		return (0);
 	while (src[n])
 	{

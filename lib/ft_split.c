@@ -6,7 +6,7 @@
 /*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 17:11:39 by cshelli           #+#    #+#             */
-/*   Updated: 2021/03/05 17:07:43 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 11:37:19 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	size_str(char const *s, char c)
 	return (i);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		i;
 	int		start;

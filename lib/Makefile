@@ -6,11 +6,11 @@
 #    By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/10 19:15:16 by cshelli           #+#    #+#              #
-#    Updated: 2021/01/28 14:50:34 by cshelli          ###   ########.fr        #
+#    Updated: 2021/03/21 11:21:23 by cshelli          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-HEADER	= ../includes/
+HEADER	= ./../include/
 
 SRCS			=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
 					ft_strlcat.c ft_strncmp.c ft_substr.c ft_atoi.c ft_isalpha.c \

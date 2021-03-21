@@ -6,7 +6,7 @@
 /*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 16:33:11 by cshelli           #+#    #+#             */
-/*   Updated: 2020/11/07 21:08:42 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 12:16:35 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	i = 0;
-	if (!s || !(buf = (char *)malloc(sizeof(*s) * (len + 1))))
+	buf = (char *)malloc(sizeof(*s) * (len + 1));
+	if (!s || !buf)
 		return (0);
 	if (start >= ft_strlen((char *)s))
 	{

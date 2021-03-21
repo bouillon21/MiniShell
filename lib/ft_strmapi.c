@@ -6,7 +6,7 @@
 /*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 19:03:16 by cshelli           #+#    #+#             */
-/*   Updated: 2020/11/07 19:17:59 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 11:58:35 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char	*buf;
 
 	count = 0;
-	if (!s || !f || !(buf = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1))))
+	buf = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!s || !f || !buf)
 		return (0);
 	while (s[count])
 	{

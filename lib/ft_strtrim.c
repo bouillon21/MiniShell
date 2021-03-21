@@ -6,7 +6,7 @@
 /*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 18:40:06 by cshelli           #+#    #+#             */
-/*   Updated: 2020/11/09 16:45:34 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 12:16:02 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	entry(char const c, char const *set)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (set[i])
@@ -27,7 +27,7 @@ static int	entry(char const c, char const *set)
 	return (0);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	start;
@@ -44,12 +44,12 @@ char		*ft_strtrim(char const *s1, char const *set)
 	end = ft_strlen(s1);
 	while (end > start && entry(s1[end - 1], set))
 		end--;
-	if (!(buf = (char *)malloc(sizeof(*s1) * (end - start + 1))))
+	buf = (char *)malloc(sizeof(*s1) * (end - start + 1));
+	if (!buf)
 		return (0);
 	while (start < end)
 	{
-		buf[i] = s1[start];
-		i++;
+		buf[i++] = s1[start];
 		start++;
 	}
 	buf[i] = '\0';

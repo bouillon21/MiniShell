@@ -6,7 +6,7 @@
 /*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:59:39 by cshelli           #+#    #+#             */
-/*   Updated: 2020/11/07 18:39:57 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 11:19:48 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	sr(int size, char *buf, int n, int flag)
 	}
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(long long int n)
 {
 	char	*buf;
 	int		size;
@@ -48,9 +48,8 @@ char		*ft_itoa(int n)
 	size = num_size(n);
 	if (n == 0)
 		return (ft_strdup("0"));
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (!n || !(buf = (char *)malloc((size) * sizeof(char) + 1)))
+	buf = (char *)malloc((size) * sizeof(char) + 1);
+	if (!n || !buf)
 		return (0);
 	buf[size] = '\0';
 	if (n < 0)

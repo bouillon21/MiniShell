@@ -6,7 +6,7 @@
 /*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:54:19 by cshelli           #+#    #+#             */
-/*   Updated: 2020/11/05 13:55:01 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 11:56:17 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *str, int symbol)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (str[count])

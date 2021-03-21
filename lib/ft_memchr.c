@@ -6,7 +6,7 @@
 /*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:16:55 by cshelli           #+#    #+#             */
-/*   Updated: 2020/11/07 16:40:40 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 11:34:44 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memchr(void *memptr, int val, size_t num)
 	unsigned char	*str;
 
 	i = 0;
-	str = (unsigned char*)memptr;
+	str = (unsigned char *)memptr;
 	while (i < num)
 	{
 		if (str[i] == (unsigned char)val)

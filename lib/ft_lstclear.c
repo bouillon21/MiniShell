@@ -6,7 +6,7 @@
 /*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:36:22 by cshelli           #+#    #+#             */
-/*   Updated: 2020/11/10 14:48:42 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 11:29:44 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list *list;
-	t_list *next;
+	t_list	*list;
+	t_list	*next;
 
-	if (!(list = *lst))
+	list = *lst;
+	if (!list)
 		return ;
 	while (list)
 	{
