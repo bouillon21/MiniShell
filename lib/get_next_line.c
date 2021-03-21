@@ -3,68 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 13:24:04 by cshelli           #+#    #+#             */
-/*   Updated: 2020/11/17 19:29:08 by cshelli          ###   ########.fr       */
+/*   Created: 2020/11/27 09:05:26 by hmickey           #+#    #+#             */
+/*   Updated: 2021/03/21 13:51:10 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*check_sbuf(char **sbuf, char **line)
+int	check_endl(char *str)
 {
-	char		*pointer;
-	char		*tmp;
+	size_t	i;
 
-	pointer = NULL;
-	if (*sbuf)
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i] != '\0')
 	{
-		if ((pointer = ft_strchr(*sbuf, '\n')))
-		{
-			*pointer = '\0';
-			*line = ft_strdup(*sbuf);
-			tmp = *sbuf;
-			*sbuf = ft_strdup((pointer + 1));
-			free(tmp);
-		}
-		else
-		{
-			*line = ft_strdup(*sbuf);
-			free(*sbuf);
-			*sbuf = NULL;
-		}
+		if (str[i] == '\n')
+			return (i);
+		i++;
 	}
-	else
-		*line = ft_strdup("");
-	return (pointer);
+	return (-1);
 }
 
-int		get_next_line(int fd, char **line)
+int	check_eof(int reading, char **str)
 {
-	static char	*sbuf;
-	char		*buf;
-	int			count;
-	char		*newline;
+	if (reading == 0)
+	{
+		if (str)
+		{
+			free(*str);
+			*str = NULL;
+		}
+		return (0);
+	}
+	return (1);
+}
+
+int	get_next_line(int fd, char **line)
+{
+	int			reading;
+	char		*buff;
+	static char	*str;
 	char		*tmp;
 
-	buf = NULL;
-	if ((read(fd, buf, 0) < 0 || !line || BUFFER_SIZE <= 0) ||
-		!(buf = (char *)malloc(BUFFER_SIZE + 1)))
+	buff = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buff)
 		return (-1);
-	newline = check_sbuf(&sbuf, line);
-	while (!newline && (count = read(fd, buf, BUFFER_SIZE)))
+	reading = -1;
+	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || !line)
+		return (-1);
+	while (check_endl(str) == -1 && reading != 0)
 	{
-		buf[count] = '\0';
-		if ((newline = ft_strchr(buf, '\n')))
-		{
-			*newline = '\0';
-			sbuf = ft_strdup(newline + 1);
-		}
-		tmp = *line;
-		*line = ft_strjoin(*line, buf);
+		reading = read(fd, buff, BUFFER_SIZE);
+		buff[reading] = '\0';
+		tmp = str;
+		str = ft_gnl_strjoin(str, buff);
 		free(tmp);
 	}
-	free(buf);
-	return (count || sbuf) ? 1 : 0;
+	*line = ft_gnl_substr(str, 0, check_endl(str));
+	tmp = str;
+	str = ft_gnl_substr(str, check_endl(str) + 1, ft_strlen(str));
+	free(tmp);
+	free(buff);
+	return (check_eof(reading, &str));
 }

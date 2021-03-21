@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:51:22 by cshelli           #+#    #+#             */
-/*   Updated: 2021/03/21 11:19:42 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/03/21 14:01:29 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
@@ -35,7 +35,7 @@ int					ft_lstsize(t_list *lst);
 void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t number, size_t size);
 void				*ft_memccpy(void *destptr, const void *srcptr,
-								int c, size_t num);
+						int c, size_t num);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
@@ -65,5 +65,5 @@ size_t				ft_strlcpy(char *destptr, const char *srcptr, size_t size);
 t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-								void (*del)(void *));
+						void (*del)(void *));
 #endif
