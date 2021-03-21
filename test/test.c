@@ -6,23 +6,23 @@
 #include "../include/get_next_line.h"
 #include <signal.h>
 
-int main(int argc, char **argv, char **envp)
-{
-	char *line;
-	int ret = 1;
+// int main(int argc, char **argv, char **envp)
+// {
+// 	char *line;
+// 	int ret = 1;
 
-	char **line_array;
-	int i = -1;
-	line_array = malloc(500);
-	while (ret)
-	{
-		ret = get_next_line(0, &line);
-		line_array[++i] = line;
-	}
-	i = -1;
-	while(line_array[++i])
-		printf("%s\n", line_array[i]);
-}
+// 	char **line_array;
+// 	int i = -1;
+// 	line_array = malloc(500);
+// 	while (ret)
+// 	{
+// 		ret = get_next_line(0, &line);
+// 		line_array[++i] = line;
+// 	}
+// 	i = -1;
+// 	while(line_array[++i])
+// 		printf("%s\n", line_array[i]);
+// }
 
 
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv, char **envp)
 
 // void do_stuff (void)
 // {
-// 	char a;
+// 	char a;	
 // 	read(0, &a, 1);
 // 	puts ("Doing stuff while waiting for alarm....");
 // }
