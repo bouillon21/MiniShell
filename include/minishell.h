@@ -1,3 +1,6 @@
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -35,3 +38,5 @@ typedef	struct s_all
 	t_token		token;
 	t_term		term;
 }				t_all;
+
+#endif
