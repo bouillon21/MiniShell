@@ -8,6 +8,7 @@
 #include <term.h>
 #include <curses.h>
 #include <termcap.h>
+#include <termios.h>
 
 typedef struct s_token
 {
@@ -23,7 +24,7 @@ typedef struct s_term
 {
 	char	*termtype;
 	char	*tgetnum;
-	char	termbuf[1024];
+	char	*termbuf;
 	char	*tgetflag;
 	char	*tgetstr;
 	int		tgetent;
