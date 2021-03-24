@@ -31,7 +31,7 @@ void	test(char *b)
 
 void handle_sigint(int sig)
 {
-    printf("Caught signal %d\n", sig);
+    printf("exit\n");
 	exit(0);
 }
 
@@ -39,12 +39,27 @@ int main(int argc, char **argv, char **envp)
 {
 	t_term	term;
 
+	int len;
+	char	symb;
+
+	symb = ' ';
+	char	str[1024];
+	int i;
+
+	i = 0;
+	struct termios	terminal;
+	tcgetattr(0, &terminal);
+	terminal.c_lflag &= ~(ECHO);
+	terminal.c_lflag &= ~(ICANON);
+	tcsetattr(0, TCSANOW, &terminal);
 	term.termtype = getenv("xterm-256color");
 	term.tgetent = tgetent(term.termbuf, term.termtype);
 	signal(SIGINT, handle_sigint);
-	alarm(2);
-	while(1){
-		printf("PIZDA\n");
+	while(symb != '\n')
+	{
+		read(0, &symb, 1);
+		write(0, &symb, 1);
+		str[i++] = symb;
 	}
-	signal(SIGALRM, fail(0));
+	printf("%s\n", str);
 }
