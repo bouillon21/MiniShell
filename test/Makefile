@@ -6,7 +6,7 @@
 #    By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/03/21 14:26:06 by cshelli          ###   ########.fr        #
+#    Updated: 2021/03/24 06:53:12 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ PATH_CONF	=	./src/parse_config/
 
 PATH_GNL	=	../lib/
 
-SRCS		=	test.c\
+SRCS		=	main.c\
 				${PATH_GNL}get_next_line.c\
 				${PATH_GNL}get_next_line_utils.c\
 
@@ -30,6 +30,8 @@ RM			= rm -f
 
 CFLAGS		= #-Wall -Wextra -Werror 
 
+TERMLIB		=	-ltermcap
+
 .c.o:		
 				${CC} -g ${CFLAGS}  -c -I./../include/ $< -o ${<:.c=.o}
 
@@ -38,7 +40,7 @@ CFLAGS		= #-Wall -Wextra -Werror
 
 $(NAME):		${OBJS} ${INCLUDE}
 				@${MAKE} -C ../lib 
-				@${CC} ../lib/libft.a ${OBJS} -o minishell
+				@${CC} ${TERMLIB} ../lib/libft.a ${OBJS} -o minishell
 
 all:			${NAME}
 
