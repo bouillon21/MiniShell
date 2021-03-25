@@ -10,6 +10,11 @@
 #include <termcap.h>
 #include <termios.h>
 
+#define RESET   "\033[0m"
+#define RED     "\033[1;31m"
+#define YELLOW  "\033[1;33m"
+#define WHITE   "\033[1;37m"
+
 typedef struct s_token
 {
 	char			*str;
@@ -32,6 +37,10 @@ typedef struct s_term
 
 typedef	struct s_all
 {
-	t_token		token;
-	t_term		term;
+	t_token			token;
+	t_term			term;
 }				t_all;
+
+void	terminal(t_all *all);
+void	handle_sigint(int sig);
+void	write_minishell(void);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+         #
+#    By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/03/24 06:53:12 by hmickey          ###   ########.fr        #
+#    Updated: 2021/03/25 16:26:40 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,17 @@ INCLUDE		=
 
 PATH_CONF	=	./src/parse_config/
 
-PATH_GNL	=	../lib/
+PATH_LIB	=	../lib/
+
+PATH_SIG	=	srcs/signals/
+
+PATH_TERM	=	srcs/terminal/
 
 SRCS		=	main.c\
-				${PATH_GNL}get_next_line.c\
-				${PATH_GNL}get_next_line_utils.c\
+				${PATH_LIB}get_next_line.c\
+				${PATH_LIB}get_next_line_utils.c\
+				${PATH_SIG}signal.c \
+				${PATH_TERM}terminal.c\
 
 OBJS		= ${SRCS:.c=.o}
 
@@ -34,7 +40,6 @@ TERMLIB		=	-ltermcap
 
 .c.o:		
 				${CC} -g ${CFLAGS}  -c -I./../include/ $< -o ${<:.c=.o}
-
 
 .PHONY:			all clean fclean re
 
