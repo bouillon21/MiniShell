@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   secondary_functions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/24 16:43:17 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/26 08:27:56 by hmickey          ###   ########.fr       */
+/*   Created: 2021/03/26 08:15:28 by hmickey           #+#    #+#             */
+/*   Updated: 2021/03/26 10:45:46 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 
-void handle_sigint(int sig)
+int	ft_putchar(int c)
 {
-	write(1, "\n", 1);
-	write_minishell();
+	return(write(1, &c, 1));
 }
 
-void	ctrl_d_exit(void)
+void	write_minishell(void)
 {
-	tputs(restore_cursor, 1, ft_putchar);
-	tputs(tigetstr("ed"), 1, ft_putchar);
-	write(1, YELLOW, ft_strlen(YELLOW));
-	printf("exit");
-	exit(0);
+	write(1, RED, ft_strlen(RED));
+	write(1, "🔥minishell🔥$ ", ft_strlen("🔥minishell🔥$ "));
+	write(1, RESET, ft_strlen(RESET));
+	tputs(save_cursor, 1, ft_putchar);
+}
+
+void	clear_buf(char *buf)
+{
+	int i;
+
+	i = -1;
+	if (buf)
+		while (buf[++i])
+			buf[i] = 0;
 }

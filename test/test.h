@@ -9,6 +9,7 @@
 #include <curses.h>
 #include <termcap.h>
 #include <termios.h>
+#include <string.h>
 
 #define RESET   "\033[0m"
 #define RED     "\033[1;31m"
@@ -44,3 +45,8 @@ typedef	struct s_all
 void	terminal(t_all *all);
 void	handle_sigint(int sig);
 void	write_minishell(void);
+void	ctrl_d_exit(void);
+void	write_minishell(void);
+int		ft_putchar(int c);
+void	clear_buf(char *buf);
+void	main_loop(t_all *all);

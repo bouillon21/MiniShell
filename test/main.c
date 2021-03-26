@@ -19,4 +19,6 @@ int main(int argc, char **argv, char **envp)
 	t_all all;
 
 	terminal(&all);
+	// signal(SIGINT, handle_sigint);
+	main_loop(&all);
 }
