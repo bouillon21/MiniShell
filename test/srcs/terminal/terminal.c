@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/26 11:38:03 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/26 14:21:34 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,27 @@ int	check_key(char *str)
 	return (0);
 }
 
+void	build_string(char *str, char **tmp)
+{
+	char *old_string;
+
+	write(1, str, ft_strlen(str));
+
+	old_string = *tmp;
+	*tmp = ft_strjoin(str, *tmp);
+	free(old_string);
+// write(1, *tmp, ft_strlen(*tmp));
+}
+
 void	main_loop(t_all *all)
 {
 	char	symb;
 	char	*str;
 	int 	i;
 	char	*head;
+	char	*tmp;
 
+	tmp = malloc(1);
 	str = malloc(5000);
 	while (1)
 	{
@@ -59,12 +73,13 @@ void	main_loop(t_all *all)
 		while(symb != '\n')
 		{
 			read(0, str, 100);
+			build_string(str, &tmp);
 			if (!check_key(str))
 				write(1, str, ft_strlen(str));
 			if (ft_strchr(str, '\n'))
 				symb = '\n';
 		}
-		printf("%s\n", "here is command");
+		printf("%s\n", tmp);
 	}
 }
 
