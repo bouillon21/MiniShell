@@ -28,6 +28,11 @@ void	build_string(char *str, char **tmp)
 	free(old_string);
 }
 
+void	pizda(char *str)
+{
+	printf("%c\n", str[2]);
+}
+
 void	main_loop(t_all *all)
 {
 	char	*str;
@@ -42,7 +47,6 @@ void	main_loop(t_all *all)
 		{
 			str = malloc(4000);
 			read(0, str, 100);
-			// printf("CURRENT - %d, START - %d\n", all->cursor.cursor_current_pos, all->cursor.cursor_start_pos);
 			if (!check_key(str, all))
 			{
 				all->cursor.cursor_end_pos += write(1, str, ft_strlen(str));
@@ -56,6 +60,8 @@ void	main_loop(t_all *all)
 			}
 			clear_buf(&str);
 		}
+		if (all->tmp_string[0] == 0)
+			write(1, "\n", 1);
 		printf("%s", all->tmp_string);
 		clear_buf(&all->tmp_string);
 	}
