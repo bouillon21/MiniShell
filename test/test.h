@@ -28,19 +28,29 @@ typedef struct s_token
 
 typedef struct s_term
 {
-	char	*termtype;
-	char	*tgetnum;
-	char	*termbuf;
-	char	*tgetflag;
-	char	*tgetstr;
-	int		tgetent;
-}			t_term;
+	char			*termtype;
+	char			*tgetnum;
+	char			*termbuf;
+	char			*tgetflag;
+	char			*tgetstr;
+	int				tgetent;
+}					t_term;
+
+typedef struct s_cursor
+{
+	int				cursor_start_pos;
+	int				cursor_end_pos;
+	int				cursor_current_pos;		
+}					t_cursor;;
+
 
 typedef	struct s_all
 {
 	t_token			token;
 	t_term			term;
-}				t_all;
+	t_cursor		cursor;
+	char			*tmp_string;
+}					t_all;
 
 void	terminal(t_all *all);
 void	handle_sigint(int sig);
@@ -48,7 +58,8 @@ void	write_minishell(void);
 void	ctrl_d_exit(void);
 void	write_minishell(void);
 int		ft_putchar(int c);
-void	clear_buf(char *buf);
+void	clear_buf(char **buf);
 void	main_loop(t_all *all);
-int		check_key(char *str);
-int		check_key2(char *str);
+int		check_key(char *str, t_all *all);
+int		check_key2(char *str, t_all *all);
+void	delete_symbol(t_all *all);

@@ -6,33 +6,35 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/27 08:53:13 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/27 13:54:50 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 
-int		press_left(char *str)
+int		press_left(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\e[D", ft_strlen(str)))
 	{
+		all->cursor.cursor_current_pos--;
 		tputs(cursor_left, 1, ft_putchar);
 		return (1);
 	}
 	return(0);
 }
 
-int		press_right(char *str)
+int		press_right(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\e[C", ft_strlen(str)))
 	{
+		all->cursor.cursor_current_pos++;
 		tputs(cursor_right, 1, ft_putchar);
 		return (1);
 	}
 	return(0);
 }
 
-int		press_up(char *str)
+int		press_up(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\e[A", ft_strlen(str)))
 	{
@@ -44,7 +46,7 @@ int		press_up(char *str)
 	return(0);
 }
 
-int		press_down(char *str)
+int		press_down(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\e[B", ft_strlen(str)))
 	{
@@ -56,13 +58,18 @@ int		press_down(char *str)
 	return(0);
 }
 
-int	check_key(char *str)
+int	check_key(char *str, t_all *all)
 {
-	printf("%s", str);
-	press_left(str);
-	press_right(str);
-	press_up(str);
-	press_down(str);
-	check_key2(str);
-	return (0);
+	int i;
+
+	i = press_left(str, all);
+	if (i != 1)
+		i = press_right(str, all);
+	if (i != 1)
+		i = press_up(str, all);
+	if (i != 1)
+		i = press_down(str, all);
+	if (i != 1)
+		i = check_key2(str, all);
+	return (i);
 }
