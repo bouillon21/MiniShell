@@ -12,13 +12,16 @@ void	get_save_env(t_list **head ,char **envp)
 	}
 }
 
-char	**env_srh(t_list **head, char *need)
+char	**env_srh(t_list **env, char *need)
 {
-	while ((*head)->next)
+	t_list	*head;
+
+	head = *env;
+	while (head->next)
 	{
-		if (ft_strnstr((*head)->content, need, ft_strlen(need)))
-			return(&(*head)->content);
-		(*head) = (*head)->next;
+		if (ft_strnstr(head->content, need, ft_strlen(need)))
+			return(&head->content);
+		head = head->next;
 	}
 	return(NULL);
 }

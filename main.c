@@ -3,8 +3,8 @@
 int main (int argc, char **argv, char **envp)
 {
 	t_list	*env;
-	t_list *head;
-	head = env;
+	// t_list *head;
+	// head = env;
 
 	// env = malloc(sizeof(t_list));
 	get_save_env(&env, envp);

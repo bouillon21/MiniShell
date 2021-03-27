@@ -2,13 +2,11 @@
 
 void	cd(t_list **env, char *arg)
 {
-	chdir(arg);
-	char **line;//есть лик от line
-	t_list *head;
+	// chdir(arg);
+	char *line;
 
-	head = *env;
-	line = env_srh(&head, "USER=");
-	printf("%s\n", *line);
-	*line = "qqq";
+	line = *env_srh(env, "USER=");
+	printf("%s\n", line);
+	line = "qqq";
 	printf_env(*env);
 }
