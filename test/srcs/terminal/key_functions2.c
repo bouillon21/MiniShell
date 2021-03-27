@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   secondary_functions.c                              :+:      :+:    :+:   */
+/*   key_functions2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/26 08:15:28 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/26 17:11:41 by hmickey          ###   ########.fr       */
+/*   Created: 2021/03/27 08:42:34 by hmickey           #+#    #+#             */
+/*   Updated: 2021/03/27 08:49:47 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 
-int	ft_putchar(int c)
+int		press_ctrl_d(char *str)
 {
-	return(write(1, &c, 1));
+	if (ft_strnstr(str, "\004", ft_strlen(str)))
+	{
+		ctrl_d_exit();
+		return(1);
+	}
+	return(0);
 }
 
-void	write_minishell(void)
+int		press_backspace(char *str)
 {
-	write(1, RED, ft_strlen(RED));
-	write(1, "🔥minishell🔥$ ", ft_strlen("🔥minishell🔥$ "));
-	write(1, RESET, ft_strlen(RESET));
-	tputs(save_cursor, 1, ft_putchar);
+	if (ft_strnstr(str, "\177", ft_strlen(str)))
+	{
+		tputs(cursor_left, 1, ft_putchar);
+		tputs(tgetstr("dc", 0), 1, ft_putchar);
+		return(1);
+	}
+	return (0);
 }
 
-void	clear_buf(char *buf)
+int		check_key2(char *str)
 {
-	int i;
-
-	i = -1;
-	if (buf)
-		while (buf[++i])
-			buf[i] = 0;
-	free(buf);
+	press_ctrl_d(str);
+	press_backspace(str);
+	return (0);
 }
+

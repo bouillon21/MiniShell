@@ -50,3 +50,5 @@ void	write_minishell(void);
 int		ft_putchar(int c);
 void	clear_buf(char *buf);
 void	main_loop(t_all *all);
+int		check_key(char *str);
+int		check_key2(char *str);

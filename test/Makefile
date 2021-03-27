@@ -6,7 +6,7 @@
 #    By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/03/26 12:54:15 by hmickey          ###   ########.fr        #
+#    Updated: 2021/03/27 08:46:27 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRCS		=	main.c\
 				${PATH_SIG}signal.c \
 				${PATH_TERM}terminal.c\
 				${PATH_TERM}secondary_functions.c\
+				${PATH_TERM}key_functions.c\
+				${PATH_TERM}key_functions2.c\
 
 OBJS		= ${SRCS:.c=.o}
 

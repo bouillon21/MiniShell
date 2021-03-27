@@ -6,52 +6,19 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/26 14:21:34 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/26 17:56: by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 
-int	check_key(char *str)
-{
-	if(ft_strnstr(str, "\e[A", ft_strlen(str)))
-	{
-		tputs(restore_cursor, 1, ft_putchar);
-		tputs(tigetstr("ed"), 1, ft_putchar);
-		write(1, "up", 3);
-		return(1);
-	}
-	else if (ft_strnstr(str, "\e[B", ft_strlen(str)))
-	{
-		tputs(restore_cursor, 1, ft_putchar);
-		tputs(tigetstr("ed"), 1, ft_putchar);
-		write(1, "down", 4);	
-		return(1);
-	}
-	else if (ft_strnstr(str, "\004", ft_strlen(str)))
-	{
-		ctrl_d_exit();
-		return(1);
-	}
-	else if (ft_strnstr(str, "\177", ft_strlen(str)))
-	{
-		tputs(cursor_left, 1, ft_putchar);
-		tputs(tgetstr("dc", 0), 1, ft_putchar);
-		return(1);
-	}
-	return (0);
-}
-
 void	build_string(char *str, char **tmp)
 {
 	char *old_string;
 
-	write(1, str, ft_strlen(str));
-
 	old_string = *tmp;
-	*tmp = ft_strjoin(str, *tmp);
+	*tmp = ft_strjoin(*tmp, str);
 	free(old_string);
-// write(1, *tmp, ft_strlen(*tmp));
 }
 
 void	main_loop(t_all *all)
@@ -62,24 +29,27 @@ void	main_loop(t_all *all)
 	char	*head;
 	char	*tmp;
 
-	tmp = malloc(1);
-	str = malloc(5000);
 	while (1)
 	{
 		i = 0;
-		clear_buf(str);
 		write_minishell();
 		symb = 0;
-		while(symb != '\n')
+		tmp = malloc(9999);
+		str = malloc(9999);
+		while(1)
 		{
 			read(0, str, 100);
-			build_string(str, &tmp);
 			if (!check_key(str))
-				write(1, str, ft_strlen(str));
+			{
+				// write(1, str, ft_strlen(str)); 
+				build_string(str, &tmp);
+			}
 			if (ft_strchr(str, '\n'))
-				symb = '\n';
+				break ;
 		}
-		printf("%s\n", tmp);
+		printf("%s", tmp);
+		clear_buf(str);
+		clear_buf(tmp);
 	}
 }
 
