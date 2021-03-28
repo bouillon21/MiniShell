@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:43:17 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/28 09:31:41 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/28 10:06:18 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void handle_sigint(int sig)
 {
+	clear_buf(&g_string);
+	g_string = malloc(4096);
 	write(1, "\n", 1);
 	write_minishell();
 }

@@ -14,9 +14,9 @@
 
 void	refresh_cursor(t_all *all)
 {
-	all->cursor.start_pos = ft_strlen("🔥minishell🔥$ ") + 1;
-	all->cursor.end_pos = all->cursor.start_pos;
-	all->cursor.current_pos = all->cursor.start_pos;
+	all->cursor.start_pos = 0;
+	all->cursor.end_pos = 0;
+	all->cursor.current_pos = 0;
 }
 
 void	build_string(char *str, char **tmp)
@@ -40,8 +40,8 @@ void	main_loop(t_all *all)
 	while (1)
 	{
 		write_minishell();
-		all->tmp_string = malloc(100);
-		all->tmp_string[0] = 0;
+		g_string = malloc(100);
+		g_string[0] = 0;
 		refresh_cursor(all);
 		while(1)
 		{
@@ -51,7 +51,7 @@ void	main_loop(t_all *all)
 			{
 				all->cursor.end_pos += write(1, str, ft_strlen(str));
 				all->cursor.current_pos += ft_strlen(str);
-				build_string(str, &all->tmp_string);
+				build_string(str, &g_string);
 			}
 			if (ft_strchr(str, '\n'))
 			{
@@ -60,10 +60,10 @@ void	main_loop(t_all *all)
 			}
 			clear_buf(&str);
 		}
-		if (all->tmp_string[0] == 0)
+		if (g_string[0] == 0)
 			write(1, "\n", 1);
-		printf("%s", all->tmp_string);
-		clear_buf(&all->tmp_string);
+		printf("%s", g_string);
+		clear_buf(&g_string);
 	}
 }
 

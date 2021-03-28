@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:42:34 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/28 09:32:43 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/28 10:04:46 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int		check_key2(char *str, t_all *all)
 	int i;
 	
 	i = 0;
-	if (all->tmp_string[0] == 0)
+	if (g_string[0] == 0)
 		i = press_ctrl_d(str);
-	if (all->tmp_string[0] == 0 && !ft_isprint(*str))
+	if (g_string[0] == 0 && !ft_isprint(*str))
 		return (1);
 	if (all->cursor.current_pos > all->cursor.start_pos
-		&& all->tmp_string[0] != '\0')
+		&& g_string[0] != '\0')
 			i = press_backspace(str, all);
 	return (i);
 }

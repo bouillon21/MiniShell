@@ -16,6 +16,8 @@
 #define YELLOW  "\033[1;33m"
 #define WHITE   "\033[1;37m"
 
+char *g_string;
+
 typedef struct s_token
 {
 	char			*str;
@@ -49,7 +51,6 @@ typedef	struct s_all
 	t_token			token;
 	t_term			term;
 	t_cursor		cursor;
-	char			*tmp_string;
 }					t_all;
 
 void	terminal(t_all *all);
