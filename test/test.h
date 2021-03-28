@@ -21,7 +21,7 @@ char *g_string;
 typedef struct s_token
 {
 	char			*command;
-	char			*args;
+	char			**args;
 	char			**flags;
 	char			separate;
 	struct s_token	*prev;
@@ -48,7 +48,7 @@ typedef struct s_cursor
 
 typedef	struct s_all
 {
-	t_token			token;
+	t_token			*token;
 	t_term			term;
 	t_cursor		cursor;
 }					t_all;
@@ -65,3 +65,4 @@ int		check_key(char *str, t_all *all);
 int		check_key2(char *str, t_all *all);
 void	delete_symbol(t_all *all);
 void	parse_string(t_all *all);
+t_token	*create_new_token(t_token *token);

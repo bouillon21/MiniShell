@@ -16,6 +16,7 @@ int main(int argc, char **argv, char **envp)
 {
 	t_all all;
 
+	all.token = malloc(sizeof(t_token));
 	terminal(&all);
 	signal(SIGINT, handle_sigint);
 	main_loop(&all);

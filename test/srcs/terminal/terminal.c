@@ -55,7 +55,8 @@ void	main_loop(t_all *all)
 		}
 		if (g_string[0] == 0)
 			write(1, "\n", 1);
-		parse_string(all);
+		else
+			parse_string(all);
 		clear_buf(&g_string);
 	}
 }
