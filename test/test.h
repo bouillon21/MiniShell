@@ -20,8 +20,8 @@ char *g_string;
 
 typedef struct s_token
 {
-	char			*str;
-	int				type;
+	char			*command;
+	char			*args;
 	char			**flags;
 	char			separate;
 	struct s_token	*prev;
@@ -64,3 +64,4 @@ void	main_loop(t_all *all);
 int		check_key(char *str, t_all *all);
 int		check_key2(char *str, t_all *all);
 void	delete_symbol(t_all *all);
+void	parse_string(t_all *all);

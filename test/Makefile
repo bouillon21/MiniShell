@@ -6,7 +6,7 @@
 #    By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/03/27 14:43:43 by hmickey          ###   ########.fr        #
+#    Updated: 2021/03/28 15:01:33 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ PATH_SIG	=	srcs/signals/
 
 PATH_TERM	=	srcs/terminal/
 
+PATH_PARSE	=	srcs/parsing/
+
 SRCS		=	main.c\
 				${PATH_LIB}get_next_line.c\
 				${PATH_LIB}get_next_line_utils.c\
@@ -31,6 +33,7 @@ SRCS		=	main.c\
 				${PATH_TERM}key_functions.c\
 				${PATH_TERM}key_functions2.c\
 				${PATH_TERM}del_bs_functions.c\
+				${PATH_PARSE}parse_input.c\
 
 OBJS		= ${SRCS:.c=.o}
 

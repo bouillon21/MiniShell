@@ -19,18 +19,15 @@ void	refresh_cursor(t_all *all)
 	all->cursor.current_pos = 0;
 }
 
-void	build_string(char *str, char **tmp)
+void	build_string(t_all *all, char *str, char **tmp)
 {
 	char *old_string;
 
+	all->cursor.end_pos += write(1, str, ft_strlen(str));
+	all->cursor.current_pos += ft_strlen(str);
 	old_string = *tmp;
 	*tmp = ft_strjoin(*tmp, str);
 	free(old_string);
-}
-
-void	pizda(char *str)
-{
-	printf("%c\n", str[2]);
 }
 
 void	main_loop(t_all *all)
@@ -40,19 +37,15 @@ void	main_loop(t_all *all)
 	while (1)
 	{
 		write_minishell();
+		refresh_cursor(all);
 		g_string = malloc(100);
 		g_string[0] = 0;
-		refresh_cursor(all);
 		while(1)
 		{
-			str = malloc(4000);
+			str = malloc(4096);
 			read(0, str, 100);
 			if (!check_key(str, all))
-			{
-				all->cursor.end_pos += write(1, str, ft_strlen(str));
-				all->cursor.current_pos += ft_strlen(str);
-				build_string(str, &g_string);
-			}
+				build_string(all, str, &g_string);
 			if (ft_strchr(str, '\n'))
 			{
 				clear_buf(&str);
@@ -62,7 +55,7 @@ void	main_loop(t_all *all)
 		}
 		if (g_string[0] == 0)
 			write(1, "\n", 1);
-		printf("%s", g_string);
+		parse_string(all);
 		clear_buf(&g_string);
 	}
 }
