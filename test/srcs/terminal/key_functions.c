@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/27 17:14:05 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/28 09:32:42 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		press_left(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\e[D", ft_strlen(str)))
 	{
-		all->cursor.cursor_current_pos--;
+		all->cursor.current_pos--;
 		tputs(cursor_left, 1, ft_putchar);
 		return (1);
 	}
@@ -27,7 +27,7 @@ int		press_right(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\e[C", ft_strlen(str)))
 	{
-		all->cursor.cursor_current_pos++;
+		all->cursor.current_pos++;
 		tputs(cursor_right, 1, ft_putchar);
 		return (1);
 	}
@@ -63,7 +63,7 @@ int	check_key(char *str, t_all *all)
 	int i;
 
 	i = press_left(str, all);
-	if (i != 1)
+	if (i != 1 && all->cursor.current_pos < all->cursor.end_pos)
 		i = press_right(str, all);
 	if (i != 1)
 		i = press_up(str, all);

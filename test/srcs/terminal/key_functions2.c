@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:42:34 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/27 17:22:57 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/28 09:32:43 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int		press_backspace(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\177", ft_strlen(str)))
 	{
-		all->cursor.cursor_end_pos--;
-		all->cursor.cursor_current_pos--;
+		all->cursor.end_pos--;
+		all->cursor.current_pos--;
 		delete_symbol(all);
 		tputs(cursor_left, 1, ft_putchar);
 		tputs(tgetstr("dc", 0), 1, ft_putchar);
@@ -45,7 +45,7 @@ int		check_key2(char *str, t_all *all)
 		i = press_ctrl_d(str);
 	if (all->tmp_string[0] == 0 && !ft_isprint(*str))
 		return (1);
-	if (all->cursor.cursor_current_pos > all->cursor.cursor_start_pos
+	if (all->cursor.current_pos > all->cursor.start_pos
 		&& all->tmp_string[0] != '\0')
 			i = press_backspace(str, all);
 	return (i);

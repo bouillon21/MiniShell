@@ -14,9 +14,9 @@
 
 void	refresh_cursor(t_all *all)
 {
-	all->cursor.cursor_start_pos = ft_strlen("🔥minishell🔥$ ") + 1;
-	all->cursor.cursor_end_pos = all->cursor.cursor_start_pos;
-	all->cursor.cursor_current_pos = all->cursor.cursor_start_pos;
+	all->cursor.start_pos = ft_strlen("🔥minishell🔥$ ") + 1;
+	all->cursor.end_pos = all->cursor.start_pos;
+	all->cursor.current_pos = all->cursor.start_pos;
 }
 
 void	build_string(char *str, char **tmp)
@@ -49,8 +49,8 @@ void	main_loop(t_all *all)
 			read(0, str, 100);
 			if (!check_key(str, all))
 			{
-				all->cursor.cursor_end_pos += write(1, str, ft_strlen(str));
-				all->cursor.cursor_current_pos += ft_strlen(str);
+				all->cursor.end_pos += write(1, str, ft_strlen(str));
+				all->cursor.current_pos += ft_strlen(str);
 				build_string(str, &all->tmp_string);
 			}
 			if (ft_strchr(str, '\n'))

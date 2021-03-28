@@ -38,9 +38,9 @@ typedef struct s_term
 
 typedef struct s_cursor
 {
-	int				cursor_start_pos;
-	int				cursor_end_pos;
-	int				cursor_current_pos;		
+	int				start_pos;
+	int				end_pos;
+	int				current_pos;		
 }					t_cursor;;
 
 
