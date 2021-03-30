@@ -6,31 +6,38 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/30 12:35:43 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/30 14:59:15 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 
-int		search_quote_close(int i, char symbol)
+int		search_quote_close(int i, char *symbol)
 {
-	// while (g_string[i] != '\'' && g_string[i] != '\"')
-	return(0);
+	while (g_string[i] != *symbol && g_string[i])
+	{
+		i++;
+		if (g_string[i] == *symbol && g_string[i - 1] == '\\')
+			i++;
+		else if (g_string[i] == *symbol)
+			return (1);
+	}
+	return(0);			// ВМЕСТО ЭТОГО СДЕЛАТЬ ERROR ФУНКЦИЮ;
 }
 
 int		search_command(t_all *all, int start)
 {
 	int		i;
 	char	*tmp;
-	char	symb;
+	char	*symb;
 
 	i = start;
 	while (g_string[i] != ' ' && g_string[i] != '\n' && g_string[i] != ';')
 	{
 		if (g_string[i] == '\'' || g_string[i] == '\"')
 		{
-			symb = ft_strnstr(g_string + i, "\'\"", ft_strlen(g_string + i));
-			if (search_quote_close(++i, symb))
+			symb = ft_strrchr("\'\"", g_string[i]);
+			if (!search_quote_close(++i, symb))
 				;
 		}
 		i++;
