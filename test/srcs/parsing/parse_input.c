@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/30 17:53:48 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:19:35 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		search_command(t_all *all, int start)
 	int		i;
 
 	i = start;
-	while (g_string[i])
+	while (g_string[i] != '\n')
 	{
 		if (g_string[i] == '\'')
 			i = single_quote_start(i);
@@ -27,14 +27,14 @@ int		search_command(t_all *all, int start)
 		else if (g_string[i] == '\\')
 			i = ecranisation(i);
 		else if (g_string[i] == ' ')
-			check_leftovers(i);
+			return (i);
 		else if(g_string[i] == ';' || g_string[i] == '>'
-			|| g_string[i] == '>')
-			;
+			|| g_string[i] == '>' || g_string[i] == '\n')
+			return (i);
 		else
 			i++;
 	}
-	return (start);
+	return (i);
 }
 
 int		search_flags(t_all *all, int start)
@@ -48,12 +48,22 @@ void	parse_string(t_all *all)
 	int j;
 
 	i = 0;
-	j = 0;
 	while (g_string[i] && g_string[i] != '\n')
 	{
-		// i = search_command(all, i);
-		// i = search_flags(all, i);
-		// i = search_args(all, i);
+		i = skip_space(i);
+		j = i;
+		i = search_command(all, i);
+		all->token->command = ft_substr(g_string, j, i - j);
+		i = skip_space(i);
+		printf("%s\n", all->token->command);
+		if (g_string[i] != ';')
+		{
+			i++;
+			i = skip_space(i);
+			printf("\n-------------\n");
+			// i = search_flags(all, i);
+			// i = search_args(all, i);
+		}
 		all->token->next = create_new_token(all->token);
 		all->token = all->token->next;
 	}

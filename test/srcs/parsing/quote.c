@@ -6,20 +6,22 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 17:37:49 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/30 17:54:48 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:12:43 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 
-int		check_leftovers(int start)
+int		skip_space(int start)
 {
+	while (g_string[start] == ' ')
+		start++;
 	return (start);
 }
 
 int		ecranisation(int start)
 {
-	return (start);
+	return (++start);
 }
 
 int		double_quote_start(int start)

@@ -56,8 +56,10 @@ void	main_loop(t_all *all)
 		if (g_string[0] == 0)
 			write(1, "\n", 1);
 		else
-			write(1, g_string, ft_strlen(g_string));
-			// parse_string(all);
+		{
+			// write(1, g_string, ft_strlen(g_string));
+			parse_string(all);
+		}
 		//here will be BULAT FUNCTIONS;
 		clear_buf(&g_string);
 	}
