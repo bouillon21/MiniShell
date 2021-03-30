@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/29 20:44:28 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/30 12:35:43 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,27 @@
 
 int		search_quote_close(int i, char symbol)
 {
-	// if (!symbol)
-		return (0);
-	// while (g_string[i])
-	// {
-	// 	i++;
-	// 	if (g_string[i] ==)
-	// }
+	// while (g_string[i] != '\'' && g_string[i] != '\"')
+	return(0);
 }
 
 int		search_command(t_all *all, int start)
 {
-	int i;
-	char *tmp;
+	int		i;
+	char	*tmp;
+	char	symb;
 
 	i = start;
 	while (g_string[i] != ' ' && g_string[i] != '\n' && g_string[i] != ';')
+	{
+		if (g_string[i] == '\'' || g_string[i] == '\"')
+		{
+			symb = ft_strnstr(g_string + i, "\'\"", ft_strlen(g_string + i));
+			if (search_quote_close(++i, symb))
+				;
+		}
 		i++;
+	}
 	tmp = ft_substr(g_string, start, i - start);
 	//checking and etc;
 	all->token->command = tmp;
