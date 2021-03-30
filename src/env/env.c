@@ -28,6 +28,25 @@ char	*env_srh(t_list **env, char *need)
 	return("");
 }
 
+char	**env_join(t_list *env)
+{
+	int	i;
+	char	**env_copy;
+	
+	i = 0;
+	env_copy = malloc(sizeof(char *) * ft_lstsize(env));
+	if (!env_copy)
+		return (NULL);
+	while (env->next)
+	{
+		env_copy[i] = ft_strdup(env->content);
+		env = env->next;
+		i++;
+	}
+	env_copy[i] = ft_strdup(env->content);
+	return (env_copy);
+}
+
 void	printf_env(t_list *head)
 {
 	while (head->next)

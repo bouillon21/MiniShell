@@ -22,10 +22,21 @@ PATH_SIG	=	srcs/signals/
 
 PATH_TERM	=	srcs/terminal/
 
+PATH_EXECVE	=	src/execve/
+
+PATH_ENV	=	src/env/
+
+PATH_CD		=	src/cd/
+
+PATH_PWD	=	src/pwd/
+
+
 SRCS		=	main.c\
-				src/cd.c\
-				src/pwd.c\
-				src/env.c\
+				src/utils.c\
+				${PATH_CD}cd.c\
+				${PATH_PWD}pwd.c\
+				${PATH_ENV}env.c\
+				${PATH_EXECVE}execve.c\
 
 OBJS		= ${SRCS:.c=.o}
 

@@ -14,6 +14,8 @@
 #include <termios.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <errno.h>
+#include <string.h>
 
 typedef struct s_token
 {
@@ -54,6 +56,8 @@ char	*env_srh(t_list **head, char *need);
 void	exec(char **argv, t_list *env, char *cmd);
 char	**env_join(t_list *env);
 char	*verify_dir(char *path, char *cmd);
+void	free_array(char ***mas);
+
 
 
 #endif
