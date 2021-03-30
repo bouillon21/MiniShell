@@ -1,24 +1,5 @@
 #include "minishell.h"
 
-char	**env_join(t_list *env)
-{
-	int	i;
-	char	**env_copy;
-	
-	i = 0;
-	env_copy = malloc(sizeof(char *) * ft_lstsize(env));
-	if (!env_copy)
-		return (NULL);
-	while (env->next)
-	{
-		env_copy[i] = ft_strdup(env->content);
-		env = env->next;
-		i++;
-	}
-	env_copy[i] = ft_strdup(env->content);
-	return (env_copy);
-}
-
 char	*verify_dir(char *path, char *cmd)
 {
 	DIR	*direct;
@@ -26,7 +7,10 @@ char	*verify_dir(char *path, char *cmd)
 
 	direct = opendir(path);
 	if (!direct)
+	{
+		closedir(direct);
 		return (NULL);
+	}
 	dir_file = readdir(direct);
 	while (dir_file)
 	{
@@ -37,30 +21,16 @@ char	*verify_dir(char *path, char *cmd)
 		}
 		dir_file = readdir(direct);
 	}
+	closedir(direct);
 	return(NULL);
-}
-
-void	free_array(char ***mas)
-{
-	int	i;
-
-	i = 0;
-	while ((*mas)[i])
-	{
-		free((*mas)[i]);
-		i++;
-	}
-	free(*mas);
 }
 
 void	open_apk(char *path, char **argv, t_list *env)
 {
 	int	a;
 	pid_t	forks;
-	char	**path_bin;
 	char	**env_copy;
 
-	// printf("%s\n", argv[1]);
 	forks = fork();
 	if (forks == 0)
 	{
@@ -70,43 +40,41 @@ void	open_apk(char *path, char **argv, t_list *env)
 	wait(&a);
 }
 
+char	**defin_dir(t_list *env, char **cmd)
+{
+	char	**path_bin;
+
+	if (ft_strncmp(*cmd, "./", 2) == 0)
+	{
+		path_bin = ft_split(env_srh(&env, "PWD="), ':');
+		*cmd = ft_substr(*cmd, 2,ft_strlen(*cmd) - 2);
+	}
+	else
+		path_bin = ft_split(env_srh(&env, "PATH="), ':');
+	return (path_bin);
+}
+
 void	exec(char **argv, t_list *env, char *cmd)
 {
-	pid_t forks;
 	int	a;
 	char	*line;
 	char	**path_bin;
 	char	*tmp;
-	char	*ad[3];
-
-	ad[0] = ft_strdup("minishell");
-	ad[1] = ft_strdup("uipiouiuy");
-	// ad[2] = NULL;
 	
 	a = 0;
-
-	// while (argv[a])
-	// {
-	// 	printf("%s\n", argv[a]);
-	// 	a++;
-	// }
-	path_bin = ft_split(env_srh(&env, "PATH="), ':');
+	path_bin = defin_dir(env, &cmd);
 	while (path_bin[a])
 	{
-		line = verify_dir(path_bin[a], cmd);
-		if (line)
+		tmp = verify_dir(path_bin[a], cmd);
+		if (tmp)
 		{
-			printf("%s\n", line);
-			open_apk("/bin/echo", ad, env);
+			line = ft_strjoin(path_bin[a], tmp);
+			open_apk(line, argv, env);
+			free(tmp);
+			free(line);
 		}
-		free(line);
 		a++;
 	}
+	free(cmd);
 	free_array(&path_bin);
-	// if (forks == 0)
-	// {
-	// 	execve("/bin/./ls", argv, env_copy);
-	// }
-	// wait(&a);
-	// printf("ya goul\n");
 }

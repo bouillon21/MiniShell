@@ -3,37 +3,17 @@
 int main (int argc, char **argv, char **envp)
 {
 	t_list	*env;
-	// t_list *head;
-	// head = env;
+	char	*ad[3];
 
-	// env = malloc(sizeof(t_list));
+	ad[0] = ft_strdup("minishell");
+	ad[1] = ft_strdup("uipiouiuy");
+	ad[1] = NULL;
+
 	get_save_env(&env, envp);
-	// cd(&env,"/////////bin");
-	// ft_pwd();
-	// printf_env(env);
-	// ft_pwd();
-	// cd(&env ,"..");
-	// ft_pwd();
-	// char **line;
-	// line = env_srh(&env, "USER=");
-	// printf("%s\n", *line);
-	// *line = "qqq";
-	// printf_env(env);
-	// free(line);
-	// cd (&env, "");
 
-	// pid_t forks;
-	// forks = fork();
-	// int a;
-	// if (forks == 0)
-	// {
-	// 	execve("./minishell", argv, envp);
-	// }
-	// wait(&a);
-	// printf("ya goul");
-	exec(argv, env, "ls");
+	char *app = ft_strdup("ls");
+	exec(ad, env, app);
 	sleep(1);
-	// printf("tut\n");
 	while (1)
 	{}
 }

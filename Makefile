@@ -32,6 +32,7 @@ PATH_PWD	=	src/pwd/
 
 
 SRCS		=	main.c\
+				src/utils.c\
 				${PATH_CD}cd.c\
 				${PATH_PWD}pwd.c\
 				${PATH_ENV}env.c\
