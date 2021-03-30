@@ -6,17 +6,18 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 14:42:40 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/28 10:04:31 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/30 18:54:11 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 
-void	delete_symbol(t_all *all)
+void	delete_from_array(int i)
 {
-	int	i;
-
-	i = all->cursor.current_pos - all->cursor.start_pos;
-	if (all->cursor.current_pos == all->cursor.end_pos)
-		g_string[i] = '\0';
+	while (g_string[i + 1])
+	{
+		g_string[i] = g_string[i + 1];
+		i++;
+	}
+	g_string[i] = 0;
 }

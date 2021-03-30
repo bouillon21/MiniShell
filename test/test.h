@@ -45,12 +45,19 @@ typedef struct s_cursor
 	int				current_pos;		
 }					t_cursor;;
 
+typedef struct s_flags
+{
+	int			single;
+	int			twice;
+}				t_flags;
+
 
 typedef	struct s_all
 {
 	t_token			*token;
 	t_term			term;
 	t_cursor		cursor;
+	t_flags			quote;
 }					t_all;
 
 void	terminal(t_all *all);
@@ -63,6 +70,6 @@ void	clear_buf(char **buf);
 void	main_loop(t_all *all);
 int		check_key(char *str, t_all *all);
 int		check_key2(char *str, t_all *all);
-void	delete_symbol(t_all *all);
 void	parse_string(t_all *all);
+void	delete_from_array(int i);
 t_token	*create_new_token(t_token *token);

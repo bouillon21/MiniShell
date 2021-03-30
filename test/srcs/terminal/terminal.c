@@ -19,7 +19,7 @@ void	refresh_cursor(t_all *all)
 	all->cursor.current_pos = 0;
 }
 
-void	build_string(t_all *all, char *str, char **tmp)
+void	build_string(t_all *all, char *str, char **tmp)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WHERE CURRENT CURSOR IS PLACED
 {
 	char *old_string;
 
@@ -56,7 +56,9 @@ void	main_loop(t_all *all)
 		if (g_string[0] == 0)
 			write(1, "\n", 1);
 		else
-			parse_string(all);
+			write(1, g_string, ft_strlen(g_string));
+			// parse_string(all);
+		//here will be BULAT FUNCTIONS;
 		clear_buf(&g_string);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/03/28 18:31:57 by hmickey          ###   ########.fr        #
+#    Updated: 2021/03/30 17:54:18 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS		=	main.c\
 				${PATH_TERM}key_functions2.c\
 				${PATH_TERM}del_bs_functions.c\
 				${PATH_PARSE}parse_input.c\
+				${PATH_PARSE}quote.c\
 				${PATH_LISTS}lists_functions.c\
 
 OBJS		= ${SRCS:.c=.o}
