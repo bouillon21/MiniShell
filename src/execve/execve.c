@@ -46,11 +46,11 @@ char	**defin_dir(t_list *env, char **cmd)
 
 	if (ft_strncmp(*cmd, "./", 2) == 0)
 	{
-		path_bin = ft_split(env_srh(&env, "PWD="), ':');
+		path_bin = ft_split(env_srh_edit(&env, "PWD=", NULL), ':');
 		*cmd = ft_substr(*cmd, 2,ft_strlen(*cmd) - 2);
 	}
 	else
-		path_bin = ft_split(env_srh(&env, "PATH="), ':');
+		path_bin = ft_split(env_srh_edit(&env, "PATH=", NULL), ':');
 	return (path_bin);
 }
 

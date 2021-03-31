@@ -52,12 +52,10 @@ int	ft_pwd();
 void	get_save_env(t_list **head ,char **envp);
 void	printf_env(t_list *head);
 void	cd(t_list **head, char *arg);
-char	*env_srh(t_list **head, char *need);
+char	*env_srh_edit(t_list **head, char *need, char *changes);
 void	exec(char **argv, t_list *env, char *cmd);
 char	**env_join(t_list *env);
 char	*verify_dir(char *path, char *cmd);
 void	free_array(char ***mas);
-
-
 
 #endif

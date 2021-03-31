@@ -12,20 +12,26 @@ void	get_save_env(t_list **head ,char **envp)
 	}
 }
 
-char	*env_srh(t_list **env, char *need)
+char	*env_srh_edit(t_list **env, char *need, char *changes)
 {
-	int	i;
 	t_list	*head;
 
-	i = 0;
 	head = *env;
 	while (head->next)
 	{
 		if (ft_strnstr(head->content, need, ft_strlen(need)))
-			return(ft_strrchr(head->content,'=') + 1);
+		{
+			if (changes == NULL)
+				return(ft_strrchr(head->content,'=') + 1);
+			free(head->content);
+			changes = ft_strjoin(need, changes);
+			head->content = ft_strdup(changes);
+			free(changes);
+			return(head->content);
+		}
 		head = head->next;
 	}
-	return("");
+	return(NULL);
 }
 
 char	**env_join(t_list *env)
@@ -34,7 +40,7 @@ char	**env_join(t_list *env)
 	char	**env_copy;
 	
 	i = 0;
-	env_copy = malloc(sizeof(char *) * ft_lstsize(env));
+	env_copy = malloc(sizeof(char *) * ft_lstsize(env) + 1);
 	if (!env_copy)
 		return (NULL);
 	while (env->next)
@@ -44,6 +50,7 @@ char	**env_join(t_list *env)
 		i++;
 	}
 	env_copy[i] = ft_strdup(env->content);
+	env_copy[++i] = NULL;
 	return (env_copy);
 }
 
