@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-=======
->>>>>>> ZectorJay_test_branch
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -15,13 +9,6 @@
 #include <curses.h>
 #include <termcap.h>
 #include <termios.h>
-<<<<<<< HEAD
-
-typedef struct s_token
-{
-	char			*str;
-	int				type;
-=======
 #include <string.h>
 
 #define RESET   "\033[0m"
@@ -35,7 +22,6 @@ typedef struct s_token
 {
 	char			*command;
 	char			**args;
->>>>>>> ZectorJay_test_branch
 	char			**flags;
 	char			separate;
 	struct s_token	*prev;
@@ -44,23 +30,6 @@ typedef struct s_token
 
 typedef struct s_term
 {
-<<<<<<< HEAD
-	char	*termtype;
-	char	*tgetnum;
-	char	*termbuf;
-	char	*tgetflag;
-	char	*tgetstr;
-	int		tgetent;
-}			t_term;
-
-typedef	struct s_all
-{
-	t_token		token;
-	t_term		term;
-}				t_all;
-
-#endif
-=======
 	char			*termtype;
 	char			*tgetnum;
 	char			*termbuf;
@@ -108,4 +77,3 @@ int		single_quote_start(int start);
 int		double_quote_start(int start);
 int		ecranisation(int start);
 int		skip_space(int start);
->>>>>>> ZectorJay_test_branch
