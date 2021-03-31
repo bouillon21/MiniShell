@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/30 18:37:09 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 18:37:45 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		press_up(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\e[A", ft_strlen(str)))
 	{
-		tputs(restore_cursor, 1, ft_putchar);
+		tputs(tigetstr("rc"), 1, ft_putchar);
 		tputs(tigetstr("ed"), 1, ft_putchar);
 		write(1, "up", 3);						// there will be function to read from history
 		return(1);

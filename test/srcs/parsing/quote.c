@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 17:37:49 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 16:07:16 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 18:44:51 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		double_quote_start(int start)
 		if (g_string[start] == '\n')
 			exit(0);						// ТУТ СДЕЛАТЬ ОШИБКУ!! ЪУЪ!!!!
 	}
-	return (start);
+	return (++start);
 }
 
 int		single_quote_start(int start)
@@ -44,5 +44,5 @@ int		single_quote_start(int start)
 		if (g_string[start] == '\n')
 			exit(0);						// ТУТ СДЕЛАТЬ ОШИБКУ!! ЪУЪ!!!!
 	}
-	return (start);
+	return (++start);
 }

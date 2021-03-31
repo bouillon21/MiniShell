@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 16:48:41 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 19:36:17 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int		search_command(t_all *all, int start)
 	while (g_string[i] != '\n')
 	{
 		if (g_string[i] == '\'')
-			i = single_quote_start(i);
+			i = single_quote_start(++i);
 		else if (g_string[i] == '\"')
-			i = double_quote_start(i);
+			i = double_quote_start(++i);
 		else if (g_string[i] == '\\')
 			i = ecranisation(i);
 		else if (g_string[i] == ' ')
@@ -67,10 +67,10 @@ void	parse_string(t_all *all)
 	k = 0;
 	i = 0;
 
-	all->token->args = ft_calloc(sizeof(char*), 50);		// КОСТЫЛЬ НА ВРЕМЯ
 
 	while (g_string[i] != '\0' && g_string[i] != '\n')
 	{
+		all->token->args = ft_calloc(sizeof(char*), 50);		// КОСТЫЛЬ НА ВРЕМЯ
 		i = skip_space(i);
 		j = i;
 		i = search_command(all, i);
@@ -81,9 +81,7 @@ void	parse_string(t_all *all)
 			// i = search_flags(all, i);
 
 			while (g_string[i] != ';' && g_string[i] != '\n')
-			{
 				i = fill_args(all, i, &k);
-			}
 		}
 		else
 			i++;
