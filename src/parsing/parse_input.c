@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 19:50:40 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 21:24:59 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@ int		search_command(t_all *all, int start)
 	while (g_string[i] != '\n')
 	{
 		if (g_string[i] == '\'')
-			i = single_quote_start(++i);
+		{
+			delete_from_array(i);
+			i = single_quote_start(i);
+		}
 		else if (g_string[i] == '\"')
-			i = double_quote_start(++i);
+		{
+			delete_from_array(i);
+			i = double_quote_start(i);
+		}
 		else if (g_string[i] == '\\')
 			i = ecranisation(i);
 		else if (g_string[i] == ' ')
