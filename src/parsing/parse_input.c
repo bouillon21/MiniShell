@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 21:24:59 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 21:44:09 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		search_command(t_all *all, int start)
 			i = ecranisation(i);
 		else if (g_string[i] == ' ')
 		{
-			i = skip_space(i);
+			i = skip_space(i);						// НЕ ЗАБЫТЬ УБРАТЬ ОТСЮДА
 			return (i);
 		}
 		else if(g_string[i] == ';' || g_string[i] == '<'

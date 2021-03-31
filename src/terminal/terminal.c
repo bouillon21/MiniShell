@@ -38,6 +38,7 @@ void	main_loop(t_all *all)
 	{
 		write_minishell();
 		refresh_cursor(all);
+		// HERE I GONNA NEED FILLED ENV STRUCT
 		g_string = malloc(100);
 		g_string[0] = 0;
 		while(1)
@@ -56,11 +57,8 @@ void	main_loop(t_all *all)
 		if (g_string[0] == 0)
 			write(1, "\n", 1);
 		else
-		{
-			// write(1, g_string, ft_strlen(g_string));
 			parse_string(all);
-		}
-		//here will be BULAT FUNCTIONS;
+		//here will be calling of BULAT FUNCTIONS;
 		clear_buf(&g_string);
 	}
 }
