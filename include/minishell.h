@@ -1,3 +1,5 @@
+#ifndef MINISHELL_H
+#define MINISHELL_H
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -17,6 +19,10 @@
 #define WHITE   "\033[1;37m"
 
 char *g_string;
+#include <sys/types.h>
+#include <dirent.h>
+#include <errno.h>
+#include <string.h>
 
 typedef struct s_token
 {
@@ -77,3 +83,15 @@ int		single_quote_start(int start);
 int		double_quote_start(int start);
 int		ecranisation(int start);
 int		skip_space(int start);
+
+int	ft_pwd();
+void	get_save_env(t_list **head ,char **envp);
+void	printf_env(t_list *head);
+void	cd(t_list **head, char *arg);
+char	*env_srh_edit(t_list **head, char *need, char *changes);
+void	exec(char **argv, t_list *env, char *cmd);
+char	**env_join(t_list *env);
+char	*verify_dir(char *path, char *cmd);
+void	free_array(char ***mas);
+
+#endif
