@@ -6,7 +6,7 @@
 #    By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/03/30 17:54:18 by hmickey          ###   ########.fr        #
+#    Updated: 2021/03/31 16:24:03 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ TERMLIB		=	-ltermcap
 
 $(NAME):		${OBJS} ${INCLUDE}
 				@${MAKE} -C ../lib 
-				@${CC} ${TERMLIB} ../lib/libft.a ${OBJS} -o minishell
+				@${CC} -g ${TERMLIB} ../lib/libft.a ${OBJS} -o minishell
 
 all:			${NAME}
 

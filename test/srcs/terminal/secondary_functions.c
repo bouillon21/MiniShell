@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 08:15:28 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/28 15:02:52 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 16:41:29 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	write_minishell(void)
 	write(1, RED, ft_strlen(RED));
 	write(1, "🔥minishell🔥$ ", ft_strlen("🔥minishell🔥$ "));
 	write(1, RESET, ft_strlen(RESET));
-	tputs(save_cursor, 1, ft_putchar);
+	// tputs(save_cursor, 1, ft_putchar);
 }
 
 void	clear_buf(char **buf)

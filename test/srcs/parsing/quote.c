@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 17:37:49 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/30 21:12:43 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 16:07:16 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int		skip_space(int start)
 {
-	while (g_string[start] == ' ')
-		start++;
+	if (g_string[start])
+		while (g_string[start] == ' ')
+			start++;
 	return (start);
 }
 

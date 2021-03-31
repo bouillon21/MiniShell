@@ -73,5 +73,5 @@ void	terminal(t_all *all)
 	terminal.c_lflag &= ~(ICANON);
 	tcsetattr(0, TCSANOW, &terminal);
 	all->term.termtype = getenv("xterm-256color");
-	all->term.tgetent = tgetent(all->term.termbuf, all->term.termtype);
+	all->term.tgetent = tgetent(0, all->term.termtype);
 }
