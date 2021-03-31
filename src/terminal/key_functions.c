@@ -6,11 +6,11 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 18:37:45 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 19:50:49 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../test.h"
+#include "minishell.h"
 
 int		press_left(char *str, t_all *all)
 {

@@ -6,11 +6,11 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:32:13 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/29 19:57:55 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 19:50:38 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../test.h"
+#include "minishell.h"
 
 t_token	*create_new_token(t_token *token)
 {

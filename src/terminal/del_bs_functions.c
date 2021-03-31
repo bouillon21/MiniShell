@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   secondary_functions.c                              :+:      :+:    :+:   */
+/*   del_bs_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/26 08:15:28 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 18:29:44 by hmickey          ###   ########.fr       */
+/*   Created: 2021/03/27 14:42:40 by hmickey           #+#    #+#             */
+/*   Updated: 2021/03/31 19:50:50 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../test.h"
+#include "minishell.h"
 
-int	ft_putchar(int c)
+void	delete_from_array(int i)
 {
-	return(write(1, &c, 1));
-}
-
-void	write_minishell(void)
-{
-	write(1, RED, ft_strlen(RED));
-	write(1, "🔥minishell🔥$ ", ft_strlen("🔥minishell🔥$ "));
-	write(1, RESET, ft_strlen(RESET));
-	tputs(tigetstr("sc"), 1, ft_putchar);
-}
-
-void	clear_buf(char **buf)
-{
-	int i;
-
-	i = -1;
-	if (buf)
-		ft_bzero(*buf, ft_strlen(*buf));
-	free(*buf);
+	while (g_string[i + 1])
+	{
+		g_string[i] = g_string[i + 1];
+		i++;
+	}
+	g_string[i] = 0;
 }

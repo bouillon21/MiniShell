@@ -6,11 +6,11 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:43:17 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/28 10:06:18 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 19:50:42 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../test.h"
+#include "minishell.h"
 
 void handle_sigint(int sig)
 {

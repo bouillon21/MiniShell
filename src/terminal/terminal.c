@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../test.h"
+#include "minishell.h"
 
 void	refresh_cursor(t_all *all)
 {

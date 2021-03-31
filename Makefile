@@ -6,7 +6,7 @@
 #    By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/03/31 18:34:04 by hmickey          ###   ########.fr        #
+#    Updated: 2021/03/31 19:46:42 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,15 @@ INCLUDE		=
 
 PATH_CONF	=	./src/parse_config/
 
-PATH_LIB	=	../lib/
+PATH_LIB	=	./lib/
 
-PATH_SIG	=	srcs/signals/
+PATH_SIG	=	src/signals/
 
-PATH_TERM	=	srcs/terminal/
+PATH_TERM	=	src/terminal/
 
-PATH_PARSE	=	srcs/parsing/
+PATH_PARSE	=	src/parsing/
 
-PATH_LISTS	=	srcs/lists/
+PATH_LISTS	=	src/lists/
 
 SRCS		=	main.c\
 				${PATH_LIB}get_next_line.c\
@@ -50,22 +50,22 @@ CFLAGS		= #-Wall -Wextra -Werror
 TERMLIB		=	-ltermcap -lncurses
 
 .c.o:		
-				${CC} -g ${CFLAGS}  -c -I./../include/ $< -o ${<:.c=.o}
+				${CC} -g ${CFLAGS}  -c -I./include/ $< -o ${<:.c=.o}
 
 .PHONY:			all clean fclean re
 
 $(NAME):		${OBJS} ${INCLUDE}
-				@${MAKE} -C ../lib 
-				@${CC} -g ${TERMLIB} ../lib/libft.a ${OBJS} -o minishell
+				@${MAKE} -C ./lib 
+				@${CC} -g ${TERMLIB} ./lib/libft.a ${OBJS} -o minishell
 
 all:			${NAME}
 
 clean:
 				${RM} ${OBJS}
-				${MAKE} clean -C ../lib
+				${MAKE} clean -C ./lib
 
 fclean:			clean
-				${RM} ${NAME} ../lib/libft.a
+				${RM} ${NAME} ./lib/libft.a
 
 -include		${OBJ:.o=.d}
 

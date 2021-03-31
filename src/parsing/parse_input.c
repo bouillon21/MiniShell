@@ -6,11 +6,11 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 19:36:17 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 19:50:40 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../test.h"
+#include "minishell.h"
 
 int		search_command(t_all *all, int start)
 {

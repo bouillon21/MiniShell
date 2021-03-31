@@ -6,11 +6,11 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 17:37:49 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 18:44:51 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/03/31 19:51:01 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../test.h"
+#include "minishell.h"
 
 int		skip_space(int start)
 {
