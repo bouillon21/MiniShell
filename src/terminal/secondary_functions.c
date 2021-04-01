@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 08:15:28 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 19:50:48 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/01 22:31:38 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ void	write_minishell(void)
 
 void	clear_buf(char **buf)
 {
-	int i;
-
-	i = -1;
 	if (buf)
 		ft_bzero(*buf, ft_strlen(*buf));
 	free(*buf);

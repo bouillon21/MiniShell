@@ -12,6 +12,10 @@
 #include <termcap.h>
 #include <termios.h>
 #include <string.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <errno.h>
+#include <string.h>
 
 #define RESET   "\033[0m"
 #define RED     "\033[1;31m"
@@ -19,10 +23,7 @@
 #define WHITE   "\033[1;37m"
 
 char *g_string;
-#include <sys/types.h>
-#include <dirent.h>
-#include <errno.h>
-#include <string.h>
+
 
 typedef struct s_token
 {
@@ -33,6 +34,13 @@ typedef struct s_token
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
+
+typedef struct s_list_hist
+{
+	char			*string;
+	struct t_list	*prev;
+	struct t_list	*next;
+}					t_list_hist;
 
 typedef struct s_term
 {
@@ -57,13 +65,14 @@ typedef struct s_flags
 	int			twice;
 }				t_flags;
 
-
 typedef	struct s_all
 {
 	t_token			*token;
 	t_term			term;
 	t_cursor		cursor;
 	t_flags			quote;
+	int				fd;
+	t_list_hist		hist;
 }					t_all;
 
 void	terminal(t_all *all);
@@ -83,8 +92,8 @@ int		single_quote_start(int start);
 int		double_quote_start(int start);
 int		ecranisation(int start);
 int		skip_space(int start);
-
-int	ft_pwd();
+void	string_to_lower(char **mas);
+int		ft_pwd();
 void	get_save_env(t_list **head ,char **envp);
 void	printf_env(t_list *head);
 void	cd(t_list **head, char *arg);
@@ -93,5 +102,5 @@ void	exec(char **argv, t_list *env, char *cmd);
 char	**env_join(t_list *env);
 char	*verify_dir(char *path, char *cmd);
 void	free_array(char ***mas);
-
+t_list_hist	*create_new_list(t_list_hist *hist);
 #endif

@@ -19,15 +19,34 @@ void	refresh_cursor(t_all *all)
 	all->cursor.current_pos = 0;
 }
 
-void	build_string(t_all *all, char *str, char **tmp)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WHERE CURRENT CURSOR IS PLACED
+void	build_string(t_all *all, char *str)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WHERE CURRENT CURSOR IS PLACED
 {
 	char *old_string;
 
 	all->cursor.end_pos += write(1, str, ft_strlen(str));
 	all->cursor.current_pos += ft_strlen(str);
-	old_string = *tmp;
-	*tmp = ft_strjoin(*tmp, str);
+	old_string = g_string;
+	g_string = ft_strjoin(g_string, str);
 	free(old_string);
+}
+
+void	build_string2(t_all *all, char *str)
+{
+	char	*old_string;
+	int		i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (ft_isalnum(str[i]))
+		{
+			all->cursor.end_pos++;
+			all->cursor.current_pos++;
+			old_string = g_string;
+			g_string = ft_strjoin(g_string, &str[i]);
+			free(old_string);	
+		}
+	}
 }
 
 void	main_loop(t_all *all)
@@ -45,8 +64,9 @@ void	main_loop(t_all *all)
 		{
 			str = malloc(4096);
 			read(0, str, 100);
-			if (!check_key(str, all))
-				build_string(all, str, &g_string);
+			if (!check_key(str, all) && !ft_strnstr(str, "\177", ft_strlen(str))
+			&& !ft_strnstr(str, "\e[3~", ft_strlen(str)))
+				build_string(all, str);
 			if (ft_strchr(str, '\n'))
 			{
 				clear_buf(&str);
@@ -57,8 +77,11 @@ void	main_loop(t_all *all)
 		if (g_string[0] == 0)
 			write(1, "\n", 1);
 		else
+		{
+			write(all->fd, g_string, ft_strlen(g_string));
 			parse_string(all);
-		//here will be calling of BULAT FUNCTIONS;
+			//here will be calling of BULAT FUNCTIONS;
+		}
 		clear_buf(&g_string);
 	}
 }
