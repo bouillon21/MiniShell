@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:43:17 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 19:50:42 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/01 11:08:36 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void handle_sigint(int sig)
 
 void	ctrl_d_exit(void)
 {
-	tputs(restore_cursor, 1, ft_putchar);
-	tputs(tigetstr("ed"), 1, ft_putchar);
+	tputs(tigetstr("rc"), 1, ft_putchar);
 	write(1, YELLOW, ft_strlen(YELLOW));
 	printf("exit");
 	exit(0);
