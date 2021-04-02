@@ -30,6 +30,17 @@ void	build_string(t_all *all, char *str, char **tmp)		//ADD SOME FUNCTIONS TO AD
 	free(old_string);
 }
 
+void	switcher(t_all *all)
+{
+	if(all->token->command)
+	{
+		exec(all->token->args, all, all->token->command);
+	}
+	else
+		printf("noup\n");
+
+}
+
 void	main_loop(t_all *all)
 {
 	char	*str;
@@ -59,8 +70,10 @@ void	main_loop(t_all *all)
 		{
 			// write(1, g_string, ft_strlen(g_string));
 			parse_string(all);
+			all->token = all->token->prev;
+			switcher(all);
+			//here will be BULAT FUNCTIONS;
 		}
-		//here will be BULAT FUNCTIONS;
 		clear_buf(&g_string);
 	}
 }

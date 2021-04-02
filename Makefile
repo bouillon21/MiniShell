@@ -73,6 +73,9 @@ $(NAME):		${OBJS} ${INCLUDE}
 
 all:			${NAME}
 
+run:			${NAME}
+				./minishell
+
 clean:
 				${RM} ${OBJS}
 				${MAKE} clean -C lib

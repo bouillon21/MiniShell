@@ -25,12 +25,14 @@ char	*verify_dir(char *path, char *cmd)
 	return(NULL);
 }
 
-void	open_apk(char *path, char **argv, t_list *env)
+void	open_apk(char *path, char **argv, t_all *all)
 {
 	int	a;
 	pid_t	forks;
 	char	**env_copy;
+	t_list	*env;
 
+	env = all->env;
 	forks = fork();
 	if (forks == 0)
 	{
@@ -40,21 +42,26 @@ void	open_apk(char *path, char **argv, t_list *env)
 	wait(&a);
 }
 
-char	**defin_dir(t_list *env, char **cmd)
+char	**defin_dir(t_all *all, char **cmd)
 {
 	char	**path_bin;
+	char	*line;
 
 	if (ft_strncmp(*cmd, "./", 2) == 0)
 	{
-		path_bin = ft_split(env_srh_edit(&env, "PWD=", NULL), ':');
+		line = env_srh(all, "PWD=")->content;
+		path_bin = ft_split(&line[4], ':');
 		*cmd = ft_substr(*cmd, 2,ft_strlen(*cmd) - 2);
 	}
 	else
-		path_bin = ft_split(env_srh_edit(&env, "PATH=", NULL), ':');
+	{
+		line = env_srh(all, "PATH=")->content;
+		path_bin = ft_split(&line[5], ':');
+	}
 	return (path_bin);
 }
 
-void	exec(char **argv, t_list *env, char *cmd)
+void	exec(char **argv, t_all *all, char *cmd)
 {
 	int	a;
 	char	*line;
@@ -62,14 +69,14 @@ void	exec(char **argv, t_list *env, char *cmd)
 	char	*tmp;
 	
 	a = 0;
-	path_bin = defin_dir(env, &cmd);
+	path_bin = defin_dir(all, &cmd);
 	while (path_bin[a])
 	{
 		tmp = verify_dir(path_bin[a], cmd);
 		if (tmp)
 		{
 			line = ft_strjoin(path_bin[a], tmp);
-			open_apk(line, argv, env);
+			open_apk(line, argv, all);
 			free(tmp);
 			free(line);
 		}

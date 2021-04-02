@@ -17,12 +17,15 @@ int main(int argc, char **argv, char **envp)
 	t_all all;
 	all.env = NULL;
 
-	all.token = malloc(sizeof(t_token));
-	// terminal(&all);
-	// signal(SIGINT, handle_sigint);
 	get_save_env(&all, envp);
-	// sleep(2);
-	// printf_env(&all);
-
-	// main_loop(&all);
+	all.token = malloc(sizeof(t_token));
+	terminal(&all);
+	signal(SIGINT, handle_sigint);
+	main_loop(&all);
+	// char	*line = ft_strdup("cat");
+	// char	**mas = malloc(500);
+	// mas[0] = ft_strdup("mini");
+	// mas[1] = ft_strdup("tut.c");
+	// // mas[2] = NULL;
+	// exec(mas, &all, line);
 }

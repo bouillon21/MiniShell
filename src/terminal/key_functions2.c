@@ -41,7 +41,7 @@ int		press_backspace(char *str, t_all *all)
 		all->cursor.end_pos--;
 		all->cursor.current_pos--;
 		delete_from_array(all->cursor.current_pos);
-		tputs(cursor_left, 1, ft_putchar);
+		tputs(tgetstr("le", 0), 1, ft_putchar);
 		tputs(tgetstr("dc", 0), 1, ft_putchar);
 		return(1);
 	}

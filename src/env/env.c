@@ -12,6 +12,20 @@ void	get_save_env(t_all *all, char **envp)
 	}
 }
 
+t_list	*env_srh(t_all	*all, char *need)
+{
+	t_list	*env;
+
+	env = all->env;
+	while (env->next)
+	{
+		if (ft_strnstr(env->content, need, ft_strlen(need)))
+			return(env);
+		env = env->next;
+	}
+	return(NULL);
+}
+
 char	*env_srh_edit(t_list **env, char *need, char *changes)
 {
 	t_list	*head;

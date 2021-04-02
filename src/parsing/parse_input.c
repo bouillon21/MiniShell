@@ -53,7 +53,7 @@ int		fill_args(t_all *all, int start, int *k)
 	int	j;
 	j = search_command(all, start);
 	all->token->args[++(*k)] = ft_substr(g_string, start, j - start);
-	printf("arg [%d]= %s\n", *k, all->token->args[*k]);
+	// printf("arg [%d]= %s\n", *k, all->token->args[*k]);
 	return (j);
 }
 
@@ -64,17 +64,19 @@ void	parse_string(t_all *all)
 	int k;
 	char	**tmp;
 
-	k = 0;
+	k = 1;
 	i = 0;
 
 
 	while (g_string[i] != '\0' && g_string[i] != '\n')
 	{
-		all->token->args = ft_calloc(sizeof(char*), 50);		// КОСТЫЛЬ НА ВРЕМЯ
+		all->token->args = ft_calloc(sizeof(char*), 50);
+		all->token->args[0] = ft_strdup("minishell");		// КОСТЫЛЬ НА ВРЕМЯ
+		k = 0;
 		i = skip_space(i);
 		j = i;
 		i = search_command(all, i);
-		all->token->command = ft_substr(g_string, j, i - j);
+		all->token->command = ft_substr(g_string, j, i - j - 1);
 		if (g_string[i] != ';')
 		{
 			i = skip_space(i);
@@ -85,11 +87,11 @@ void	parse_string(t_all *all)
 		}
 		else
 			i++;
-		printf("%s\n", all->token->command);
-		k = -1;
-		if(all->token->args)
-			while(all->token->args[++k])
-				printf("arg %d: %s\n", k, all->token->args[k]);
+		// printf("%s\n", all->token->command);
+		// k = -1;
+		// if(all->token->args)
+		// 	while(all->token->args[++k])
+		// 		printf("arg %d: %s\n", k, all->token->args[k]);
 		all->token->next = create_new_token(all->token);
 		all->token = all->token->next;
 	}
