@@ -60,6 +60,7 @@ typedef struct s_flags
 
 typedef	struct s_all
 {
+	t_list			*env;
 	t_token			*token;
 	t_term			term;
 	t_cursor		cursor;
@@ -85,8 +86,8 @@ int		ecranisation(int start);
 int		skip_space(int start);
 
 int	ft_pwd();
-void	get_save_env(t_list **head ,char **envp);
-void	printf_env(t_list *head);
+void	get_save_env(t_all *all, char **envp);
+void	printf_env(t_all *all);
 void	cd(t_list **head, char *arg);
 char	*env_srh_edit(t_list **head, char *need, char *changes);
 void	exec(char **argv, t_list *env, char *cmd);

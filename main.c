@@ -15,9 +15,14 @@
 int main(int argc, char **argv, char **envp)
 {
 	t_all all;
+	all.env = NULL;
 
 	all.token = malloc(sizeof(t_token));
-	terminal(&all);
-	signal(SIGINT, handle_sigint);
-	main_loop(&all);
+	// terminal(&all);
+	// signal(SIGINT, handle_sigint);
+	get_save_env(&all, envp);
+	// sleep(2);
+	// printf_env(&all);
+
+	// main_loop(&all);
 }

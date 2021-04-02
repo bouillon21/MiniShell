@@ -1,13 +1,13 @@
 #include "minishell.h"
 
-void	get_save_env(t_list **head ,char **envp)
+void	get_save_env(t_all *all, char **envp)
 {
 	int		i;
 
 	i = 0;
 	while (envp && envp[i])
 	{
-		ft_lstadd_back(head, ft_lstnew(ft_strdup(envp[i])));
+		ft_lstadd_back(&all->env, ft_lstnew(ft_strdup(envp[i])));
 		i++;
 	}
 }
@@ -54,12 +54,15 @@ char	**env_join(t_list *env)
 	return (env_copy);
 }
 
-void	printf_env(t_list *head)
+void	printf_env(t_all *all)
 {
-	while (head->next)
+	t_list	*env;
+
+	env = all->env;
+	while (env->next)
 	{
-		printf("%s\n", head->content);
-		head = head->next;
+		printf("%s\n", env->content);
+		env = env->next;
 	}
-	printf("%s\n", head->content);
+	printf("%s\n", env->content);
 }
