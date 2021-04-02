@@ -16,11 +16,15 @@ INCLUDE		=
 
 PATH_CONF	=	./src/parse_config/
 
-PATH_LIB	=	../lib/
+PATH_LIB	=	./lib/
 
-PATH_SIG	=	srcs/signals/
+PATH_SIG	=	src/signals/
 
-PATH_TERM	=	srcs/terminal/
+PATH_TERM	=	src/terminal/
+
+PATH_PARSE	=	src/parsing/
+
+PATH_LISTS	=	src/lists/
 
 PATH_EXECVE	=	src/execve/
 
@@ -30,13 +34,23 @@ PATH_CD		=	src/cd/
 
 PATH_PWD	=	src/pwd/
 
-
 SRCS		=	main.c\
 				src/utils.c\
 				${PATH_CD}cd.c\
 				${PATH_PWD}pwd.c\
 				${PATH_ENV}env.c\
 				${PATH_EXECVE}execve.c\
+				${PATH_LIB}get_next_line.c\
+				${PATH_LIB}get_next_line_utils.c\
+				${PATH_SIG}signal.c \
+				${PATH_TERM}terminal.c\
+				${PATH_TERM}secondary_functions.c\
+				${PATH_TERM}key_functions.c\
+				${PATH_TERM}key_functions2.c\
+				${PATH_TERM}del_bs_functions.c\
+				${PATH_PARSE}parse_input.c\
+				${PATH_PARSE}quote.c\
+				${PATH_LISTS}lists_functions.c\
 
 OBJS		= ${SRCS:.c=.o}
 
@@ -46,11 +60,10 @@ RM			= rm -f
 
 CFLAGS		= #-Wall -Wextra -Werror 
 
-TERMLIB		=	-ltermcap
+TERMLIB		=	-ltermcap -lncurses
 
 .c.o:		
-				${CC} -g ${CFLAGS}  -c -I include $< -o ${<:.c=.o}
-
+				${CC} -g ${CFLAGS}  -c -I./include/ $< -o ${<:.c=.o}
 
 .PHONY:			all clean fclean re
 
