@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:42:34 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/01 22:31:37 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/02 15:36:29 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 int		press_del(char *str, t_all *all)
 {
-	if (ft_strnstr(str, "\e[3~", ft_strlen(str)))
-	{
-		all->cursor.end_pos--;
-		delete_from_array(all->cursor.current_pos);
-		tputs(tgetstr("dc", 0), 1, ft_putchar);
-		return(1);
-	}
-	return (0);
+	all->cursor.end_pos--;
+	delete_from_array(all->cursor.current_pos);
+	tputs(tgetstr("dc", 0), 1, ft_putchar);
+	return(1);
 }
 
 int		press_ctrl_d(char *str)
@@ -50,15 +46,12 @@ int		press_backspace(char *str, t_all *all)
 
 int		check_key2(char *str, t_all *all)
 {
-	int i;
-	
-	i = 0;
-	if (g_string[0] == 0)
-		i = press_ctrl_d(str);
-	if (g_string[0] != 0)
-		i = press_del(str, all);
+	if (g_string[0] == 0 && ft_strnstr(str, "\004", ft_strlen(str)))
+		return (press_ctrl_d(str));
+	if (g_string[0] != 0 && ft_strnstr(str, "\e[3~", ft_strlen(str)))
+		return (press_del(str, all));
 	if (g_string[0] != 0
 		&& all->cursor.current_pos > all->cursor.start_pos)
-		i = press_backspace(str, all);
-	return (i);
+		return (press_backspace(str, all));
+	return (0);
 }

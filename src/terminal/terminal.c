@@ -57,15 +57,13 @@ void	main_loop(t_all *all)
 	{
 		write_minishell();
 		refresh_cursor(all);
-		// HERE I GONNA NEED FILLED ENV STRUCT
 		g_string = malloc(100);
 		g_string[0] = 0;
 		while(1)
 		{
 			str = malloc(4096);
 			read(0, str, 100);
-			if (!check_key(str, all) && !ft_strnstr(str, "\177", ft_strlen(str))
-			&& !ft_strnstr(str, "\e[3~", ft_strlen(str)))
+			if (!check_key(str, all))
 				build_string(all, str);
 			if (ft_strchr(str, '\n'))
 			{

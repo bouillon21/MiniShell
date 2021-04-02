@@ -35,5 +35,6 @@ int main(int argc, char **argv, char **envp)
 	minishell_history(&all);
 	terminal(&all);
 	signal(SIGINT, handle_sigint);
+	// HERE I GONNA NEED FILLED ENV STRUCT
 	main_loop(&all);
 }
