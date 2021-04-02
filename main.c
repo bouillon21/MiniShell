@@ -1,14 +1,14 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   main.c                                             :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2021/03/23 13:17:10 by hmickey           #+#    #+#             */
-// /*   Updated: 2021/03/24 09:53:36 by hmickey          ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 13:17:10 by hmickey           #+#    #+#             */
+/*   Updated: 2021/04/02 20:36:59 by hmickey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -37,11 +37,12 @@ void	minishell_history(t_all *all)
 int main(int argc, char **argv, char **envp)
 {
 	t_all all;
+	all.env = NULL;
 
 	all.token = create_new_token(0);
 	minishell_history(&all);
+	get_save_env(&all, envp);
 	terminal(&all);
 	signal(SIGINT, handle_sigint);
-	// HERE I GONNA NEED FILLED ENV STRUCT
 	main_loop(&all);
 }

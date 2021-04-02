@@ -30,23 +30,12 @@ void	build_string(t_all *all, char *str)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WH
 	free(old_string);
 }
 
-void	build_string2(t_all *all, char *str)
+void	switcher(t_all *all)
 {
-	char	*old_string;
-	int		i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (ft_isalnum(str[i]))
-		{
-			all->cursor.end_pos++;
-			all->cursor.current_pos++;
-			old_string = g_string;
-			g_string = ft_strjoin(g_string, &str[i]);
-			free(old_string);	
-		}
-	}
+	if(all->token->command)
+		exec(all->token->args, all, all->token->command);
+	else
+		printf("noup\n");
 }
 
 void	main_loop(t_all *all)
@@ -78,7 +67,8 @@ void	main_loop(t_all *all)
 		{
 			write(all->fd, g_string, ft_strlen(g_string));
 			parse_string(all);
-			//here will be calling of BULAT FUNCTIONS;
+			all->token = all->token->prev;
+			switcher(all);
 		}
 		clear_buf(&g_string);
 	}
