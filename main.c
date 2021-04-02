@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+void	error_message(char *message, t_all *all)
+{
+	write (1, "\n", 1);
+	ft_putstr_fd("🔥minishell🔥 : ", 1);
+	ft_putstr_fd(message, 1);
+}
+
 void	minishell_history(t_all *all)
 {
 	int ret;
@@ -20,7 +27,7 @@ void	minishell_history(t_all *all)
 	all->fd = open("minishell_history", O_RDWR |
 	O_CREAT, 0755 | O_APPEND);
 	if (!all->fd)
-		exit(0);			// ПОМЕНЯТЬ НА ОШИБКУ СИСЬКИ-ПИСЬКИ;
+		error_message("fail to create minishell_history file", all);
 	while (ret)
 	{
 		ret = get_next_line(all->fd, &all->hist.string);

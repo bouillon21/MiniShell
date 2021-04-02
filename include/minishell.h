@@ -103,4 +103,6 @@ char	**env_join(t_list *env);
 char	*verify_dir(char *path, char *cmd);
 void	free_array(char ***mas);
 t_list_hist	*create_new_list(t_list_hist *hist);
+void	error_message(char *message, t_all *all);
+
 #endif
