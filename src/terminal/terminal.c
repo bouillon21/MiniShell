@@ -30,57 +30,46 @@ void	build_string(t_all *all, char *str)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WH
 	free(old_string);
 }
 
-void	switcher(t_all *all)
+void	launch_command(t_all *all)
 {
-	if(all->token->command)
-		exec(all->token->args, all, all->token->command);
-	else
-		printf("noup\n");
+	write(all->fd, g_string, ft_strlen(g_string));
+	parse_string(all);
+	all->token = all->token->prev;
+	exec(all->token->args, all, all->token->command);
+	all->token = all->token->next;
+	clear_token(all);
+}
+
+void	read_input(t_all *all)
+{
+	char	*str;
+
+	while(1)
+	{
+		str = ft_calloc(4096, 1);
+		read(0, str, 100);
+		if (!check_key(str, all))
+			build_string(all, str);
+		if (ft_strchr(str, '\n'))
+		{
+			clear_buf(&str);
+			break ;
+		}
+		clear_buf(&str);
+	}
 }
 
 void	main_loop(t_all *all)
 {
-	char	*str;
-
 	while (1)
 	{
 		write_minishell();
 		refresh_cursor(all);
-		g_string = malloc(100);
+		g_string = ft_calloc(100, 1);
 		g_string[0] = 0;
-		while(1)
-		{
-			str = malloc(4096);
-			read(0, str, 100);
-			if (!check_key(str, all))
-				build_string(all, str);
-			if (ft_strchr(str, '\n'))
-			{
-				clear_buf(&str);
-				break ;
-			}
-			clear_buf(&str);
-		}
-		if (g_string[0] == 0)
-			write(1, "\n", 1);
-		else
-		{
-			write(all->fd, g_string, ft_strlen(g_string));
-			parse_string(all);
-			all->token = all->token->prev;
-			switcher(all);
-		}
+		read_input(all);
+		if (g_string[0] != 0 && g_string[0] != '\n')
+			launch_command(all);
 		clear_buf(&g_string);
 	}
-}
-
-void	terminal(t_all *all)
-{
-	struct termios	terminal;
-	tcgetattr(0, &terminal);
-	terminal.c_lflag &= ~(ECHO);
-	terminal.c_lflag &= ~(ICANON);
-	tcsetattr(0, TCSANOW, &terminal);
-	all->term.termtype = getenv("xterm-256color");
-	all->term.tgetent = tgetent(0, all->term.termtype);
 }

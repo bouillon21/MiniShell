@@ -8,7 +8,7 @@ char	*verify_dir(char *path, char *cmd)
 	direct = opendir(path);
 	if (!direct)
 	{
-		closedir(direct);
+		// closedir(direct);
 		return (NULL);
 	}
 	dir_file = readdir(direct);

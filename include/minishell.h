@@ -37,10 +37,10 @@ typedef struct s_token
 
 typedef struct s_list_hist
 {
-	char			*string;
-	struct t_list	*prev;
-	struct t_list	*next;
-}					t_list_hist;
+	char				*string;
+	struct s_list_hist	*prev;
+	struct s_list_hist	*next;
+}						t_list_hist;
 
 typedef struct s_term
 {
@@ -72,11 +72,11 @@ typedef	struct s_all
 	t_term			term;
 	t_cursor		cursor;
 	t_flags			quote;
+	struct termios	terminal;
 	int				fd;
-	t_list_hist		hist;
+	t_list_hist		*hist;
 }					t_all;
 
-void	terminal(t_all *all);
 void	handle_sigint(int sig);
 void	write_minishell(void);
 void	ctrl_d_exit(void);
@@ -106,5 +106,6 @@ char	*verify_dir(char *path, char *cmd);
 void	free_array(char ***mas);
 t_list_hist	*create_new_list(t_list_hist *hist);
 void	error_message(char *message, t_all *all);
+void	clear_token(t_all *all);
 
 #endif

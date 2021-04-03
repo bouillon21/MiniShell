@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/02 20:40:38 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/03 18:51:10 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int		fill_args(t_all *all, int start, int *k)
 	int	j;
 	j = search_command(all, start);
 	all->token->args[++(*k)] = ft_substr(g_string, start, j - start);
-	// printf("arg [%d]= %s\n", *k, all->token->args[*k]);
 	return (j);
 }
 
@@ -75,13 +74,13 @@ void	parse_string(t_all *all)
 
 	while (g_string[i] != '\0' && g_string[i] != '\n')
 	{
-		all->token->args = ft_calloc(sizeof(char*), 50);
+		all->token->args = ft_calloc(sizeof(char*), 500);
 		all->token->args[0] = ft_strdup("minishell");		// КОСТЫЛЬ НА ВРЕМЯ
 		k = 0;
 		i = skip_space(i);
 		j = i;
 		i = search_command(all, i);
-		all->token->command = ft_substr(g_string, j, i - j - 1);
+		all->token->command = ft_substr(g_string, j, i - j);
 		if (g_string[i] != ';')
 		{
 			i = skip_space(i);
@@ -91,11 +90,11 @@ void	parse_string(t_all *all)
 		}
 		else
 			i++;
-		// printf("%s\n", all->token->command);
+		// printf("|%s|\n", all->token->command);
 		// k = -1;
 		// if(all->token->args)
 		// 	while(all->token->args[++k])
-		// 		printf("arg %d: %s\n", k, all->token->args[k]);
+		// 		printf("arg %d: |%s|\n", k, all->token->args[k]);
 		all->token->next = create_new_token(all->token);
 		all->token = all->token->next;
 	}

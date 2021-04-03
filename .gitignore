@@ -56,3 +56,4 @@ include/.DS_Store
 .DS_Store
 .DS_Store
 minishell
+minishell_history
