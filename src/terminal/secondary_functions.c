@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 08:15:28 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/01 22:31:38 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/03 22:14:50 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ft_putchar(int c)
 void	write_minishell(void)
 {
 	write(1, RED, ft_strlen(RED));
+	tputs(tigetstr("mb"), 1, ft_putchar);
 	write(1, "🔥minishell🔥$ ", ft_strlen("🔥minishell🔥$ "));
 	write(1, RESET, ft_strlen(RESET));
 	tputs(tigetstr("sc"), 1, ft_putchar);

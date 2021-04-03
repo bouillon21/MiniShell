@@ -63,9 +63,11 @@ void	main_loop(t_all *all)
 {
 	while (1)
 	{
-		write_minishell();
 		refresh_cursor(all);
 		g_string = ft_calloc(100, 1);
+		if (!g_string)
+			exit (errno);
+		write_minishell();
 		g_string[0] = 0;
 		read_input(all);
 		if (g_string[0] != 0 && g_string[0] != '\n')

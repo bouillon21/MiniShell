@@ -17,13 +17,15 @@
 #include <errno.h>
 #include <string.h>
 
-#define RESET   "\033[0m"
-#define RED     "\033[1;31m"
-#define YELLOW  "\033[1;33m"
-#define WHITE   "\033[1;37m"
+#define RESET		"\033[0m"
+#define RED			"\033[1;31m"
+#define LIGHT_GREEN	"\033[1;92m"
+#define YELLOW		"\033[1;33m"
+#define WHITE		"\033[1;37m"
+#define LIGHT_CYAN	"\033[1;36m"
+#define BLUE		"\033[1;34m"
 
 char *g_string;
-
 
 typedef struct s_token
 {
@@ -75,6 +77,7 @@ typedef	struct s_all
 	struct termios	terminal;
 	int				fd;
 	t_list_hist		*hist;
+	char			*check;
 }					t_all;
 
 void	handle_sigint(int sig);
