@@ -82,8 +82,7 @@ void	exec(char **argv, t_all *all, char *cmd)
 			break;
 		}
 		if (!path_bin[a + 1])
-			error_message("command not found", all);	
+			error_message("command not found", all);
 	}
-	free(cmd);
 	free_array(&path_bin);
 }

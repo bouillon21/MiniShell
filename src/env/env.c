@@ -26,26 +26,25 @@ t_list	*env_srh(t_all	*all, char *need)
 	return(NULL);
 }
 
-char	*env_srh_edit(t_list **env, char *need, char *changes)
+void	env_add(t_all *all, char *need, char *content)
 {
-	t_list	*head;
+	t_list	*env;
+	char	*line;
 
-	head = *env;
-	while (head->next)
+	env = env_srh(all, need);
+	if(env != NULL)
 	{
-		if (ft_strnstr(head->content, need, ft_strlen(need)))
-		{
-			if (changes == NULL)
-				return(ft_strrchr(head->content,'=') + 1);
-			free(head->content);
-			changes = ft_strjoin(need, changes);
-			head->content = ft_strdup(changes);
-			free(changes);
-			return(head->content);
-		}
-		head = head->next;
+		free(env->content);
+		line = ft_strjoin(need, content);
+		env->content = ft_strdup(line);
+		free(line);
 	}
-	return(NULL);
+	else
+	{
+		line = ft_strjoin(need, content);
+		ft_lstadd_back(&all->env, ft_lstnew(ft_strdup(line)));
+		free(line);
+	}
 }
 
 char	**env_join(t_list *env)
