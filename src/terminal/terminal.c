@@ -32,7 +32,6 @@ void	build_string(t_all *all, char *str)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WH
 
 void	launch_command(t_all *all)
 {
-	write(1, "\n", 1);
 	if (all->flag != 1)
 		write(all->fd, g_string, ft_strlen(g_string));
 	else
@@ -42,15 +41,18 @@ void	launch_command(t_all *all)
 		clear_buf(&g_string);
 		g_string = ft_strdup(all->hist->string);
 	}
+	
+	
 	if (all->hist->next)
+	{
 		while (all->hist->next)
-		{
 			all->hist = all->hist->next;
-			if (!all->hist->string)
-				break;
-		}
+		all->hist = all->hist->prev;
+	}
 	if (all->flag != 1)
 		all->hist->string = g_string;
+
+
 	all->hist->next = create_new_list(all->hist);
 	all->hist = all->hist->next;
 	parse_string(all);
