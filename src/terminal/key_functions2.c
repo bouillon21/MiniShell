@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:42:34 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 19:50:49 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/03 21:24:54 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,48 @@
 
 int		press_del(char *str, t_all *all)
 {
-	if (ft_strnstr(str, "\e[3~", ft_strlen(str)))
-	{
-		all->cursor.end_pos--;
-		delete_from_array(all->cursor.current_pos);
-		tputs(tgetstr("dc", 0), 1, ft_putchar);
-		return(1);
-	}
-	return (0);
-}
-
-int		press_ctrl_d(char *str)
-{
-	if (ft_strnstr(str, "\004", ft_strlen(str)))
-	{
-		ctrl_d_exit();
-		return(1);
-	}
-	return(0);
+	all->cursor.end_pos--;
+	delete_from_array(all->cursor.current_pos);
+	tputs(tgetstr("dc", 0), 1, ft_putchar);
+	return(1);
 }
 
 int		press_backspace(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\177", ft_strlen(str)))
 	{
-		all->cursor.end_pos--;
-		all->cursor.current_pos--;
-		delete_from_array(all->cursor.current_pos);
-		tputs(tgetstr("le", 0), 1, ft_putchar);
-		tputs(tgetstr("dc", 0), 1, ft_putchar);
+		if (g_string[0] != '\0' && g_string[0] != 0 && g_string)
+		{
+			all->cursor.end_pos--;
+			all->cursor.current_pos--;
+			delete_from_array(all->cursor.current_pos);
+			tputs(tgetstr("le", 0), 1, ft_putchar);
+			tputs(tgetstr("dc", 0), 1, ft_putchar);
+		}
 		return(1);
 	}
 	return (0);
 }
 
+int		ctrl_l(t_all *all)
+{
+	tputs(tgetstr("cl", 0), 1, ft_putchar);
+	write(1, "\n", 1);
+	write_minishell();
+	write(1, g_string, ft_strlen(g_string));
+	return (1);
+}
+
 int		check_key2(char *str, t_all *all)
 {
-	int i;
-	
-	i = 0;
-	if (g_string[0] == 0)
-		i = press_ctrl_d(str);
-	if (g_string[0] == 0 && !ft_isprint(*str))
-		return (1);
-	if (all->cursor.current_pos > all->cursor.start_pos
-		&& g_string[0] != '\0')
-			i = press_backspace(str, all);
-	if (g_string[0] != 0)
-		i = press_del(str, all);
-	return (i);
+	if (g_string[0] == 0 && ft_strnstr(str, "\004", ft_strlen(str)))
+		ctrl_d_exit();
+	if(ft_strnstr(str, "\f", ft_strlen(str)))
+		return(ctrl_l(all));
+	if (g_string[0] != 0 && ft_strnstr(str, "\e[3~", ft_strlen(str)))
+		return (press_del(str, all));
+	if (g_string[0] != 0
+		&& all->cursor.current_pos > all->cursor.start_pos)
+		return (press_backspace(str, all));
+	return (0);
 }

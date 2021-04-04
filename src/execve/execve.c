@@ -8,7 +8,7 @@ char	*verify_dir(char *path, char *cmd)
 	direct = opendir(path);
 	if (!direct)
 	{
-		closedir(direct);
+		// closedir(direct);
 		return (NULL);
 	}
 	dir_file = readdir(direct);
@@ -67,10 +67,10 @@ void	exec(char **argv, t_all *all, char *cmd)
 	char	*line;
 	char	**path_bin;
 	char	*tmp;
-	
-	a = 0;
+
+	a = -1;
 	path_bin = defin_dir(all, &cmd);
-	while (path_bin[a])
+	while (path_bin[++a])
 	{
 		tmp = verify_dir(path_bin[a], cmd);
 		if (tmp)
@@ -79,8 +79,10 @@ void	exec(char **argv, t_all *all, char *cmd)
 			open_apk(line, argv, all);
 			free(tmp);
 			free(line);
+			break;
 		}
-		a++;
+		if (!path_bin[a + 1])
+			error_message("command not found", all);	
 	}
 	free(cmd);
 	free_array(&path_bin);
