@@ -76,8 +76,8 @@ typedef	struct s_all
 	t_flags			quote;
 	struct termios	terminal;
 	int				fd;
+	int				flag;
 	t_list_hist		*hist;
-	char			*check;
 }					t_all;
 
 void	handle_sigint(int sig);

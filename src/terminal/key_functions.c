@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/02 20:41:52 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/04 07:39:28 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,31 @@ int		press_right(char *str, t_all *all)
 	return (1);
 }
 
-int		press_up(char *str, t_all *all)
+int		press_up(t_all *all)
 {
-	tputs(tigetstr("rc"), 1, ft_putchar);
-	tputs(tigetstr("ed"), 1, ft_putchar);
-	write(1, "up", 3);						// there will be function to read from history
+	if (all->hist->prev)
+	{
+		tputs(tigetstr("rc"), 1, ft_putchar);
+		tputs(tigetstr("ed"), 1, ft_putchar);
+		if (all->flag != 1 && g_string[0] != 0)
+			all->hist->string = g_string;
+		all->hist = all->hist->prev;
+		all->flag = 1;
+	}
+	ft_putstr_fd(all->hist->string, 1);
 	return(1);
 }
 
-int		press_down(char *str, t_all *all)
+int		press_down(t_all *all)
 {
-	tputs(tigetstr("rc"), 1, ft_putchar);
-	tputs(tigetstr("ed"), 1, ft_putchar);
-	write(1, "down", 4);					// there will be function to read from history
+	if (all->hist->next != NULL)
+	{
+		tputs(tigetstr("rc"), 1, ft_putchar);
+		tputs(tigetstr("ed"), 1, ft_putchar);
+		all->flag = 1;
+		all->hist = all->hist->next;
+		ft_putstr_fd(all->hist->string, 1);
+	}
 	return(1);
 }
 
@@ -55,8 +67,8 @@ int	check_key(char *str, t_all *all)
 	if (ft_strnstr(str, "\e[C", ft_strlen(str)))
 		return (press_right(str, all));
 	if (ft_strnstr(str, "\e[A", ft_strlen(str)))
-		return (press_up(str, all));
+		return (press_up(all));
 	if (ft_strnstr(str, "\e[B", ft_strlen(str)))
-		return (press_down(str, all));
+		return (press_down(all));
 	return (check_key2(str, all));
 }

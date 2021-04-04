@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 13:17:10 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/03 22:37:07 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/04 01:04:24 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	error_message(char *message, t_all *all)
 	write(1, ": ", 2);
 	write(1, LIGHT_CYAN, ft_strlen(LIGHT_CYAN));
 	ft_putstr_fd(message, 1);
-	write(1, " 😢\n", ft_strlen(" 😢\n"));
+	write(1, " 🐒\n", ft_strlen(" 🐒\n"));
 	write(1, RESET, ft_strlen(RESET));
 }
 
@@ -59,6 +59,7 @@ int main(int argc, char **argv, char **envp)
 	t_all all;
 	all.env = NULL;
 
+	all.flag = 0;
 	all.token = create_new_token(0);
 	all.hist = create_new_list(0);
 	minishell_history(&all);

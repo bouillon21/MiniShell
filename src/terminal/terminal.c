@@ -32,12 +32,37 @@ void	build_string(t_all *all, char *str)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WH
 
 void	launch_command(t_all *all)
 {
-	write(all->fd, g_string, ft_strlen(g_string));
+	write(1, "\n", 1);
+	if (all->flag != 1)
+		write(all->fd, g_string, ft_strlen(g_string));
+	else
+	{
+		write(all->fd, all->hist->string,
+		ft_strlen(all->hist->string));
+		clear_buf(&g_string);
+		g_string = ft_strdup(all->hist->string);
+	}
+	if (all->hist->next)
+		while (all->hist->next)
+		{
+			all->hist = all->hist->next;
+			if (!all->hist->string)
+				break;
+		}
+	if (all->flag != 1)
+		all->hist->string = g_string;
+	all->hist->next = create_new_list(all->hist);
+	all->hist = all->hist->next;
 	parse_string(all);
+
+
+
+	// DONT FORGET TO REPLACE KOSTYL
 	all->token = all->token->prev;
 	exec(all->token->args, all, all->token->command);
 	all->token = all->token->next;
 	clear_token(all);
+	all->flag = 0;
 }
 
 void	read_input(t_all *all)
@@ -64,14 +89,15 @@ void	main_loop(t_all *all)
 	while (1)
 	{
 		refresh_cursor(all);
+		write_minishell();
 		g_string = ft_calloc(100, 1);
 		if (!g_string)
 			exit (errno);
-		write_minishell();
 		g_string[0] = 0;
 		read_input(all);
-		if (g_string[0] != 0 && g_string[0] != '\n')
+		if ((g_string[0] != 0 && g_string[0] != '\n') || all->flag == 1)
 			launch_command(all);
-		clear_buf(&g_string);
+		else
+			clear_buf(&g_string);
 	}
 }
