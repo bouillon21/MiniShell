@@ -74,8 +74,10 @@ void	printf_env(t_all *all)
 	env = all->env;
 	while (env->next)
 	{
-		printf("%s\n", env->content);
+		if (ft_strchr(env->content, '=') != 0)
+			printf("%s\n", env->content);
 		env = env->next;
 	}
-	printf("%s\n", env->content);
+		if (ft_strchr(env->content, '=') != 0)
+			printf("%s\n", env->content);
 }
