@@ -10,6 +10,7 @@ void	get_save_env(t_all *all, char **envp)
 		ft_lstadd_back(&all->env, ft_lstnew(ft_strdup(envp[i])));
 		i++;
 	}
+	env_add(all, "OLDPWD", NULL);
 }
 
 t_list	*env_srh(t_all	*all, char *need)
@@ -35,7 +36,10 @@ void	env_add(t_all *all, char *need, char *content)
 	if(env != NULL)
 	{
 		free(env->content);
-		line = ft_strjoin(need, content);
+		if (content != NULL)
+			line = ft_strjoin(need, content);
+		else
+			line = ft_strjoin(need, "");
 		env->content = ft_strdup(line);
 		free(line);
 	}

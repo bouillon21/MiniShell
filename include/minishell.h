@@ -100,7 +100,6 @@ void	string_to_lower(char **mas);
 int		ft_pwd();
 void	get_save_env(t_all *all, char **envp);
 void	printf_env(t_all *all);
-// void	cd(t_list **head, char *arg);
 char	*env_srh_edit(t_list **head, char *need, char *changes);
 t_list	*env_srh(t_all	*all, char *need);
 void	exec(char **argv, t_all *all, char *cmd);
@@ -112,5 +111,7 @@ void	error_message(char *message, t_all *all);
 void	clear_token(t_all *all);
 void	env_add(t_all *all, char *need, char *content);
 void	cd(t_all *all);
+void	terminal(t_all *all);
+void	print_export(t_all *all);
 
 #endif

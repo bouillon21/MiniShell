@@ -48,4 +48,6 @@ void	cd(t_all *all)
 	}
 	else
 		move_path(all, all->token->args[1]);
+	// ft_pwd();
+	// printf_env(all);
 }
