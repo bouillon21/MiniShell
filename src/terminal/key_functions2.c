@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:42:34 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/06 15:23:46 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/07 15:57:59 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		ctrl_l(t_all *all)
 int		check_key2(char *str, t_all *all)
 {
 	if (g_string[0] == 0 && ft_strnstr(str, "\004", ft_strlen(str)))
-		ctrl_d_exit();
+		ctrl_d_exit(all);
 	if(ft_strnstr(str, "\f", ft_strlen(str)))
 		return(ctrl_l(all));
 	if (g_string[0] != 0 && ft_strnstr(str, "\e[3~", ft_strlen(str)))

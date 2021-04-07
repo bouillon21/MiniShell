@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/07 15:19:54 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/07 20:40:06 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ int		press_right(char *str, t_all *all)
 
 int		press_up(t_all *all)
 {
+	char	*tmp;
+
 	if (all->hist->prev)
 	{
+		tmp = g_string;
 		tputs(tigetstr("rc"), 1, ft_putchar);
 		tputs(tigetstr("ed"), 1, ft_putchar);
 		all->hist = all->hist->prev;
@@ -43,15 +46,21 @@ int		press_up(t_all *all)
 		all->cursor.end_pos = ft_strlen(all->hist->string);
 		all->flag = 1;
 		if (all->hist->string[ft_strlen(all->hist->string) - 1] == '\n')
-			write(1, all->hist->string, ft_strlen(all->hist->string) - 1);
+			g_string = ft_substr(all->hist->string, 0,
+				ft_strlen(all->hist->string) - 1);
 		else
-			write(1, all->hist->string, ft_strlen(all->hist->string));
+			g_string = ft_substr(all->hist->string, 0,
+				ft_strlen(all->hist->string));
+		write(1, g_string, ft_strlen(g_string));
+		free(tmp);
 	}
 	return(1);
 }
 
 int		press_down(t_all *all)
 {
+	char *tmp;
+	
 	if (all->hist->next)
 		all->hist = all->hist->next;
 	if (all->hist->string != NULL)
@@ -63,11 +72,16 @@ int		press_down(t_all *all)
 			write(1, all->hist->string, ft_strlen(all->hist->string) - 1);
 		else
 			write(1, all->hist->string, ft_strlen(all->hist->string));
+		tmp = g_string;
+		g_string = ft_strdup(all->hist->string);
+		free(tmp);
 		all->cursor.current_pos = ft_strlen(all->hist->string);
 		all->cursor.end_pos = ft_strlen(all->hist->string);
 	}
 	else
 	{
+		if (all->flag == 1)
+			g_string = all->old_string;
 		tputs(tigetstr("rc"), 1, ft_putchar);
 		tputs(tigetstr("ed"), 1, ft_putchar);
 		all->flag = 0;

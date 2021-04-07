@@ -21,26 +21,23 @@ void	refresh_cursor(t_all *all)
 
 void	build_string(t_all *all, char *str)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WHERE CURRENT CURSOR IS PLACED
 {
-	char *old_string;
+	char *tmp;
 
 	all->cursor.end_pos += write(1, str, ft_strlen(str));
 	all->cursor.current_pos += ft_strlen(str);
-	old_string = g_string;
+	tmp = g_string;
 	g_string = ft_strjoin(g_string, str);
-	free(old_string);
+	free(tmp);
+	if (all->flag == 0)
+	{
+		free(all->old_string);
+		all->old_string = ft_strdup(g_string);
+	}
 }
 
 void	add_history(t_all *all)
 {
 	char *tmp;
-	if (all->flag == 1)
-	{
-		clear_buf(&g_string);
-		g_string = ft_strdup(all->hist->string);
-		tmp = g_string;
-		g_string = ft_strjoin(g_string, "\n");
-		free(tmp);
-	}
 	write(all->fd, g_string, ft_strlen(g_string));
 	if (all->hist->next)
 		while (all->hist->next)
@@ -55,7 +52,6 @@ void	launch_command(t_all *all)
 {
 	add_history(all);
 	parse_string(all);
-	printf("g_string - %s", g_string);
 	// DONT FORGET TO REPLACE KOSTYL
 	all->token = all->token->prev;
 	exec(all->token->args, all, all->token->command);
@@ -72,7 +68,9 @@ void	read_input(t_all *all)
 	{
 		str = ft_calloc(4096, 1);
 		read(0, str, 100);
-		if (!check_key(str, all))
+		// write(1, "\nHI\n", 3);
+		sleep(10);
+		if (!check_key(str, all) && !ft_strnstr(str, "\n", ft_strlen(str)))
 			build_string(all, str);
 		if (ft_strchr(str, '\n'))
 		{
@@ -94,6 +92,7 @@ void	main_loop(t_all *all)
 		if (!g_string)
 			exit (errno);
 		g_string[0] = 0;
+		all->old_string = malloc(100);
 		read_input(all);
 		if ((g_string[0] != 0 && g_string[0] != '\n') || all->flag == 1)
 			launch_command(all);
