@@ -1,47 +1,53 @@
 #include "minishell.h"
 
-void	save_old_pwd(t_list **env)
+void	save_old_pwd(t_all *all)
 {
 	char	*line;
 	char	*buf;
 	
 	buf = malloc(1024);
 	getcwd(buf, 1024);
-	if (env_srh_edit(env, "OLDPWD=", buf) == NULL)
-		ft_lstadd_back(env, ft_lstnew(buf));
+	env_add(all, "OLDPWD=", buf);
 	free(buf);
 }
 
-int	move_path(t_list **env, char *arg)
+int	move_path(t_all *all, char *path)
 {
-	char	*buf;
-	char	*new_path;
+	char	buf[1024];
 
-	buf = malloc(1024);
-	new_path = env_srh_edit(env,arg, NULL);
-	printf("%s\n", new_path);
-	if (new_path == NULL)
-		return (-1);
-	save_old_pwd(env);
-	chdir(new_path);
+	save_old_pwd(all);
+	if (chdir(path) == -1)
+	{
+		error_message("No such file or directory", all);
+		return(-1);
+	}
 	getcwd(buf, 1024);
-	env_srh_edit(env, "PWD=", buf);
-	free(buf);
+	env_add(all, "PWD=", getcwd(buf, 1024));
 	return(0);
 }
 
-void	cd(t_list **env, char *arg)
+void	cd(t_all *all)
 {
-	if (arg == NULL)
+	t_list	*env;
+
+	if (all->token->args[1] == NULL)
 	{
-		move_path(env, "HOME=");
+		env = env_srh(all, "HOME=");
+		if (env != NULL)
+			move_path(all, &env->content[5]);
+		else
+			error_message("HOME not set", all);
 	}
-	// else if	(ft_strncmp(arg, "-", 1) == 0)
-	// {
-	// 	move_path(env, "OLDPWD=");
-	// }
+	else if (ft_strncmp(all->token->args[1], "-", 1) == 0)
+	{
+		env = env_srh(all, "OLDPWD=");
+		if (env != NULL)
+			move_path(all, &env->content[7]);
+		else
+			error_message("OLDPWD not set", all);
+	}
 	else
-	{
-		move_path(env, arg);
-	}
+		move_path(all, all->token->args[1]);
+	// ft_pwd();
+	// printf_env(all);
 }

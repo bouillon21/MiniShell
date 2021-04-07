@@ -34,6 +34,8 @@ PATH_CD		=	src/cd/
 
 PATH_PWD	=	src/pwd/
 
+PATH_EXPORT	=	src/export/
+
 SRCS		=	main.c\
 				src/utils.c\
 				${PATH_CD}cd.c\
@@ -51,6 +53,7 @@ SRCS		=	main.c\
 				${PATH_PARSE}parse_input.c\
 				${PATH_PARSE}quote.c\
 				${PATH_LISTS}lists_functions.c\
+				${PATH_EXPORT}export.c\
 
 OBJS		= ${SRCS:.c=.o}
 
