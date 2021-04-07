@@ -1,31 +1,33 @@
 #ifndef MINISHELL_H
-#define MINISHELL_H
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <stdlib.h>
-#include "../include/libft.h"
-#include "../include/get_next_line.h"
-#include <signal.h>
-#include <term.h>
-#include <curses.h>
-#include <termcap.h>
-#include <termios.h>
-#include <string.h>
-#include <sys/types.h>
-#include <dirent.h>
-#include <errno.h>
-#include <string.h>
+# define MINISHELL_H
 
-#define RESET		"\033[0m"
-#define RED			"\033[1;31m"
-#define LIGHT_GREEN	"\033[1;92m"
-#define YELLOW		"\033[1;33m"
-#define WHITE		"\033[1;37m"
-#define LIGHT_CYAN	"\033[1;36m"
-#define BLUE		"\033[1;34m"
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <stdlib.h>
+# include "../include/libft.h"
+# include "../include/get_next_line.h"
+# include <signal.h>
+# include <term.h>
+# include <curses.h>
+# include <termcap.h>
+# include <termios.h>
+# include <string.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <errno.h>
+# include <string.h>
 
-char *g_string;
+# define RESET			"\033[0m"
+# define RED			"\033[1;31m"
+# define LIGHT_GREEN	"\033[1;92m"
+# define YELLOW			"\033[1;33m"
+# define WHITE			"\033[1;37m"
+# define LIGHT_CYAN		"\033[1;36m"
+# define BLUE			"\033[1;34m"
+
+char	*g_string;
+pid_t	g_fork;
 
 typedef struct s_token
 {
@@ -36,6 +38,14 @@ typedef struct s_token
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
+
+// typedef struct s_double
+// {
+// 	char	*string;
+// 	pid_t	pid;				// BULKA, PLACE HERE UR GLOBAL VARIABLE FOR MULTI-PROCESS!!!!!!!!!!!!
+// }				t_double;
+
+// struct s_double	g_double; // may be use this as global_variable
 
 typedef struct s_list_hist
 {
@@ -58,8 +68,8 @@ typedef struct s_cursor
 {
 	int				start_pos;
 	int				end_pos;
-	int				current_pos;		
-}					t_cursor;;
+	int				current_pos;
+}					t_cursor;
 
 typedef struct s_flags
 {
@@ -67,7 +77,7 @@ typedef struct s_flags
 	int			twice;
 }				t_flags;
 
-typedef	struct s_all
+typedef struct s_all
 {
 	t_list			*env;
 	t_token			*token;
@@ -113,5 +123,6 @@ void	env_add(t_all *all, char *need, char *content);
 void	cd(t_all *all);
 void	terminal(t_all *all);
 void	print_export(t_all *all);
+void	terminal_off(t_all *all);
 
 #endif
