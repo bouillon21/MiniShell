@@ -27,6 +27,7 @@
 # define BLUE			"\033[1;34m"
 
 char	*g_string;
+pid_t	g_fork;
 
 typedef struct s_token
 {
@@ -119,5 +120,6 @@ void		free_array(char ***mas);
 t_list_hist	*create_new_list(t_list_hist *hist);
 void		error_message(char *message, t_all *all);
 void		clear_token(t_all *all);
-
+void		terminal(t_all *all);
+void		terminal_off(t_all *all);
 #endif

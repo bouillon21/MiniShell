@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 13:17:10 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/04 01:04:24 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/06 16:19:10 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,16 @@
 void	terminal(t_all *all)
 {
 	tcgetattr(0, &all->terminal);
-	all->terminal.c_lflag &= ~(ECHO);
-	all->terminal.c_lflag &= ~(ICANON);
+	all->terminal.c_lflag &= ~(ECHO | ICANON | ISIG);
+	tcsetattr(0, TCSANOW, &all->terminal);
+	all->term.termtype = getenv("xterm-256color");
+	all->term.tgetent = tgetent(0, all->term.termtype);
+}
+
+void	terminal_off(t_all *all)
+{
+	tcgetattr(0, &all->terminal);
+	all->terminal.c_lflag |= (ECHO | ICANON | ISIG);
 	tcsetattr(0, TCSANOW, &all->terminal);
 	all->term.termtype = getenv("xterm-256color");
 	all->term.tgetent = tgetent(0, all->term.termtype);
@@ -64,7 +72,6 @@ int main(int argc, char **argv, char **envp)
 	all.hist = create_new_list(0);
 	minishell_history(&all);
 	get_save_env(&all, envp);
-	terminal(&all);
 	signal(SIGINT, handle_sigint);
 	main_loop(&all);
 }

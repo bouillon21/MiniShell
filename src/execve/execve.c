@@ -27,19 +27,20 @@ char	*verify_dir(char *path, char *cmd)
 
 void	open_apk(char *path, char **argv, t_all *all)
 {
-	int	a;
 	pid_t	forks;
 	char	**env_copy;
 	t_list	*env;
 
 	env = all->env;
 	forks = fork();
+	g_fork = forks;
 	if (forks == 0)
 	{
 		env_copy = env_join(env);
+		terminal_off(all);
 		execve(path, argv, env_copy);
 	}
-	wait(&a);
+	g_fork = wait(&forks);
 }
 
 char	**defin_dir(t_all *all, char **cmd)
@@ -84,6 +85,5 @@ void	exec(char **argv, t_all *all, char *cmd)
 		if (!path_bin[a + 1])
 			error_message("command not found", all);	
 	}
-	free(cmd);
 	free_array(&path_bin);
 }

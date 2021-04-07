@@ -56,9 +56,6 @@ void	launch_command(t_all *all)
 	all->hist->next = create_new_list(all->hist);
 	all->hist = all->hist->next;
 	parse_string(all);
-
-
-
 	// DONT FORGET TO REPLACE KOSTYL
 	all->token = all->token->prev;
 	exec(all->token->args, all, all->token->command);
@@ -90,6 +87,7 @@ void	main_loop(t_all *all)
 {
 	while (1)
 	{
+		terminal(all);
 		refresh_cursor(all);
 		write_minishell();
 		g_string = ft_calloc(100, 1);

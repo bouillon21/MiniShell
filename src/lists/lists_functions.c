@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:32:13 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/04 00:37:20 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/06 15:56:51 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	clear_loop(t_token **token)
 	int i;
 
 	i = -1;
+	if ((*token)->command)
+		clear_buf(&(*token)->command);
 	if ((*token)->args)
 		while ((*token)->args[++i])
 			clear_buf(&(*token)->args[i]);

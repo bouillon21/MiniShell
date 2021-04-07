@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:42:34 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/03 21:24:54 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/06 15:23:46 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,13 @@ int		check_key2(char *str, t_all *all)
 	if (g_string[0] != 0
 		&& all->cursor.current_pos > all->cursor.start_pos)
 		return (press_backspace(str, all));
+	if (ft_strnstr(str, "\003", ft_strlen(str)))
+	{
+		clear_buf(&g_string);
+		write(1, "\n", 1);
+		write_minishell();
+		g_string = ft_calloc(4096, 1);
+		return (1);
+	}
 	return (0);
 }
