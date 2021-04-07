@@ -13,10 +13,10 @@
 # include <termcap.h>
 # include <termios.h>
 # include <string.h>
-# include <sys/types.h>
 # include <dirent.h>
 # include <errno.h>
 # include <string.h>
+#include <sys/wait.h>
 
 # define RESET			"\033[0m"
 # define RED			"\033[1;31m"
@@ -124,5 +124,7 @@ void	cd(t_all *all);
 void	terminal(t_all *all);
 void	print_export(t_all *all);
 void	terminal_off(t_all *all);
+void	export(t_all *all);
+char	**sort_export(t_all *all);
 
 #endif

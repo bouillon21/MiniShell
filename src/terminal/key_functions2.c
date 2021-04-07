@@ -49,7 +49,10 @@ int		ctrl_l(t_all *all)
 int		check_key2(char *str, t_all *all)
 {
 	if (g_string[0] == 0 && ft_strnstr(str, "\004", ft_strlen(str)))
+	{
+		terminal_off(all); // костыль 
 		ctrl_d_exit();
+	}
 	if(ft_strnstr(str, "\f", ft_strlen(str)))
 		return(ctrl_l(all));
 	if (g_string[0] != 0 && ft_strnstr(str, "\e[3~", ft_strlen(str)))

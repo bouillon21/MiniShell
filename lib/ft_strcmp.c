@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cshelli <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 13:55:36 by cshelli           #+#    #+#             */
-/*   Updated: 2021/03/21 11:56:49 by cshelli          ###   ########.fr       */
+/*   Created: 2020/07/26 15:54:04 by cshelli           #+#    #+#             */
+/*   Updated: 2020/07/26 15:54:07 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <string.h>
 
-char	*ft_strdup(char *src)
+int		ft_strcmp(char *s1, char *s2)
 {
-	int		n;
-	char	*buf;
-
-	n = 0;
-	buf = (char *)ft_calloc(ft_strlen(src), sizeof(char) + 1);
-	if (!buf)
-		return (0);
-	while (src[n])
+	while (*s1 != '\0' && *s2 != '\0')
 	{
-		buf[n] = src[n];
-		n++;
+		if (*s1 == *s2)
+		{
+			s1++;
+			s2++;
+		}
+		else
+		{
+			return (*s1 - *s2);
+		}
 	}
-	buf[n] = '\0';
-	return (buf);
+	return (*s1 - *s2);
 }

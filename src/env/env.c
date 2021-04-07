@@ -57,7 +57,7 @@ char	**env_join(t_list *env)
 	char	**env_copy;
 	
 	i = 0;
-	env_copy = malloc(sizeof(char *) * ft_lstsize(env) + 1);
+	env_copy = ft_calloc(sizeof(char *), ft_lstsize(env) + 1);
 	if (!env_copy)
 		return (NULL);
 	while (env->next)
