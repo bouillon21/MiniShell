@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/03 18:55:58 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/07 15:34:07 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		search_command(t_all *all, int start)
 			return (i);
 		}
 		else if(g_string[i] == ';' || g_string[i] == '<'
-			|| g_string[i] == '>' || g_string[i] == '\n')
+			|| g_string[i] == '>')
 		{
 			all->token->separate = *ft_strchr(";><", g_string[i]);			//ДОПИСАТЬ ДЛЯ >>
 			return (i);
@@ -90,11 +90,7 @@ void	parse_string(t_all *all)
 		}
 		else
 			i++;
-		// printf("|%s|\n", all->token->command);
-		// k = -1;
-		// if(all->token->args)
-		// 	while(all->token->args[++k])
-		// 		printf("arg %d: |%s|\n", k, all->token->args[k]);
+
 		all->token->next = create_new_token(all->token);
 		all->token = all->token->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/06 16:45:54 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/07 15:19:54 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,42 @@ int		press_up(t_all *all)
 	{
 		tputs(tigetstr("rc"), 1, ft_putchar);
 		tputs(tigetstr("ed"), 1, ft_putchar);
-		if (all->flag != 1 && g_string[0] != 0)
-			all->hist->string = g_string;
 		all->hist = all->hist->prev;
+		all->cursor.current_pos = ft_strlen(all->hist->string);
+		all->cursor.end_pos = ft_strlen(all->hist->string);
 		all->flag = 1;
+		if (all->hist->string[ft_strlen(all->hist->string) - 1] == '\n')
+			write(1, all->hist->string, ft_strlen(all->hist->string) - 1);
+		else
+			write(1, all->hist->string, ft_strlen(all->hist->string));
 	}
-	ft_putstr_fd(all->hist->string, 1);
 	return(1);
 }
 
 int		press_down(t_all *all)
 {
-	if (all->hist->next != NULL)
+	if (all->hist->next)
+		all->hist = all->hist->next;
+	if (all->hist->string != NULL)
 	{
 		tputs(tigetstr("rc"), 1, ft_putchar);
 		tputs(tigetstr("ed"), 1, ft_putchar);
 		all->flag = 1;
-		all->hist = all->hist->next;
-		ft_putstr_fd(all->hist->string, 1);
+		if (all->hist->string[ft_strlen(all->hist->string) - 1] == '\n')
+			write(1, all->hist->string, ft_strlen(all->hist->string) - 1);
+		else
+			write(1, all->hist->string, ft_strlen(all->hist->string));
+		all->cursor.current_pos = ft_strlen(all->hist->string);
+		all->cursor.end_pos = ft_strlen(all->hist->string);
+	}
+	else
+	{
+		tputs(tigetstr("rc"), 1, ft_putchar);
+		tputs(tigetstr("ed"), 1, ft_putchar);
+		all->flag = 0;
+		write(1, g_string, ft_strlen(g_string));
+		all->cursor.current_pos = ft_strlen(g_string);
+		all->cursor.end_pos = ft_strlen(g_string);
 	}
 	return(1);
 }

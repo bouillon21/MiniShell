@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 13:17:10 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/06 16:19:10 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/07 13:38:51 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	minishell_history(t_all *all)
 		all->hist->next = create_new_list(all->hist);
 		all->hist = all->hist->next;
 	}
+	if (ret == 0)
+		write(all->fd, "\n", 1);
 }
 
 int main(int argc, char **argv, char **envp)

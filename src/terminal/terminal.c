@@ -30,36 +30,35 @@ void	build_string(t_all *all, char *str)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WH
 	free(old_string);
 }
 
-void	launch_command(t_all *all)
+void	add_history(t_all *all)
 {
-	if (all->flag != 1)
-		write(all->fd, g_string, ft_strlen(g_string));
-	else
+	char *tmp;
+	if (all->flag == 1)
 	{
-		write(all->fd, all->hist->string,
-		ft_strlen(all->hist->string));
 		clear_buf(&g_string);
 		g_string = ft_strdup(all->hist->string);
+		tmp = g_string;
+		g_string = ft_strjoin(g_string, "\n");
+		free(tmp);
 	}
-	
-	
+	write(all->fd, g_string, ft_strlen(g_string));
 	if (all->hist->next)
-	{
 		while (all->hist->next)
 			all->hist = all->hist->next;
-		all->hist = all->hist->prev;
-	}
-	if (all->flag != 1)
-		all->hist->string = g_string;
-
-
-	all->hist->next = create_new_list(all->hist);
+	all->hist->string = ft_strdup(g_string);
+	if (!all->hist->next)
+		all->hist->next = create_new_list(all->hist);
 	all->hist = all->hist->next;
+}
+
+void	launch_command(t_all *all)
+{
+	add_history(all);
 	parse_string(all);
+	printf("g_string - %s", g_string);
 	// DONT FORGET TO REPLACE KOSTYL
 	all->token = all->token->prev;
-	cd(all);
-	// exec(all->token->args, all, all->token->command);
+	exec(all->token->args, all, all->token->command);
 	all->token = all->token->next;
 	clear_token(all);
 	all->flag = 0;
