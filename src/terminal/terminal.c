@@ -12,22 +12,54 @@
 
 #include "minishell.h"
 
-void	refresh_cursor(t_all *all)
+void	refresh_cursor(t_all *all, int pos)
 {
 	all->cursor.start_pos = 0;
-	all->cursor.end_pos = 0;
-	all->cursor.current_pos = 0;
+	all->cursor.end_pos = pos;
+	all->cursor.current_pos = pos;
 }
 
-void	build_string(t_all *all, char *str)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WHERE CURRENT CURSOR IS PLACED
+void	insert_inside(char *str, int pos)
+{
+	char	*tmp;
+	char	*tmp2;
+	int		ret_cursor;
+
+	if (pos < 0)
+		pos = 0;
+	tmp = ft_substr(g_string, 0, pos);
+	tmp2 = ft_substr(g_string, pos, ft_strlen(g_string));
+	free(g_string);
+	g_string = ft_strjoin(tmp, str);
+	free(tmp);
+	tmp = g_string;
+	g_string = ft_strjoin(g_string, tmp2);
+	free(tmp);
+	free(tmp2);
+	tputs(tigetstr("rc"), 1, ft_putchar);
+	tputs(tigetstr("ed"), 1, ft_putchar);
+	write(1, g_string, ft_strlen(g_string));
+	ret_cursor = ft_strlen(g_string) - pos - 1;
+	while (ret_cursor-- > 0)
+		tputs(tgetstr("le", 0), 1, ft_putchar);
+}
+
+void	build_string(t_all *all, char *str)
 {
 	char *tmp;
+	int len;
 
-	all->cursor.end_pos += write(1, str, ft_strlen(str));
-	all->cursor.current_pos += ft_strlen(str);
-	tmp = g_string;
-	g_string = ft_strjoin(g_string, str);
-	free(tmp);
+	len = ft_strlen(str);
+	all->cursor.end_pos += write(1, str, len);
+	all->cursor.current_pos += len;
+	if (all->cursor.current_pos != all->cursor.end_pos)
+		insert_inside(str, all->cursor.current_pos - len);
+	else
+	{
+		tmp = g_string;
+		g_string = ft_strjoin(g_string, str);
+		free(tmp);
+	}
 	if (all->flag == 0)
 	{
 		free(all->old_string);
@@ -38,6 +70,13 @@ void	build_string(t_all *all, char *str)		//ADD SOME FUNCTIONS TO ADD SYMBOLS WH
 void	add_history(t_all *all)
 {
 	char *tmp;
+
+	if (g_string[ft_strlen(g_string) - 1] != '\n')
+	{
+		tmp = g_string;
+		g_string = ft_strjoin(g_string, "\n");
+		free(tmp);
+	}
 	write(all->fd, g_string, ft_strlen(g_string));
 	if (all->hist->next)
 		while (all->hist->next)
@@ -58,6 +97,7 @@ void	launch_command(t_all *all)
 	all->token = all->token->next;
 	clear_token(all);
 	all->flag = 0;
+	free(g_string);
 }
 
 void	read_input(t_all *all)
@@ -68,8 +108,6 @@ void	read_input(t_all *all)
 	{
 		str = ft_calloc(4096, 1);
 		read(0, str, 100);
-		// write(1, "\nHI\n", 3);
-		sleep(10);
 		if (!check_key(str, all) && !ft_strnstr(str, "\n", ft_strlen(str)))
 			build_string(all, str);
 		if (ft_strchr(str, '\n'))
@@ -86,7 +124,7 @@ void	main_loop(t_all *all)
 	while (1)
 	{
 		terminal(all);
-		refresh_cursor(all);
+		refresh_cursor(all, 0);
 		write_minishell();
 		g_string = ft_calloc(100, 1);
 		if (!g_string)
@@ -94,6 +132,8 @@ void	main_loop(t_all *all)
 		g_string[0] = 0;
 		all->old_string = malloc(100);
 		read_input(all);
+		write(1, "\n", 1);
+		free(all->old_string);
 		if ((g_string[0] != 0 && g_string[0] != '\n') || all->flag == 1)
 			launch_command(all);
 		else

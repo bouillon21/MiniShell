@@ -126,5 +126,6 @@ void		cd(t_all *all);
 void		terminal(t_all *all);
 void		print_export(t_all *all);
 void		terminal_off(t_all *all);
+void		refresh_cursor(t_all *all, int pos);
 
 #endif

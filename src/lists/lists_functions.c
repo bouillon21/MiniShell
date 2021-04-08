@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:32:13 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/06 15:56:51 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/08 22:04:53 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_list_hist *create_new_list(t_list_hist *hist)
 	t_list_hist *new_list;
 
 	new_list = malloc(sizeof(t_list_hist));
+	new_list->string = NULL;
 	new_list->prev = hist;
 	new_list->next = NULL;
 	return (new_list);

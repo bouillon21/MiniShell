@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/07 15:56:18 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 00:30:31 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ void	parse_string(t_all *all)
 		j = i;
 		i = search_command(all, i);
 		all->token->command = ft_substr(g_string, j, i - j);
+		if (!ft_strncmp(all->token->command, "exit", 4)) // DONT FORGET TO REMOVE
+		{
+			write(1, "exit\n", 5);
+			exit (1);
+		}
 		if (g_string[i] != ';')
 		{
 			i = skip_space(i);
