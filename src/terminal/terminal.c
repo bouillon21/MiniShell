@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/09 18:35:56 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 18:36:54 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ void	launch_command(t_all *all)
 	parse_string(all);
 	// DONT FORGET TO REPLACE KOSTYL
 	all->token = all->token->prev;
-	exec(all->token->args, all, all->token->command);
+	exec(all);
+	// ft_pwd();
 	// export(all);
-	// printf_env(all);
 	all->token = all->token->next;
 	clear_token(all);
 	all->flag = 0;
