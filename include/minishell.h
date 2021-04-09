@@ -105,7 +105,7 @@ void		printf_env(t_all *all);
 char		*env_srh_edit(t_list **head, char *need,
 				char *changes);
 t_list		*env_srh(t_all	*all, char *need);
-void		exec(char **argv, t_all *all, char *cmd);
+void		exec(t_all *all);
 char		**env_join(t_list *env);
 char		*verify_dir(char *path, char *cmd);
 void		free_array(char ***mas);

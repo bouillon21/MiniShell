@@ -27,7 +27,7 @@ t_list	*env_srh(t_all	*all, char *need)
 	t_list	*env;
 
 	env = all->env;
-	while (env->next)
+	while (env)
 	{
 		if (ft_strncmp(env->content->key, need, ft_strlen(need)) == 0)
 			return(env);
