@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/08 23:10:00 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 01:03:48 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,15 @@ int		press_right(t_all *all)
 	return (1);
 }
 
-int		press_up(t_all *all)
+void	press_down_end_hist(t_all *all)
 {
-	int len;
-
-	if (all->hist->prev)
-	{
-		tputs(tigetstr("rc"), 1, ft_putchar);
-		tputs(tigetstr("ed"), 1, ft_putchar);
-		all->hist = all->hist->prev;
-		len = ft_strlen(all->hist->string);
-		free(g_string);
-		if (all->hist->string[len - 1] == '\n')
-			g_string = ft_substr(all->hist->string, 0, len - 1);
-		else
-			g_string = ft_substr(all->hist->string, 0, len);
-		refresh_cursor(all, ft_strlen(g_string));
-		write(1, g_string, ft_strlen(g_string));
-		all->flag = 1;
-	}
-	return(1);
+	tputs(tigetstr("rc"), 1, ft_putchar);
+	tputs(tigetstr("ed"), 1, ft_putchar);
+	free(g_string);
+	g_string = ft_strdup(all->old_string);
+	all->flag = 0;
+	write(1, g_string, ft_strlen(g_string));
+	refresh_cursor(all, ft_strlen(g_string));
 }
 
 int		press_down(t_all *all)
@@ -72,15 +61,7 @@ int		press_down(t_all *all)
 		refresh_cursor(all, ft_strlen(all->hist->string));
 	}
 	else if (all->flag == 1)
-	{
-		free(g_string);
-		g_string = ft_strdup(all->old_string);
-		all->flag = 0;
-		tputs(tigetstr("rc"), 1, ft_putchar);
-		tputs(tigetstr("ed"), 1, ft_putchar);
-		write(1, g_string, ft_strlen(g_string));
-		refresh_cursor(all, ft_strlen(g_string));
-	}
+		press_down_end_hist(all);
 	return(1);
 }
 
@@ -90,8 +71,6 @@ int	check_key(char *str, t_all *all)
 		return (press_left(all));
 	if (ft_strnstr(str, "\e[C", ft_strlen(str)))
 		return (press_right(all));
-	if (ft_strnstr(str, "\e[A", ft_strlen(str)))
-		return (press_up(all));
 	if (ft_strnstr(str, "\e[B", ft_strlen(str)))
 		return (press_down(all));
 	return (check_key2(str, all));

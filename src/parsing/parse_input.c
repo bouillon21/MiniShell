@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/09 00:30:31 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 01:11:51 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	parse_string(t_all *all)
 
 	k = 1;
 	i = 0;
-
-
 	while (g_string[i] != '\0' && g_string[i] != '\n')
 	{
 		all->token->args = ft_calloc(sizeof(char*), 500);

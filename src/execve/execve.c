@@ -38,9 +38,7 @@ void	open_apk(char *path, char **argv, t_all *all)
 		// terminal(all);
 		execve(path, argv, env_copy);
 	}
-	else
-		waitpid(forks, &tmp, 0);
-	// g_fork = wait(&forks);
+	wait(&forks);
 }
 
 char	**defin_dir(t_all *all, char **cmd)

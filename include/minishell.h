@@ -27,7 +27,6 @@
 # define BLUE			"\033[1;34m"
 
 char	*g_string;
-pid_t	g_fork;
 
 typedef struct s_token
 {
@@ -38,14 +37,6 @@ typedef struct s_token
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
-
-// typedef struct s_double
-// {
-// 	char	*string;
-// 	pid_t	pid;				// BULKA, PLACE HERE UR GLOBAL VARIABLE FOR MULTI-PROCESS!!!!!!!!!!!!
-// }				t_double;
-
-// struct s_double	g_double; // may be use this as global_variable
 
 typedef struct s_list_hist
 {
