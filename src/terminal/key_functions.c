@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/09 01:03:48 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 15:10:22 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,18 @@ int		press_down(t_all *all)
 		tputs(tigetstr("rc"), 1, ft_putchar);
 		tputs(tigetstr("ed"), 1, ft_putchar);
 		all->flag = 1;
-		if (all->hist->string[ft_strlen(all->hist->string) - 1] == '\n')
-			write(1, all->hist->string, ft_strlen(all->hist->string) - 1);
-		else
-			write(1, all->hist->string, ft_strlen(all->hist->string));
 		free(g_string);
-		g_string = ft_strdup(all->hist->string);
+		if (all->hist->string[ft_strlen(all->hist->string) - 1] == '\n')
+		{
+			write(1, all->hist->string, ft_strlen(all->hist->string) - 1);
+			g_string = ft_substr(all->hist->string, 0,
+			ft_strlen(all->hist->string) - 1);
+		}
+		else
+		{
+			write(1, all->hist->string, ft_strlen(all->hist->string));
+			g_string = ft_strdup(all->hist->string);
+		}
 		refresh_cursor(all, ft_strlen(all->hist->string));
 	}
 	else if (all->flag == 1)
@@ -67,6 +73,8 @@ int		press_down(t_all *all)
 
 int	check_key(char *str, t_all *all)
 {
+	if (ft_strnstr(str, "\n", ft_strlen(str)))
+		return (1);
 	if (ft_strnstr(str, "\e[D", ft_strlen(str)))
 		return (press_left(all));
 	if (ft_strnstr(str, "\e[C", ft_strlen(str)))

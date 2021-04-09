@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/09 01:11:41 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 16:01:36 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	read_input(t_all *all)
 	{
 		str = ft_calloc(4096, 1);
 		read(0, str, 100);
-		if (!check_key(str, all) && !ft_strnstr(str, "\n", ft_strlen(str)))
+		if (!check_key(str, all))
 			build_string(all, str);
 		if (ft_strchr(str, '\n'))
 		{
@@ -134,7 +134,7 @@ void	main_loop(t_all *all)
 		read_input(all);
 		write(1, "\n", 1);
 		free(all->old_string);
-		if ((g_string[0] != 0 && g_string[0] != '\n') || all->flag == 1)
+		if (g_string[0] != 0)
 			launch_command(all);
 		else
 			clear_buf(&g_string);

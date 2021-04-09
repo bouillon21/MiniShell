@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:42:34 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/09 01:02:32 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 12:45:48 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ int		press_del(char *str, t_all *all)
 
 int		press_backspace(char *str, t_all *all)
 {
-	if (g_string[0] != '\0' && g_string[0] != 0 && g_string)
-	{
-		all->cursor.end_pos--;
-		all->cursor.current_pos--;
-		delete_from_array(all->cursor.current_pos);
-		tputs(tgetstr("le", 0), 1, ft_putchar);
-		tputs(tgetstr("dc", 0), 1, ft_putchar);
-	}	
+	if (all->cursor.current_pos > 0)
+		if (g_string[0] != '\0' && g_string[0] != 0 && g_string)
+		{
+			all->cursor.end_pos--;
+			all->cursor.current_pos--;
+			delete_from_array(all->cursor.current_pos);
+			tputs(tgetstr("le", 0), 1, ft_putchar);
+			tputs(tgetstr("dc", 0), 1, ft_putchar);
+		}	
 	return(1);
 }
 
