@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:43:17 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/07 17:13:48 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 01:19:59 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void handle_sigint(int sig)
 	g_string = ft_calloc(4096, 1);
 	// pid = waitpid(-1, 0, WNOHANG);
 	write(1, "\n", 1);
-	g_fork = 0;
 }
 
 void	ctrl_d_exit(t_all *all)

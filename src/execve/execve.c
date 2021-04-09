@@ -33,14 +33,13 @@ void	open_apk(char *path, char **argv, t_all *all)
 
 	env = all->env;
 	forks = fork();
-	g_fork = forks;
 	if (forks == 0)
 	{
 		env_copy = env_join(env);
 		terminal_off(all);
 		execve(path, argv, env_copy);
 	}
-	g_fork = wait(&forks);
+	wait(&forks);
 }
 
 char	**defin_dir(t_all *all, char **cmd)
