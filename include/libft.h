@@ -15,9 +15,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef struct s_env_data
+{
+	char	*key;
+	char	*value;
+}					t_env_data;
+
+
 typedef struct s_list
 {
-	char			*content;
+	t_env_data		*content;
 	struct s_list	*next;
 }					t_list;
 
