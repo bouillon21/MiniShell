@@ -15,9 +15,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef struct s_env_data
+{
+	char	*key;
+	char	*value;
+}					t_env_data;
+
+
 typedef struct s_list
 {
-	char			*content;
+	t_env_data		*content;
 	struct s_list	*next;
 }					t_list;
 
@@ -66,4 +73,5 @@ t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+int					ft_strcmp(char *s1, char *s2);
 #endif

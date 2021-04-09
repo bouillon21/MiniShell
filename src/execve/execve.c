@@ -7,10 +7,7 @@ char	*verify_dir(char *path, char *cmd)
 
 	direct = opendir(path);
 	if (!direct)
-	{
-		// closedir(direct);
 		return (NULL);
-	}
 	dir_file = readdir(direct);
 	while (dir_file)
 	{
@@ -30,6 +27,7 @@ void	open_apk(char *path, char **argv, t_all *all)
 	pid_t	forks;
 	char	**env_copy;
 	t_list	*env;
+	int	tmp;
 
 	env = all->env;
 	forks = fork();
@@ -37,6 +35,7 @@ void	open_apk(char *path, char **argv, t_all *all)
 	{
 		env_copy = env_join(env);
 		terminal_off(all);
+		// terminal(all);
 		execve(path, argv, env_copy);
 	}
 	wait(&forks);
@@ -67,7 +66,8 @@ void	exec(char **argv, t_all *all, char *cmd)
 	char	*line;
 	char	**path_bin;
 	char	*tmp;
-
+// зделать защиту от null
+// переделать в all
 	a = -1;
 	path_bin = defin_dir(all, &cmd);
 	while (path_bin[++a])

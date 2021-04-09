@@ -13,10 +13,10 @@
 # include <termcap.h>
 # include <termios.h>
 # include <string.h>
-# include <sys/types.h>
 # include <dirent.h>
 # include <errno.h>
 # include <string.h>
+#include <sys/wait.h>
 
 # define RESET			"\033[0m"
 # define RED			"\033[1;31m"
@@ -110,6 +110,8 @@ char		**env_join(t_list *env);
 char		*verify_dir(char *path, char *cmd);
 void		free_array(char ***mas);
 t_list_hist	*create_new_list(t_list_hist *hist);
+void		export(t_all *all);
+char		**sort_export(t_all *all);
 void		error_message(char *message, t_all *all);
 void		clear_token(t_all *all);
 void		env_add(t_all *all, char *need, char *content);
