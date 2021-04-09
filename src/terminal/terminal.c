@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/09 18:36:54 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 20:58:46 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,8 @@ void	add_history(t_all *all)
 void	launch_command(t_all *all)
 {
 	add_history(all);
-	parse_string(all);
-	// DONT FORGET TO REPLACE KOSTYL
-	all->token = all->token->prev;
-	exec(all);
-	// ft_pwd();
-	// export(all);
+	if (parse_string(all))
+		exec(all);
 	all->token = all->token->next;
 	clear_token(all);
 	all->flag = 0;

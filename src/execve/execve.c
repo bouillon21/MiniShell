@@ -49,9 +49,7 @@ char	**defin_dir(t_all *all, char *cmd)
 
 	if (ft_strncmp(cmd, "./", 2) == 0)
 	{
-		line = ft_calloc(500, 1);
-		line = env_srh(all, "PWD")->content->value;
-		// printf("%s\n", env_srh(all, "PWD")->content->value);
+		line = ft_strdup(env_srh(all, "PWD")->content->value);
 		path_bin = ft_split(line, ':');
 		free(line);
 		cmd = ft_substr(cmd, 2, ft_strlen(cmd) - 2);
@@ -67,7 +65,7 @@ void	exec(t_all *all)
 	char	*line;
 	char	**path_bin;
 	char	*tmp;
-// зделать защиту от null
+// cделать защиту от null
 // переделать в all
 	// printf_env(all);
 	// printf("\n\n\n\n\n");
@@ -75,9 +73,10 @@ void	exec(t_all *all)
 	// printf("\n\n\n\n\n");
 	// printf_env(all);
 
-
+	
 	a = -1;
 	path_bin = defin_dir(all, all->token->command);
+	// printf("2nd - %s\n", env_srh(all, "PWD")->content->value);
 	while (path_bin[++a])
 	{
 		tmp = verify_dir(path_bin[a], all->token->command);

@@ -91,7 +91,7 @@ void		clear_buf(char **buf);
 void		main_loop(t_all *all);
 int			check_key(char *str, t_all *all);
 int			check_key2(char *str, t_all *all);
-void		parse_string(t_all *all);
+int			parse_string(t_all *all);
 void		delete_from_array(int i);
 t_token		*create_new_token(t_token *token);
 int			single_quote_start(int start);
