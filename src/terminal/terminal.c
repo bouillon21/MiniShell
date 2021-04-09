@@ -93,7 +93,8 @@ void	launch_command(t_all *all)
 	parse_string(all);
 	// DONT FORGET TO REPLACE KOSTYL
 	all->token = all->token->prev;
-	exec(all->token->args, all, all->token->command);
+	// exec(all->token->args, all, all->token->command);
+	export(all);
 	all->token = all->token->next;
 	clear_token(all);
 	all->flag = 0;
