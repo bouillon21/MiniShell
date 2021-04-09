@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/09 22:08:23 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 22:29:17 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		count_args(t_all *all, int i)
 	int flag;
 	int words;
 
-	words = 1;
+	words = 2;
 	flag = 0;
 	while (g_string[i])
 	{
@@ -101,7 +101,7 @@ int		count_args(t_all *all, int i)
 }
 
 int		write_command(t_all *all,int i)
-{	
+{
 	return (i = search_command(all, i));
 }
 

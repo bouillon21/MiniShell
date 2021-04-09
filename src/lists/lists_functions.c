@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:32:13 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/08 22:04:53 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/09 22:28:47 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_token	*create_new_token(t_token *token)
 
 	new_token = malloc(sizeof(t_token));
 	new_token->separate = 0;
-	new_token->command = 0;
+	new_token->command = NULL;
 	new_token->args = 0;
 	new_token->flags = 0;
 	new_token->prev = token;
