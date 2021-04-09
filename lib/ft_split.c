@@ -38,7 +38,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	pars = malloc(size_str(s, c) * sizeof(char *) + 1);
+	pars = ft_calloc(size_str(s, c), sizeof(char *) + 1);
 	if (pars == NULL)
 		return (NULL);
 	i = 0;

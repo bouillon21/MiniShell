@@ -27,19 +27,16 @@ void	open_apk(char *path, char **argv, t_all *all)
 	pid_t	forks;
 	char	**env_copy;
 	t_list	*env;
-	int	tmp;
 
 	env = all->env;
 	forks = fork();
 	if (forks == 0)
 	{
-		printf("%s\n", path);
 		env_copy = env_join(env);
 		terminal_off(all);
 		execve(path, argv, env_copy);
 	}
-	else
-		wait(&forks);
+	wait(&forks);
 }
 
 char	**defin_dir(t_all *all, char *cmd)
@@ -52,14 +49,14 @@ char	**defin_dir(t_all *all, char *cmd)
 	{
 		path_bin = ft_split(env_srh(all, "PWD")->content->value, ':');
 		free (all->token->command);
-		all->token->command = ft_substr(cmd, 2, ft_strlen(cmd) - 2);
+		all->token->command = ft_strdup(ft_strchr(cmd, '/') + 1);
 	}
 	else
 		path_bin = ft_split(env_srh(all, "PATH")->content->value, ':');
 	return (path_bin);
 }
 
-void	exec(t_all *all)
+void	exec(char **argv, t_all *all, char *cmd)
 {
 	int	a;
 	char	*line;
@@ -68,14 +65,14 @@ void	exec(t_all *all)
 // зделать защиту от null
 // переделать в all
 	a = -1;
-	path_bin = defin_dir(all, all->token->command);
+	path_bin = defin_dir(all, cmd);
 	while (path_bin[++a])
 	{
 		tmp = verify_dir(path_bin[a], all->token->command);
 		if (tmp)
 		{
 			line = ft_strjoin(path_bin[a], tmp);
-			open_apk(line, all->token->args, all);
+			open_apk(line, argv, all);
 			free(tmp);
 			free(line);
 			break;
