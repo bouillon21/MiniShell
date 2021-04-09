@@ -71,6 +71,7 @@ typedef struct s_flags
 typedef struct s_all
 {
 	t_list			*env;
+	t_list			*test;
 	t_token			*token;
 	t_term			term;
 	t_cursor		cursor;
@@ -105,7 +106,7 @@ void		printf_env(t_all *all);
 char		*env_srh_edit(t_list **head, char *need,
 				char *changes);
 t_list		*env_srh(t_all	*all, char *need);
-void		exec(t_all *all);
+void	exec(char **argv, t_all *all, char *cmd);
 char		**env_join(t_list *env);
 char		*verify_dir(char *path, char *cmd);
 void		free_array(char ***mas);
@@ -120,5 +121,10 @@ void		terminal(t_all *all);
 void		print_export(t_all *all);
 void		terminal_off(t_all *all);
 void		refresh_cursor(t_all *all, int pos);
+
+void	get_save_env_test(t_all *all, char **envp);
+char	**env_join_test(t_list *env);
+
+
 
 #endif

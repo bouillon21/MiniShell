@@ -27,7 +27,6 @@ void	open_apk(char *path, char **argv, t_all *all)
 	pid_t	forks;
 	char	**env_copy;
 	t_list	*env;
-	int	tmp;
 
 	env = all->env;
 	forks = fork();
@@ -35,7 +34,6 @@ void	open_apk(char *path, char **argv, t_all *all)
 	{
 		env_copy = env_join(env);
 		terminal_off(all);
-		// terminal(all);
 		execve(path, argv, env_copy);
 	}
 	wait(&forks);
@@ -43,23 +41,22 @@ void	open_apk(char *path, char **argv, t_all *all)
 
 char	**defin_dir(t_all *all, char *cmd)
 {
-
 	char	**path_bin;
 	char	*line;
+	char	*tmp;
 
 	if (ft_strncmp(cmd, "./", 2) == 0)
 	{
-		line = ft_strdup(env_srh(all, "PWD")->content->value);
-		path_bin = ft_split(line, ':');
-		free(line);
-		cmd = ft_substr(cmd, 2, ft_strlen(cmd) - 2);
+		path_bin = ft_split(env_srh(all, "PWD")->content->value, ':');
+		free (all->token->command);
+		all->token->command = ft_strdup(ft_strchr(cmd, '/') + 1);
 	}
 	else
 		path_bin = ft_split(env_srh(all, "PATH")->content->value, ':');
 	return (path_bin);
 }
 
-void	exec(t_all *all)
+void	exec(char **argv, t_all *all, char *cmd)
 {
 	int	a;
 	char	*line;
@@ -67,23 +64,15 @@ void	exec(t_all *all)
 	char	*tmp;
 // cделать защиту от null
 // переделать в all
-	// printf_env(all);
-	// printf("\n\n\n\n\n");
-	// env_add(all,"PWD", env_srh(all, "PWD")->content->value);
-	// printf("\n\n\n\n\n");
-	// printf_env(all);
-
-	
 	a = -1;
-	path_bin = defin_dir(all, all->token->command);
-	// printf("2nd - %s\n", env_srh(all, "PWD")->content->value);
+	path_bin = defin_dir(all, cmd);
 	while (path_bin[++a])
 	{
 		tmp = verify_dir(path_bin[a], all->token->command);
 		if (tmp)
 		{
 			line = ft_strjoin(path_bin[a], tmp);
-			open_apk(line, all->token->args, all);
+			open_apk(line, argv, all);
 			free(tmp);
 			free(line);
 			break;
