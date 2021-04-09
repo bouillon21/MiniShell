@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:43:17 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/07 14:28:41 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/07 17:13:48 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void handle_sigint(int sig)
 	g_fork = 0;
 }
 
-void	ctrl_d_exit(void)
+void	ctrl_d_exit(t_all *all)
 {
 	clear_buf(&g_string);
 	write(1, YELLOW, ft_strlen(YELLOW));
@@ -33,5 +33,6 @@ void	ctrl_d_exit(void)
 	write(1, "i", 1);
 	write(1, BLUE, ft_strlen(BLUE));
 	write(1, "t", 1);
+	terminal_off(all);
 	exit(1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cshelli <cshelli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:55:36 by cshelli           #+#    #+#             */
-/*   Updated: 2021/03/21 11:56:49 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/04/07 18:31:14 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ char	*ft_strdup(char *src)
 	char	*buf;
 
 	n = 0;
-	buf = (char *)ft_calloc(ft_strlen(src), sizeof(char) + 1);
+	if (!src)
+		return (ft_strdup(""));
+	buf = (char *)malloc(ft_strlen(src) * sizeof(char) + 1);
 	if (!buf)
 		return (0);
 	while (src[n])
