@@ -81,6 +81,7 @@ typedef struct s_all
 	int				flag;
 	t_list_hist		*hist;
 	char			*old_string;
+	char			*static_home;
 }					t_all;
 
 void		handle_sigint(int sig);

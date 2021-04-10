@@ -19,6 +19,8 @@ void	get_save_env(t_all *all, char **envp)
 		ft_lstadd_back(&all->env, ft_lstnew(data));
 		i++;
 	}
+	if (env_srh(all, "HOME"))
+		all->static_home = ft_strdup(env_srh(all, "HOME")->content->value);
 	env_add(all, "OLDPWD", NULL);
 }
 
