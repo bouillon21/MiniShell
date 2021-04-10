@@ -1,58 +1,55 @@
 #include "minishell.h"
 
-void	print_export(t_all *all)
+void	sort_export(t_list *export)
 {
-	int	i;
-	int	j;
-	char	**env_sort;
+	t_list *copy;
+	t_list *next;
+	char *tmp;
 
-	i = -1;
-	env_sort = sort_export(all);
-	while (env_sort[++i])
+	copy = export;
+	next = export->next;
+	while (copy)
 	{
-		j = -1;
-		ft_putstr_fd("declare -x ", 1);
-		while (env_sort[i][++j] != '\0')
+		while (next)
 		{
-			write(1,&env_sort[i][j], 1);
-			if (env_sort[i][j] == '=')
+			if (ft_strcmp(copy->content->key, next->content->key) > 0)
 			{
-				ft_putchar('"');
-				while (env_sort[i][++j] != '\0')
-					write(1,&env_sort[i][j], 1);
-				ft_putchar('"');
-				break;
+				tmp = copy->content->key;
+				copy->content->key = next->content->key;
+				next->content->key = tmp;
+				tmp = copy->content->value;
+				copy->content->value = next->content->value;
+				next->content->value = tmp;
 			}
+			next = next->next;
 		}
-		write(1,"\n", 1);
+		copy = copy->next;
+		next = copy;
 	}
-	free_array(&env_sort);
 }
 
-char	**sort_export(t_all *all)
+void	print_export(t_list *env)
 {
-	char	**env_sort;
-	char	*tmp;
-	int	i;
-	int	j;
+	t_list	*head;
+	t_list	*export;
 
-	i = 0;
-	j = -1;
-	env_sort = env_join(all->env);
-	while (++i < ft_lstsize(all->env))
+	export = copy_list(env);
+	head = &(*export);
+	sort_export(export);
+	while(export)
 	{
-		j = -1;
-		while (++j < ft_lstsize(all->env) - i)
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(export->content->key, 1);
+		if (export->content->value)
 		{
-			if(ft_strcmp(env_sort[j], env_sort[j+1]) > 0)
-			{
-				tmp = env_sort[j];
-				env_sort[j] = env_sort[j+1];
-				env_sort[j+1] = tmp;
-			}
+			ft_putstr_fd("=\"", 1);
+			printf("%s\"\n", export->content->value);
 		}
+		else
+			ft_putstr_fd("\n", 1);
+		export = export->next;
 	}
-	return(env_sort);
+	ft_lstclear(&head, &free);
 }
 
 int	valid_export(char *arg)
@@ -70,26 +67,56 @@ int	valid_export(char *arg)
 	return(0);
 }
 
-void	export(t_all *all)
+void	ft_uset(t_all *all)// сегается если удалять самый первый элемент в ENV, есть лики
+{
+	t_list	*env;
+	t_list	*tmp;
+
+	env = all->env;
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->content->key, all->token->args[1]) == 0)
+		{
+			env->next = tmp->next;
+			free(tmp->content->key);
+			free(tmp->content->value);
+			free(tmp);
+			break;
+		}
+		env = tmp;
+		tmp = tmp->next;
+	}
+}
+
+void	export(t_all *all)//  не по норме +3 строки
 {
 	int	i;
 	char	*line;
+	char	**tmp;
 
 	i = 0;
 	if (all->token->args[1] == NULL)
-		print_export(all);
+		print_export(all->env);
 	else
 	{
-		if (valid_export(all->token->args[1]))
+		while (all->token->args[++i])
 		{
-			line = ft_strjoin(all->token->args[1], ": not a valid identifier");
-			error_message(line, all);
-			free(line);
+			if (valid_export(all->token->args[i]))
+			{
+				line = ft_strjoin(all->token->args[i], ": not a valid identifier");
+				error_message(line, all);
+				free(line);
+			}
+			else if (ft_strchr(all->token->args[i], '=') != NULL)
+			{
+				tmp = separation_line(all->token->args[i]);
+				env_add(all, tmp[0], tmp[1]);
+				free_array(&tmp);
+			}
+			else
+				if (env_srh(all, all->token->args[i]) == NULL)
+					env_add(all, all->token->args[i], NULL);
 		}
-		// else if (ft_strchr(all->token->args[1], '=') == NULL)
-		// {
-		// 	while
-		// 	env_add(all, all->token->args[])
-		// }
 	}
 }
