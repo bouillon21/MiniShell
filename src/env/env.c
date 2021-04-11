@@ -7,7 +7,7 @@ void	get_save_env(t_all *all, char **envp)
 	t_env_data	*data;
 
 	i = 0;
-	while (envp && envp[i])
+	while (i < 3)
 	{
 		data = ft_calloc(sizeof(t_env_data),1);
 		data->key = ft_substr(envp[i], 0,

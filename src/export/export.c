@@ -1,13 +1,14 @@
 #include "minishell.h"
 
-void	sort_export(t_list *export)
+void	sort_export(t_list *export)// не по норме +5
 {
 	t_list *copy;
 	t_list *next;
 	char *tmp;
 
 	copy = export;
-	next = export->next;
+	if (export)
+		next = export->next;
 	while (copy)
 	{
 		while (next)
@@ -67,25 +68,37 @@ int	valid_export(char *arg)
 	return(0);
 }
 
-void	ft_uset(t_all *all)// сегается если удалять самый первый элемент в ENV, есть лики
+void	ft_uset(t_all *all)
 {
+	int	i;
+	int	flag;
 	t_list	*env;
 	t_list	*tmp;
 
-	env = all->env;
-	tmp = env;
-	while (tmp)
+	i = 0;
+	while (all->token->args[++i])
 	{
-		if (ft_strcmp(tmp->content->key, all->token->args[1]) == 0)
+		flag = 0;
+		env = all->env;
+		tmp = env;
+		while (tmp)
 		{
-			env->next = tmp->next;
-			free(tmp->content->key);
-			free(tmp->content->value);
-			free(tmp);
-			break;
+			if (ft_strcmp(tmp->content->key, all->token->args[i]) == 0)
+			{
+				if (flag)
+					env->next = tmp->next;
+				else
+					all->env = tmp->next;
+				free(tmp->content->key);
+				free(tmp->content->value);
+				free(tmp->content);
+				free(tmp);
+				break;
+			}
+			flag = 1;
+			env = tmp;
+			tmp = tmp->next;
 		}
-		env = tmp;
-		tmp = tmp->next;
 	}
 }
 
