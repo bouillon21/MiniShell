@@ -125,6 +125,7 @@ void		refresh_cursor(t_all *all, int pos);
 char		**separation_line(char *line);
 t_list		*copy_list(t_list *env);
 void		ft_uset(t_all *all);
+void		manager_cmd(t_all *all);
 
 
 #endif

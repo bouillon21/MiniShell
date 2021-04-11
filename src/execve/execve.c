@@ -39,7 +39,7 @@ void	open_apk(char *path, char **argv, t_all *all)
 	wait(&forks);
 }
 
-char	**defin_dir(t_all *all, char *cmd)
+char	**defin_dir(t_all *all, char *cmd)// переделать тк косяки с PWD
 {
 	char	**path_bin;
 	char	*line;

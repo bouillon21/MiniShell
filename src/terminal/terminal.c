@@ -87,12 +87,8 @@ void	add_history(t_all *all)
 	all->hist = all->hist->next;
 }
 
-void	launch_command(t_all *all)
+void	manager_cmd(t_all *all)
 {
-	add_history(all);
-	parse_string(all);
-	// DONT FORGET TO REPLACE KOSTYL
-	all->token = all->token->prev;
 	if (ft_strcmp(all->token->command, "env") == 0)
 		printf_env(all);
 	else if (ft_strcmp(all->token->command, "export") == 0)
@@ -105,6 +101,15 @@ void	launch_command(t_all *all)
 		ft_uset(all);
 	else
 		exec(all->token->args, all, all->token->command);
+}
+
+void	launch_command(t_all *all)
+{
+	add_history(all);
+	parse_string(all);
+	// DONT FORGET TO REPLACE KOSTYL
+	all->token = all->token->prev;
+	manager_cmd(all);
 	all->token = all->token->next;
 	clear_token(all);
 	all->flag = 0;
