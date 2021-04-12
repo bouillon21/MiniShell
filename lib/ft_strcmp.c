@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del_bs_functions.c                                 :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cshelli <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/27 14:42:40 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/01 10:23:35 by hmickey          ###   ########.fr       */
+/*   Created: 2020/07/26 15:54:04 by cshelli           #+#    #+#             */
+/*   Updated: 2020/07/26 15:54:07 by cshelli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdio.h>
+#include <string.h>
 
-void	delete_from_array(int i)
+int		ft_strcmp(char *s1, char *s2)
 {
-	while (g_string[i + 1])
+	while (*s1 != '\0' && *s2 != '\0')
 	{
-		g_string[i] = g_string[i + 1];
-		i++;
+		if (*s1 == *s2)
+		{
+			s1++;
+			s2++;
+		}
+		else
+		{
+			return (*s1 - *s2);
+		}
 	}
-	g_string[i] = 0;
+	return (*s1 - *s2);
 }

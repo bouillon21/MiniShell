@@ -23,6 +23,7 @@ SRCS			=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
 					ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
 					ft_lstmap.c ft_lstnew.c ft_lstsize.c\
 					get_next_line.c get_next_line_utils.c\
+					ft_strcmp.c\
 
 OBJS			= $(SRCS:.c=.o)
 

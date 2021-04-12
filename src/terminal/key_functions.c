@@ -6,76 +6,77 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/03/31 19:50:49 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/11 19:13:52 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		press_left(char *str, t_all *all)
+int		press_left(t_all *all)
 {
-	if (ft_strnstr(str, "\e[D", ft_strlen(str)))
+	if (all->cursor.current_pos > all->cursor.start_pos)
 	{
-		if (all->cursor.current_pos > all->cursor.start_pos)
-		{
-			all->cursor.current_pos--;
-			tputs(cursor_left, 1, ft_putchar);
-		}
-		return (1);
+		all->cursor.current_pos--;
+		tputs(tgetstr("le", 0), 1, ft_putchar);
 	}
-	return(0);
+	return (1);
 }
 
-int		press_right(char *str, t_all *all)
+int		press_right(t_all *all)
 {
-	if (ft_strnstr(str, "\e[C", ft_strlen(str)))
+	if (all->cursor.current_pos < all->cursor.end_pos)
 	{
-		if (all->cursor.current_pos < all->cursor.end_pos)
-		{
-			all->cursor.current_pos++;
-			tputs(cursor_right, 1, ft_putchar);
-		}
-		return (1);
+		all->cursor.current_pos++;
+		tputs(tgetstr("nd", 0), 1, ft_putchar);
 	}
-	return(0);
+	return (1);
 }
 
-int		press_up(char *str, t_all *all)
+void	press_down_end_hist(t_all *all)
 {
-	if (ft_strnstr(str, "\e[A", ft_strlen(str)))
+	tputs(tigetstr("rc"), 1, ft_putchar);
+	tputs(tigetstr("ed"), 1, ft_putchar);
+	free(g_string);
+	g_string = ft_strdup(all->old_string);
+	all->flag = 0;
+	write(1, g_string, ft_strlen(g_string));
+	refresh_cursor(all, ft_strlen(g_string));
+}
+
+int		press_down(t_all *all)
+{
+	if (all->hist->next)
+		all->hist = all->hist->next;
+	if (all->hist->string != NULL)
 	{
 		tputs(tigetstr("rc"), 1, ft_putchar);
 		tputs(tigetstr("ed"), 1, ft_putchar);
-		write(1, "up", 3);						// there will be function to read from history
-		return(1);
+		all->flag = 1;
+		free(g_string);
+		if (all->hist->string[ft_strlen(all->hist->string) - 1] == '\n')
+		{
+				g_string = ft_substr(all->hist->string, 0,
+				ft_strlen(all->hist->string) - 1);
+		}
+		else
+			g_string = ft_strdup(all->hist->string);
+		refresh_cursor(all, ft_strlen(all->hist->string));
+		write(1, g_string, ft_strlen(g_string));
 	}
-	return(0);
-}
-
-int		press_down(char *str, t_all *all)
-{
-	if (ft_strnstr(str, "\e[B", ft_strlen(str)))
-	{
-		tputs(restore_cursor, 1, ft_putchar);
-		tputs(tigetstr("ed"), 1, ft_putchar);
-		write(1, "down", 4);					// there will be function to read from history
-		return(1);
-	}
-	return(0);
+	else if (all->flag == 1)
+		press_down_end_hist(all);
+	return(1);
 }
 
 int	check_key(char *str, t_all *all)
 {
-	int i;
-
-	i = press_left(str, all);
-	if (i != 1)
-		i = press_right(str, all);
-	if (i != 1)
-		i = press_up(str, all);
-	if (i != 1)
-		i = press_down(str, all);
-	if (i != 1)
-		i = check_key2(str, all);
-	return (i);
+	if (ft_strnstr(str, "\n", ft_strlen(str)))
+		return (1);
+	if (ft_strnstr(str, "\e[D", ft_strlen(str)))
+		return (press_left(all));
+	if (ft_strnstr(str, "\e[C", ft_strlen(str)))
+		return (press_right(all));
+	if (ft_strnstr(str, "\e[B", ft_strlen(str)))
+		return (press_down(all));
+	return (check_key2(str, all));
 }

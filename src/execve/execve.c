@@ -7,10 +7,7 @@ char	*verify_dir(char *path, char *cmd)
 
 	direct = opendir(path);
 	if (!direct)
-	{
-		closedir(direct);
 		return (NULL);
-	}
 	dir_file = readdir(direct);
 	while (dir_file)
 	{
@@ -25,56 +22,63 @@ char	*verify_dir(char *path, char *cmd)
 	return(NULL);
 }
 
-void	open_apk(char *path, char **argv, t_list *env)
+void	open_apk(char *path, char **argv, t_all *all)
 {
-	int	a;
 	pid_t	forks;
 	char	**env_copy;
+	t_list	*env;
 
+	env = all->env;
 	forks = fork();
 	if (forks == 0)
 	{
 		env_copy = env_join(env);
+		terminal_off(all);
 		execve(path, argv, env_copy);
 	}
-	wait(&a);
+	forks = wait(&forks);
 }
 
-char	**defin_dir(t_list *env, char **cmd)
+char	**defin_dir(t_all *all, char *cmd)
 {
 	char	**path_bin;
+	char	*line;
+	char	*tmp;
 
-	if (ft_strncmp(*cmd, "./", 2) == 0)
+	if (ft_strncmp(cmd, "./", 2) == 0)
 	{
-		path_bin = ft_split(env_srh_edit(&env, "PWD=", NULL), ':');
-		*cmd = ft_substr(*cmd, 2,ft_strlen(*cmd) - 2);
+		path_bin = ft_split(env_srh(all, "PWD")->content->value, ':');
+		free (all->token->command);
+		all->token->command = ft_strdup(ft_strchr(cmd, '/') + 1);
 	}
 	else
-		path_bin = ft_split(env_srh_edit(&env, "PATH=", NULL), ':');
+		path_bin = ft_split(env_srh(all, "PATH")->content->value, ':');
 	return (path_bin);
 }
 
-void	exec(char **argv, t_list *env, char *cmd)
+void	exec(char **argv, t_all *all, char *cmd)
 {
 	int	a;
 	char	*line;
 	char	**path_bin;
 	char	*tmp;
-	
-	a = 0;
-	path_bin = defin_dir(env, &cmd);
-	while (path_bin[a])
+// cделать защиту от null
+// переделать в all
+	a = -1;
+	path_bin = defin_dir(all, cmd);
+	while (path_bin[++a])
 	{
-		tmp = verify_dir(path_bin[a], cmd);
+		tmp = verify_dir(path_bin[a], all->token->command);
 		if (tmp)
 		{
 			line = ft_strjoin(path_bin[a], tmp);
-			open_apk(line, argv, env);
+			open_apk(line, argv, all);
 			free(tmp);
 			free(line);
+			break;
 		}
-		a++;
+		if (!path_bin[a + 1])
+			error_message("command not found", all);
 	}
-	free(cmd);
 	free_array(&path_bin);
 }
