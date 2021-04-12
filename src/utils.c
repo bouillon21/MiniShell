@@ -21,3 +21,33 @@ void	free_array(char ***mas)
 	}
 	free(*mas);
 }
+
+char	**separation_line(char *line)
+{
+	char **mas;
+
+	mas = ft_calloc(sizeof(char *), 3);
+	mas[0] = ft_substr(line, 0, 
+				ft_strlen(line) - ft_strlen(ft_strchr(line, '=')));
+	mas[1] = ft_strdup(ft_strchr(line, '=') + 1);
+	return(mas);
+}
+
+t_list	*copy_list(t_list *env)
+{
+	t_list	*export;
+	t_env_data	*data;
+
+	export = NULL;
+	while (env)
+	{
+		data = (t_env_data *)ft_calloc(sizeof(t_env_data), 1);
+		data->key = ft_strdup(env->content->key);
+		data->value = NULL;
+		if (env->content->value)
+			data->value = ft_strdup(env->content->value);
+		ft_lstadd_back(&export, ft_lstnew(data));
+		env = env->next;
+	}
+	return (export);
+}

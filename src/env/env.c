@@ -19,6 +19,8 @@ void	get_save_env(t_all *all, char **envp)
 		ft_lstadd_back(&all->env, ft_lstnew(data));
 		i++;
 	}
+	if (env_srh(all, "HOME"))
+		all->static_home = ft_strdup(env_srh(all, "HOME")->content->value);
 	env_add(all, "OLDPWD", NULL);
 }
 
@@ -29,7 +31,7 @@ t_list	*env_srh(t_all	*all, char *need)
 	env = all->env;
 	while (env)
 	{
-		if (ft_strncmp(env->content->key, need, ft_strlen(need)) == 0)
+		if (ft_strcmp(env->content->key, need) == 0)
 			return(env);
 		env = env->next;
 	}
@@ -82,6 +84,7 @@ char	**env_join(t_list *env)
 		}
 		env = env->next;
 	}
+	env_copy[i] = NULL;
 	return (env_copy);
 }
 
