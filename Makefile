@@ -6,7 +6,7 @@
 #    By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/03/25 16:18:40 by hmickey          ###   ########.fr        #
+#    Updated: 2021/04/12 21:52:49 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRCS		=	main.c\
 				${PATH_TERM}key_functions2.c\
 				${PATH_TERM}del_bs_functions.c\
 				${PATH_PARSE}parse_input.c\
+				${PATH_PARSE}fill_token.c\
 				${PATH_PARSE}quote.c\
 				${PATH_LISTS}lists_functions.c\
 				${PATH_EXPORT}export.c\

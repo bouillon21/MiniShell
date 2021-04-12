@@ -6,50 +6,11 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/12 21:09:32 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/12 21:53:04 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int		search_command(t_all *all, int start)
-{
-	char	*tmp;
-	int		i;
-
-	i = start;
-	while (g_string[i] != '\n')
-	{
-		if (g_string[i] == '\'')
-		{
-			delete_from_array(i);
-			i = single_quote_start(i);
-		}
-		else if (g_string[i] == '\"')
-		{
-			delete_from_array(i);
-			i = double_quote_start(i);
-		}
-		else if (g_string[i] == '\\')
-			i = ecranisation(i);
-		else if (g_string[i] == ' ')
-		{
-			skip_space(i);						// НЕ ЗАБЫТЬ УБРАТЬ ОТСЮДА
-			return (i);
-		}
-		else if(g_string[i] == ';' || g_string[i] == '<'
-			|| g_string[i] == '>')
-		{
-			all->token->separate = *ft_strchr(";><", g_string[i]);			//ДОПИСАТЬ ДЛЯ >>
-			if (g_string[i + 1] == '>' && g_string[i] == '>')
-				all->token->separate = 'r';
-			return (i);
-		}
-		else
-			i++;
-	}
-	return (i);
-}
 
 int		search_flags(t_all *all, int start)
 {
@@ -72,7 +33,7 @@ int		count_args(t_all *all, int i)
 
 	words = 2;
 	flag = 0;
-	while (g_string[i])
+	while (g_string[i++])
 	{
 		if (g_string[i] == '\"' && flag == 0)
 			flag = 1;
@@ -90,10 +51,8 @@ int		count_args(t_all *all, int i)
 				i++;
 			if (ft_strchr(";\n\0", g_string[i]))
 				break;
-			i--;
-			words++;
+			words++ && i--;
 		}
-		i++;
 	}
 	if (flag != 0)
 	{

@@ -122,9 +122,9 @@ void		terminal(t_all *all);
 void		print_export(t_all *all);
 void		terminal_off(t_all *all);
 void		refresh_cursor(t_all *all, int pos);
-
-void	get_save_env_test(t_all *all, char **envp);
-char	**env_join_test(t_list *env);
+int			search_command(t_all *all, int start);
+void		get_save_env_test(t_all *all, char **envp);
+char		**env_join_test(t_list *env);
 
 
 
