@@ -82,6 +82,7 @@ typedef struct s_all
 	t_list_hist		*hist;
 	char			*old_string;
 	char			*string;
+	char			*static_home;
 }					t_all;
 
 void		handle_sigint(int sig);
@@ -113,19 +114,23 @@ char		*verify_dir(char *path, char *cmd);
 void		free_array(char ***mas);
 t_list_hist	*create_new_list(t_list_hist *hist);
 void		export(t_all *all);
-char		**sort_export(t_all *all);
+void		sort_export(t_list *export);
 void		error_message(char *message, t_all *all);
 void		clear_token(t_all *all);
 void		env_add(t_all *all, char *need, char *content);
 void		cd(t_all *all);
 void		terminal(t_all *all);
-void		print_export(t_all *all);
+void		print_export(t_list *all);
 void		terminal_off(t_all *all);
 void		refresh_cursor(t_all *all, int pos);
 int			search_command(t_all *all, int start);
 void		get_save_env_test(t_all *all, char **envp);
 char		**env_join_test(t_list *env);
 
+char		**separation_line(char *line);
+t_list		*copy_list(t_list *env);
+void		ft_uset(t_all *all);
+void		manager_cmd(t_all *all);
 
 
 #endif

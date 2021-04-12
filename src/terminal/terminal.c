@@ -91,6 +91,22 @@ void	add_history(t_all *all)
 	all->hist = all->hist->next;
 }
 
+void	manager_cmd(t_all *all)
+{
+	if (ft_strcmp(all->token->command, "env") == 0)
+		printf_env(all);
+	else if (ft_strcmp(all->token->command, "export") == 0)
+		export(all);
+	else if (ft_strcmp(all->token->command, "cd") == 0)
+		cd(all);
+	else if (ft_strcmp(all->token->command, "pwd") == 0)
+		ft_pwd();
+	else if (ft_strcmp(all->token->command, "unset") == 0)
+		ft_uset(all);
+	else
+		exec(all->token->args, all, all->token->command);
+}
+
 void	launch_command(t_all *all)
 {
 	add_history(all);
