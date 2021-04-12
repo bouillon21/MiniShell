@@ -39,20 +39,40 @@ void	open_apk(char *path, char **argv, t_all *all)
 	wait(&forks);
 }
 
-char	**defin_dir(t_all *all, char *cmd)// переделать тк косяки с PWD
+char	**defin_dir(t_all *all, char **complete_cmd)
 {
 	char	**path_bin;
 	char	*line;
-	char	*tmp;
+	char	tmp[1024];
+	t_list	*tmp_env;
 
-	if (ft_strncmp(cmd, "./", 2) == 0)
+	path_bin = NULL;
+	if (all->token->command[0] == '.')
 	{
-		path_bin = ft_split(env_srh(all, "PWD")->content->value, ':');
-		free (all->token->command);
-		all->token->command = ft_strdup(ft_strchr(cmd, '/') + 1);
+		path_bin = ft_calloc(sizeof(char *), 2);
+		path_bin[0] = ft_strdup(getcwd(tmp, 1024));
+		*complete_cmd = ft_strdup(ft_strchr(all->token->command, '/') + 1);
+	}
+	else if (all->token->command[0] == '/')
+	{
+		path_bin = ft_calloc(sizeof(char *), 2);
+		path_bin[0] = ft_substr(all->token->command, 0,
+			ft_strlen(all->token->command)
+				- ft_strlen(ft_strrchr(all->token->command , '/')));
+		*complete_cmd = ft_strdup(ft_strrchr(all->token->command, '/') + 1);
 	}
 	else
-		path_bin = ft_split(env_srh(all, "PATH")->content->value, ':');
+	{
+		*complete_cmd = ft_strdup(all->token->command);
+		tmp_env = env_srh(all, "PATH");
+		if (tmp_env)
+			path_bin = ft_split(tmp_env->content->value, ':');
+		else
+		{
+			path_bin = ft_calloc(sizeof(char *), 2);
+			path_bin[0] = ft_strdup(getcwd(tmp, 1024));
+		}
+	}
 	return (path_bin);
 }
 
@@ -62,23 +82,28 @@ void	exec(char **argv, t_all *all, char *cmd)
 	char	*line;
 	char	**path_bin;
 	char	*tmp;
+	char	*cmd1;
 // зделать защиту от null
 // переделать в all
 	a = -1;
-	path_bin = defin_dir(all, cmd);
-	while (path_bin[++a])
+	path_bin = defin_dir(all, &cmd1);
+	if (path_bin)
 	{
-		tmp = verify_dir(path_bin[a], all->token->command);
-		if (tmp)
+		while (path_bin[++a])
 		{
-			line = ft_strjoin(path_bin[a], tmp);
-			open_apk(line, argv, all);
-			free(tmp);
-			free(line);
-			break;
+			tmp = verify_dir(path_bin[a], cmd1);
+			if (tmp)
+			{
+				line = ft_strjoin(path_bin[a], tmp);
+				open_apk(line, argv, all);
+				free(tmp);
+				free(line);
+				break;
+			}
+			if (!path_bin[a + 1])
+				error_message("command not found", all);
 		}
-		if (!path_bin[a + 1])
-			error_message("command not found", all);
+		free_array(&path_bin);
 	}
-	free_array(&path_bin);
+	free(cmd1);
 }
