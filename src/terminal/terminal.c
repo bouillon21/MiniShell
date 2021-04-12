@@ -6,11 +6,15 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/09 22:44:34 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/12 21:07:23 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** ПОЧИНИТЬ DELETE.
+*/
 
 void	refresh_cursor(t_all *all, int pos)
 {
@@ -91,8 +95,11 @@ void	launch_command(t_all *all)
 {
 	add_history(all);
 	if (parse_string(all))
-		exec(all);
-	all->token = all->token->next;
+		while(all->token->next)
+		{
+			exec(all->token->args, all, all->token->command);
+			all->token = all->token->next;
+		}
 	clear_token(all);
 	all->flag = 0;
 	free(g_string);
@@ -128,7 +135,7 @@ void	main_loop(t_all *all)
 		if (!g_string)
 			exit (errno);
 		g_string[0] = 0;
-		all->old_string = malloc(100);
+		all->old_string = ft_calloc(100, 1);
 		read_input(all);
 		write(1, "\n", 1);
 		free(all->old_string);

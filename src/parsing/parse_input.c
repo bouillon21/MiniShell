@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/09 22:29:17 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/12 21:09:32 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ int		search_command(t_all *all, int start)
 			i = ecranisation(i);
 		else if (g_string[i] == ' ')
 		{
-			i = skip_space(i);						// НЕ ЗАБЫТЬ УБРАТЬ ОТСЮДА
-			return (--i);
+			skip_space(i);						// НЕ ЗАБЫТЬ УБРАТЬ ОТСЮДА
+			return (i);
 		}
 		else if(g_string[i] == ';' || g_string[i] == '<'
 			|| g_string[i] == '>')
 		{
 			all->token->separate = *ft_strchr(";><", g_string[i]);			//ДОПИСАТЬ ДЛЯ >>
+			if (g_string[i + 1] == '>' && g_string[i] == '>')
+				all->token->separate = 'r';
 			return (i);
 		}
 		else
@@ -57,6 +59,7 @@ int		search_flags(t_all *all, int start)
 int		fill_args(t_all *all, int start, int *k)
 {
 	int	j;
+	skip_space(start);
 	j = search_command(all, start);
 	all->token->args[++(*k)] = ft_substr(g_string, start, j - start);
 	return (j);
@@ -94,24 +97,40 @@ int		count_args(t_all *all, int i)
 	}
 	if (flag != 0)
 	{
-		error_message("Quotes are not closed\n", all);
+		error_message("Quotes are not closed", all);
 		return (-1);
 	}
 	return (words);
 }
 
-int		write_command(t_all *all,int i)
+int		write_command(t_all *all, int i)
 {
-	return (i = search_command(all, i));
+	int j;
+
+	if (!ft_strchr("<>", g_string[i]))
+	{
+		j = i;
+		i = search_command(all, i);
+		if (i == j)
+			i++;
+		all->token->command = ft_substr(g_string, j, i - j);
+		string_to_lower(&all->token->command);
+		if (!ft_strncmp(all->token->command, "exit", 4)) // DONT FORGET TO REMOVE THIS!!!!!!!!!!!!!!!!!!
+		{
+			write(1, "exit\n", 5);
+			exit (1);
+		}
+	}
+	return (i);
 }
 
 int		parse_string(t_all *all)
 {
 	int i;
-	int j;
 	int k;
+	t_token	*head;
 
-	k = 1;
+	head = all->token;
 	i = 0;
 	while (g_string[i] != '\0' && g_string[i] != '\n')
 	{
@@ -122,27 +141,19 @@ int		parse_string(t_all *all)
 		all->token->args = ft_calloc(sizeof(char*), k);
 		all->token->args[0] = ft_strdup("minishell");
 		k = 0;
-		j = i;
 		i = write_command(all, i);
-		all->token->command = ft_substr(g_string, j, i - j);
-		// printf("%s\n", env_srh(all, "PWD")->content->value);
-		if (!ft_strncmp(all->token->command, "exit", 4)) // DONT FORGET TO REMOVE
-		{
-			write(1, "exit\n", 5);
-			exit (1);
-		}
-		if (g_string[i] != ';')
+		if (!all->token->separate)
 		{
 			i = skip_space(i);
 			// i = search_flags(all, i);
 			while (g_string[i] != ';' && g_string[i] != '\n')
 				i = fill_args(all, i, &k);
 		}
-		else
-			i++;
+		i++;
+		all->token->args[++k] = NULL;
 		all->token->next = create_new_token(all->token);
 		all->token = all->token->next;
 	}
-	all->token = all->token->prev;
+	all->token = head;
 	return (1);
 }

@@ -81,6 +81,7 @@ typedef struct s_all
 	int				flag;
 	t_list_hist		*hist;
 	char			*old_string;
+	char			*string;
 }					t_all;
 
 void		handle_sigint(int sig);
@@ -106,7 +107,7 @@ void		printf_env(t_all *all);
 char		*env_srh_edit(t_list **head, char *need,
 				char *changes);
 t_list		*env_srh(t_all	*all, char *need);
-void	exec(char **argv, t_all *all, char *cmd);
+void		exec(char **argv, t_all *all, char *cmd);
 char		**env_join(t_list *env);
 char		*verify_dir(char *path, char *cmd);
 void		free_array(char ***mas);
