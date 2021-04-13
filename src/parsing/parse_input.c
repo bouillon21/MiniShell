@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/13 03:52:45 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/13 04:49:08 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		count_args(t_all *all, int i)
 	int flag;
 	int words;
 
-	words = 2;
+	words = 3;
 	flag = 0;
 	while (g_string[i++])
 	{
@@ -62,8 +62,11 @@ int		check_syntax(int i, t_all *all)
 {
 	if (g_string[i] == ';' && (g_string[i - 1] == ';' || g_string[i + 1] == ';'))
 		error_message("syntax error near unexpected token `;;\'", all);
-	else
+	else if (g_string[i] == ';')
 		error_message("syntax error near unexpected token `;\'", all);
+	else if (i == 0 || (g_string[i] == '|'
+		&& (g_string[i - 1] == '|' || g_string[i + 1] == '|')))
+		error_message("syntax error near unexpected token `|\'", all);
 	return (0);
 }
 
@@ -79,18 +82,21 @@ int		parse_string(t_all *all)
 	while (g_string[i] != '\0' && g_string[i] != '\n')
 	{
 		i = skip_space(i);
+		if (g_string[0] == '|' || g_string[0] == ';')
+			return (check_syntax(0, all));
 		k = count_args(all, i);
 		if (k == -1)
 			return (0);
 		all->token->args = ft_calloc(sizeof(char*), k);
 		all->token->args[0] = ft_strdup("minishell");
-		i = fill_command(all, i);
-		if (all->token->separate != ';')
+		if (!all->token->prev || !ft_strchr("><r",all->token->prev->separate))
+			i = fill_command(all, i);
+		if (!all->token->separate)
 		{
 			// i = search_flags(all, i);
 			i = fill_args(all, i);
 		}
-		else if (all->token->separate == ';' && !all->token->command)
+		else if (all->token->separate && !all->token->command)
 			return (check_syntax(i, all));
 		else
 			all->token->args[1] = NULL;

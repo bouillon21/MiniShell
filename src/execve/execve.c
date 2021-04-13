@@ -78,12 +78,12 @@ char	**defin_dir(t_all *all, char **complete_cmd)
 
 void	exec(char **argv, t_all *all, char *cmd)
 {
-	int	a;
+	int		a;
 	char	*line;
 	char	**path_bin;
 	char	*tmp;
 	char	*cmd1;
-// зделать защиту от null
+// cделать защиту от null ?? Команды может и не быть в случае редиректов.
 // переделать в all
 	a = -1;
 	path_bin = defin_dir(all, &cmd1);

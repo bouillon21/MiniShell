@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 21:52:52 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/13 03:57:48 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/13 04:22:06 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		fill_command(t_all *all, int i)
 			i++;
 		all->token->command = ft_substr(g_string, j, i - j);
 		if (ft_strchr("<>;|", g_string[i]))
-			all->token->separate = *ft_strchr("<>;", g_string[i]);
+			all->token->separate = *ft_strchr("<>;|", g_string[i]);
 		if (all->token->separate == '>' && g_string[i + 1] == '>')
 				all->token->separate = 'r';
 		string_to_lower(&all->token->command);

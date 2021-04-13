@@ -574,3 +574,170 @@ pwd pwd
 
 pwd pwd
 pwd 123123
+
+pwd pwd
+
+pwd pwd
+pwd
+ls
+ls ls ls ls
+ls ls ls ls ls pwd
+
+echo 123
+
+pwd
+pwd pwd
+
+pwd
+pwd pwd
+ls
+
+pwd
+pwd pwd
+ls
+pwd
+./minishell
+
+pwd
+ls
+pwd pwd
+
+
+pwd
+
+pwd
+pwd
+pwd
+cd ..
+pwd
+cd ..
+pwd
+ls
+cd /bin
+ls
+pwd
+exit
+
+pwd
+pwd pwd
+
+pwd
+ls
+
+pwd
+pwd pwd
+
+pwd
+pwd pwd
+pwd pwd pwd
+
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+:
+pwd
+ls
+ls ; pwd
+pwd pwd pwd ; pwd
+pwd ; pwd
+ls pwd
+cd ..
+pwd
+cd -
+exit
+
+ls
+ls ; ls ; exit
+
+ls ; exit ; ls
+
+ls > ls
+
+ls > ls
+
+ls > ls
+
+ls
+
+ls
+
+ls
+ls ls
+ls pwd
+ls > ls
+
+ls ls
+ls > ls
+ls > pwd
+
+ls > ls
+
+ls | ls
+
+ls | ls
+
+> ls
+< ls
+| ls
+ls ; ;
+ls ; ;
+ls ;   ;
+ls      ;
+ls ; ls ;;
+; ls
+; ; ls
+; ;; ls
+ls ; ; ;;
+;
+ ls ;;
+ls ;            ;
+
+| ls
+
+| ls
+| pwd
+|| pwd
+|| ls
+ls || pwd
+ls | | pwd
+ls | | | ls
+ls | ls | ls | | ls
+| ls
+|| ls
+
+ls
+; ls
+| ls
+| pwd
+
+| ls
+; ls
+
+ls
+| ls
+; ls
+ls ; ls
+ls ; ; 
+ls ; pwd;

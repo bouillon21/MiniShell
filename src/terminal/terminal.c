@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/12 21:07:23 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/13 04:19:17 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	manager_cmd(t_all *all)
 		ft_pwd();
 	else if (ft_strcmp(all->token->command, "unset") == 0)
 		ft_uset(all);
+	else if (ft_strcmp(all->token->command, "exit") == 0)
+		exit (1);
 	else
 		exec(all->token->args, all, all->token->command);
 }
@@ -113,7 +115,8 @@ void	launch_command(t_all *all)
 	if (parse_string(all))
 		while(all->token->next)
 		{
-			exec(all->token->args, all, all->token->command);
+			if (all->token->command)		// КОСТЫЛЬ ОТ БУЛКИ :)
+				manager_cmd(all);
 			all->token = all->token->next;
 		}
 	clear_token(all);
