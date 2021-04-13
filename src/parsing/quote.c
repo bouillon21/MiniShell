@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 17:37:49 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/12 20:53:11 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/12 22:24:04 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ecranisation(int start)
 
 int		double_quote_start(int start)
 {
+	delete_from_array(start);
 	while (g_string[start] != '\"')
 	{
 		if (g_string[start] == '$')
@@ -43,6 +44,7 @@ int		double_quote_start(int start)
 
 int		single_quote_start(int start)
 {
+	delete_from_array(start);
 	while (g_string[start] != '\'')
 	{
 		start++;
