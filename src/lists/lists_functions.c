@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:32:13 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/08 22:04:53 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/11 19:48:25 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,23 @@ void	clear_loop(t_token **token)
 
 	i = -1;
 	if ((*token)->command)
+	{
+		// printf("command - %s\n", (*token)->command);
 		clear_buf(&(*token)->command);
+	}
 	if ((*token)->args)
 		while ((*token)->args[++i])
+		{
+			// printf("args - %s\n", (*token)->args[i]);
 			clear_buf(&(*token)->args[i]);
+		}
 	if ((*token)->flags)
 		while ((*token)->flags[++i])
+		{
+			// printf("flags - %s\n", (*token)->flags[i]);
 			clear_buf(&(*token)->flags[i]);
+		}
+		// write(1, "\n", 1);
 	free((*token)->args);
 	// free((*token)->flags);
 }
@@ -49,7 +59,7 @@ t_token	*create_new_token(t_token *token)
 
 	new_token = malloc(sizeof(t_token));
 	new_token->separate = 0;
-	new_token->command = 0;
+	new_token->command = NULL;
 	new_token->args = 0;
 	new_token->flags = 0;
 	new_token->prev = token;

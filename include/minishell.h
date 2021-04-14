@@ -26,8 +26,6 @@
 # define LIGHT_CYAN		"\033[1;36m"
 # define BLUE			"\033[1;34m"
 
-char	*g_string;
-
 typedef struct s_token
 {
 	char			*command;
@@ -81,6 +79,7 @@ typedef struct s_all
 	int				flag;
 	t_list_hist		*hist;
 	char			*old_string;
+	char			*string;
 	char			*static_home;
 }					t_all;
 
@@ -93,13 +92,13 @@ void		clear_buf(char **buf);
 void		main_loop(t_all *all);
 int			check_key(char *str, t_all *all);
 int			check_key2(char *str, t_all *all);
-void		parse_string(t_all *all);
-void		delete_from_array(int i);
+int			parse_string(t_all *all);
+void		delete_from_array(int i, char *str);
 t_token		*create_new_token(t_token *token);
-int			single_quote_start(int start);
-int			double_quote_start(int start);
+int			single_quote_start(int start, char *str);
+int			double_quote_start(int start, char *str);
 int			ecranisation(int start);
-int			skip_space(int start);
+int			skip_space(int start, char *str);
 void		string_to_lower(char **mas);
 int			ft_pwd(void);
 void		get_save_env(t_all *all, char **envp);
@@ -107,7 +106,7 @@ void		printf_env(t_all *all);
 char		*env_srh_edit(t_list **head, char *need,
 				char *changes);
 t_list		*env_srh(t_all	*all, char *need);
-void	exec(char **argv, t_all *all, char *cmd);
+void		exec(char **argv, t_all *all, char *cmd);
 char		**env_join(t_list *env);
 char		*verify_dir(char *path, char *cmd);
 void		free_array(char ***mas);
@@ -122,10 +121,15 @@ void		terminal(t_all *all);
 void		print_export(t_list *all);
 void		terminal_off(t_all *all);
 void		refresh_cursor(t_all *all, int pos);
+int			search_command(t_all *all, int start);
+void		get_save_env_test(t_all *all, char **envp);
+char		**env_join_test(t_list *env);
 char		**separation_line(char *line);
 t_list		*copy_list(t_list *env);
 void		ft_uset(t_all *all);
 void		manager_cmd(t_all *all);
-
+int			search_flags(t_all *all, int start);
+int			fill_command(t_all *all, int i);
+int			fill_args(t_all *all, int start);
 
 #endif

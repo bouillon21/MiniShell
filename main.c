@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 13:17:10 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/07 13:38:51 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/13 00:25:21 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ void	error_message(char *message, t_all *all)
 	write(1, RED, ft_strlen(RED));
 	ft_putstr_fd("minishell: ", 1);
 	write(1, YELLOW, ft_strlen(YELLOW));
-	ft_putstr_fd(all->token->command, 1);
-	write(1, ": ", 2);
+	if (all->token->command)
+	{
+		ft_putstr_fd(all->token->command, 1);
+		write(1, ": ", 2);
+	}
 	write(1, LIGHT_CYAN, ft_strlen(LIGHT_CYAN));
 	ft_putstr_fd(message, 1);
 	write(1, " 🐒\n", ft_strlen(" 🐒\n"));
