@@ -51,7 +51,7 @@ char	**defin_dir(t_all *all, char **complete_cmd)
 	{
 		path_bin = ft_calloc(sizeof(char *), 2);
 		path_bin[0] = ft_strdup(getcwd(tmp, 1024));
-		*complete_cmd = ft_strdup(ft_strchr(all->token->command, '/') + 1);
+		*complete_cmd = ft_strdup(ft_strrchr(all->token->command, '/') + 1);
 	}
 	else if (all->token->command[0] == '/')
 	{
