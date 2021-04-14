@@ -28,10 +28,9 @@ char	**separation_line(char *line)
 	int	len;
 
 	mas = ft_calloc(sizeof(char *), 3);
+	len = ft_strlen(line) - ft_strlen(ft_strchr(line, '='));
 	if (ft_strnstr(line, "+=", ft_strlen(line)))
-		len = ft_strlen(line) - ft_strlen(ft_strchr(line, '=')) - 1;
-	else
-		len = ft_strlen(line) - ft_strlen(ft_strchr(line, '='));
+		len--;
 	mas[0] = ft_substr(line, 0, len);
 	if ((ft_strchr(line, '=') + 1) != NULL)
 		mas[1] = ft_strdup(ft_strchr(line, '=') + 1);
