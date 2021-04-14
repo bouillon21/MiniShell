@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:43:17 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/12 16:01:20 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/14 03:30:22 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ctrl_d_exit(t_all *all)
 	int status;
 
 	pid = waitpid(-1, &status, WNOHANG);
-	clear_buf(&g_string);
+	clear_buf(&all->string);
 	write(1, YELLOW, ft_strlen(YELLOW));
 	write(1, "e", 1);
 	write(1, LIGHT_GREEN, ft_strlen(LIGHT_GREEN));

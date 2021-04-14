@@ -26,8 +26,6 @@
 # define LIGHT_CYAN		"\033[1;36m"
 # define BLUE			"\033[1;34m"
 
-char	*g_string;
-
 typedef struct s_token
 {
 	char			*command;
@@ -95,12 +93,12 @@ void		main_loop(t_all *all);
 int			check_key(char *str, t_all *all);
 int			check_key2(char *str, t_all *all);
 int			parse_string(t_all *all);
-void		delete_from_array(int i);
+void		delete_from_array(int i, char *str);
 t_token		*create_new_token(t_token *token);
-int			single_quote_start(int start);
-int			double_quote_start(int start);
+int			single_quote_start(int start, char *str);
+int			double_quote_start(int start, char *str);
 int			ecranisation(int start);
-int			skip_space(int start);
+int			skip_space(int start, char *str);
 void		string_to_lower(char **mas);
 int			ft_pwd(void);
 void		get_save_env(t_all *all, char **envp);

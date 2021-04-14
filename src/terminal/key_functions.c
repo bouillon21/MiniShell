@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 08:35:46 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/11 19:13:52 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/14 03:32:03 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	press_down_end_hist(t_all *all)
 {
 	tputs(tigetstr("rc"), 1, ft_putchar);
 	tputs(tigetstr("ed"), 1, ft_putchar);
-	free(g_string);
-	g_string = ft_strdup(all->old_string);
+	free(all->string);
+	all->string = ft_strdup(all->old_string);
 	all->flag = 0;
-	write(1, g_string, ft_strlen(g_string));
-	refresh_cursor(all, ft_strlen(g_string));
+	write(1, all->string, ft_strlen(all->string));
+	refresh_cursor(all, ft_strlen(all->string));
 }
 
 int		press_down(t_all *all)
@@ -52,16 +52,16 @@ int		press_down(t_all *all)
 		tputs(tigetstr("rc"), 1, ft_putchar);
 		tputs(tigetstr("ed"), 1, ft_putchar);
 		all->flag = 1;
-		free(g_string);
+		free(all->string);
 		if (all->hist->string[ft_strlen(all->hist->string) - 1] == '\n')
 		{
-				g_string = ft_substr(all->hist->string, 0,
+				all->string = ft_substr(all->hist->string, 0,
 				ft_strlen(all->hist->string) - 1);
 		}
 		else
-			g_string = ft_strdup(all->hist->string);
+			all->string = ft_strdup(all->hist->string);
 		refresh_cursor(all, ft_strlen(all->hist->string));
-		write(1, g_string, ft_strlen(g_string));
+		write(1, all->string, ft_strlen(all->string));
 	}
 	else if (all->flag == 1)
 		press_down_end_hist(all);
