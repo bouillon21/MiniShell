@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:43:17 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/14 03:30:22 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/15 00:18:05 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 void handle_sigint(int sig)
 {
 	pid_t	pid;
-	int status;
-	
-	pid = waitpid(-1, &status, WNOHANG);
+	int 	status;
+
+	wait(&status);
+	// printf("status_1 - %d\n", status);
+	// pid = waitpid(-1, &status, WNOHANG);
+	// printf("status - %d\n", status);
+	// printf("pid - %d\n", (int)pid);
 	if (status != 0)
 		write(1, "\n", 1);
 }
@@ -27,6 +31,7 @@ void	ctrl_d_exit(t_all *all)
 	pid_t	pid;
 	int status;
 
+	// wait(&status);
 	pid = waitpid(-1, &status, WNOHANG);
 	clear_buf(&all->string);
 	write(1, YELLOW, ft_strlen(YELLOW));

@@ -96,8 +96,8 @@ int			parse_string(t_all *all);
 void		delete_from_array(int i, char *str);
 t_token		*create_new_token(t_token *token);
 int			single_quote_start(int start, char *str);
-int			double_quote_start(int start, char *str);
-int			ecranisation(int start);
+int			double_quote_start(int start, t_all *all);
+int			ecranisation(int start, char *str);
 int			skip_space(int start, char *str);
 void		string_to_lower(char **mas);
 int			ft_pwd(void);
@@ -131,5 +131,12 @@ void		manager_cmd(t_all *all);
 int			search_flags(t_all *all, int start);
 int			fill_command(t_all *all, int i);
 int			fill_args(t_all *all, int start);
+int			check_syntax(t_all *all);
+int			check_semicolons(char *str, int i, t_all *all);
+int			check_redirect_in_file(char *str, int i, t_all *all);
+int			check_redirect_from_file(char *str, int i, t_all *all);
+int			check_pipe(char *str, int i, t_all *all);
+void		insert_inside(char *str, int pos, t_all *all, int flag);
+char		*parse_dollar(char *str, int i, t_all *all);
 
 #endif
