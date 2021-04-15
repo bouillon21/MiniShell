@@ -6,7 +6,7 @@
 #    By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/04/12 21:52:49 by hmickey          ###   ########.fr        #
+#    Updated: 2021/04/15 04:26:29 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,9 @@ SRCS		=	main.c\
 				${PATH_PARSE}parse_input.c\
 				${PATH_PARSE}fill_token.c\
 				${PATH_PARSE}quote.c\
+				${PATH_PARSE}double_quote.c\
+				${PATH_PARSE}check_syntax.c\
+				${PATH_PARSE}validate_syntax.c\
 				${PATH_LISTS}lists_functions.c\
 				${PATH_EXPORT}export.c\
 

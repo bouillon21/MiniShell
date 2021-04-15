@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/14 03:32:08 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/15 05:54:37 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	refresh_cursor(t_all *all, int pos)
 	all->cursor.current_pos = pos;
 }
 
-void	insert_inside(char *str, int pos, t_all *all)
+void	insert_inside(char *str, int pos, t_all *all, int flag)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -40,12 +40,15 @@ void	insert_inside(char *str, int pos, t_all *all)
 	all->string = ft_strjoin(all->string, tmp2);
 	free(tmp);
 	free(tmp2);
-	tputs(tigetstr("rc"), 1, ft_putchar);
-	tputs(tigetstr("ed"), 1, ft_putchar);
-	write(1, all->string, ft_strlen(all->string));
-	ret_cursor = ft_strlen(all->string) - pos - 1;
-	while (ret_cursor-- > 0)
+	if (flag)
+	{
+		tputs(tigetstr("rc"), 1, ft_putchar);
+		tputs(tigetstr("ed"), 1, ft_putchar);
+		write(1, all->string, ft_strlen(all->string));
+		ret_cursor = ft_strlen(all->string) - pos - 1;
+		while (ret_cursor-- > 0)
 		tputs(tgetstr("le", 0), 1, ft_putchar);
+	}
 }
 
 void	build_string(t_all *all, char *str)
@@ -57,7 +60,7 @@ void	build_string(t_all *all, char *str)
 	all->cursor.end_pos += write(1, str, len);
 	all->cursor.current_pos += len;
 	if (all->cursor.current_pos != all->cursor.end_pos)
-		insert_inside(str, all->cursor.current_pos - len, all);
+		insert_inside(str, all->cursor.current_pos - len, all, 1);
 	else
 	{
 		tmp = all->string;

@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 21:52:52 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/14 03:39:41 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/15 06:28:08 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,19 @@ int		search_command(t_all *all, int start)
 		if (all->string[i] == '\'')
 			i = single_quote_start(i, all->string);
 		else if (all->string[i] == '\"')
-			i = double_quote_start(i, all->string);
+			i = double_quote_start(i, all);
+		else if (all->string[i] == '$' 
+			&& (all->string[i + 1] != '\n' || all->string[i + 1] != ' '))
+			{
+				delete_from_array(i, all->string);
+				tmp = parse_dollar(all->string, i, all);
+				insert_inside(tmp, i, all, 0);
+				i = i + ft_strlen(tmp) - 1;
+				free(tmp);
+				return (++i);
+			}
 		else if (all->string[i] == '\\')
-			i = ecranisation(i);
+			i = ecranisation(i, all->string);
 		else if (all->string[i] == ' ')
 			return (skip_space(i, all->string));		// УБЕДИТЬСЯ ЧТО ЭТО НУЖНАЯ ДИЧЬ
 		else if(all->string[i] == ';' || all->string[i] == '<'
@@ -53,8 +63,8 @@ int		fill_command(t_all *all, int i)
 	{
 		j = i;
 		i = search_command(all, i);
-		if (i == j)
-			i++;
+		if (!i)
+			return (0);
 		all->token->command = ft_substr(all->string, j, i - j);
 		if (ft_strchr("<>;|", all->string[i]))
 			all->token->separate = *ft_strchr("<>;|", all->string[i]);
