@@ -25,11 +25,17 @@ void	free_array(char ***mas)
 char	**separation_line(char *line)
 {
 	char **mas;
+	int	len;
 
 	mas = ft_calloc(sizeof(char *), 3);
-	mas[0] = ft_substr(line, 0, 
-				ft_strlen(line) - ft_strlen(ft_strchr(line, '=')));
-	mas[1] = ft_strdup(ft_strchr(line, '=') + 1);
+	len = ft_strlen(line) - ft_strlen(ft_strchr(line, '='));
+	if (ft_strnstr(line, "+=", ft_strlen(line)))
+		len--;
+	mas[0] = ft_substr(line, 0, len);
+	if ((ft_strchr(line, '=') + 1) != NULL)
+		mas[1] = ft_strdup(ft_strchr(line, '=') + 1);
+	else
+		mas[1] = ft_strdup("");
 	return(mas);
 }
 

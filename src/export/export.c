@@ -35,7 +35,7 @@ void	print_export(t_list *env)
 	t_list	*export;
 
 	export = copy_list(env);
-	head = &(*export);
+	head = export;
 	sort_export(export);
 	while(export)
 	{
@@ -56,14 +56,18 @@ void	print_export(t_list *env)
 int	valid_export(char *arg)
 {
 	int	i;
+	int	flag;
 
 	i = -1;
+	flag = 0;
 	if (!ft_isalpha(arg[0]) && arg[0] != '_')
 		return(-1);
 	while (arg[++i] && arg[i] != '=')
 	{
-		if (!ft_isalnum(arg[i]) && arg[i] != '_')
+		if ((!ft_isalnum(arg[i]) && arg[i] != '_' && arg[i] != '+') || flag)
 			return(-1);
+		if (arg[i] == '+')
+			flag = 1;
 	}
 	return(0);
 }
@@ -120,6 +124,19 @@ void	export(t_all *all)//  не по норме +3 строки
 				line = ft_strjoin(all->token->args[i], ": not a valid identifier");
 				error_message(line, all);
 				free(line);
+			}
+			else if (ft_strnstr(all->token->args[i], "+=" , ft_strlen(all->token->args[i])))
+			{
+				tmp = separation_line(all->token->args[i]);
+				if (env_srh(all, tmp[0]) && env_srh(all, tmp[0])->content->value != NULL)
+				{
+					line = ft_strjoin(env_srh(all, tmp[0])->content->value, tmp[1]);
+					env_add(all, tmp[0], line);
+					free(line);
+				}
+				else
+					env_add(all, tmp[0], tmp[1]);
+				free_array(&tmp);
 			}
 			else if (ft_strchr(all->token->args[i], '=') != NULL)
 			{
