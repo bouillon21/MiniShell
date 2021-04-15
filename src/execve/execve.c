@@ -50,7 +50,6 @@ char	*defin_dir(t_all *all, char **complete_cmd)
 	t_list	*tmp_env;
 
 	a = -1;
-	line = NULL;
 	path_bin = NULL;
 	tmp_env = env_srh(all, "PATH");
 	if (tmp_env)
@@ -62,6 +61,7 @@ char	*defin_dir(t_all *all, char **complete_cmd)
 		{
 			line = ft_strjoin(path_bin[a], tmp);
 			free(tmp);
+			free_array(&path_bin);
 			return (line);
 		}
 	}
@@ -88,5 +88,4 @@ void	exec(char **argv, t_all *all, char *cmd)
 	}
 	else
 		open_apk(all->token->command, argv, all);
-
 }
