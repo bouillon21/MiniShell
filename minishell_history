@@ -556,3 +556,278 @@ ls > ; ; ; ; pwd
 ls ; pwd
 ls < ; pwd
 ls < 123 ; pqww
+
+ls
+pwd
+pwd "HI"
+ls "src"
+ls $HOME/123
+ls "$HOME/123"
+ls\ 
+ls\
+ls\ 
+
+ls\ 
+ls\
+ls\ 
+ls\ss
+ls\$PWD
+
+p\w\d
+p\w\d\ 
+p\w\d\
+
+ls>pwd
+ls<pwd
+
+pwd\
+pwd\ 
+pwd\
+ls<
+ls<ls
+ls>ls
+ls:pwd
+ls<>pwd
+ls><pwd
+
+ls
+ls > pwd
+
+pwd > ls
+pwd < ls
+
+pwd > ls
+
+pwd > ls
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.1/adapter/codelldb terminal-agent --port=
+
+
+pwd > ls
+
+pwd > ls
+
+pwd > ls
+ls < pwd
+ls > ls
+pwd > pwd
+
+pwd > ls | ls ; pwd
+
+pwd
+pwd ; pwd
+
+pwd
+pwd ;
+pwd ; pwd
+pwd ; ls
+pwd ; pwd pwd; pwd
+pwd;pwd
+pwd;;pwd
+ls ; pwd
+pwd > ls
+ls > pwd
+ls | ls
+
+pwd ; ls
+
+pwd ; pwd
+pwd ; ls
+pwd ; pwd ;;pwd
+
+pwd ;; pwd
+ls ; pwd
+
+pwd ; pwd
+
+pwd ;; pwd
+
+pwd ;; pwd
+
+pwd ;; pwd
+pwd ; ls
+ls pwd ls ls ls pwd
+pwd pwd pwd pwd
+pwd pwd pwd pwd pwd pwd pwd pwd pwd pwd ; ls
+pwdls
+lspwd
+ls\ 
+ls\\
+ls\|
+
+ls\|
+ls\;
+ls\\
+ls\|
+ls\ pwd
+ls\  pwd
+ls\ \ \ \ pwd
+
+pwd ; pwd
+pwd ;;pwd
+pwd ; ; pwd
+pwd ; ls pwd ;;
+
+; pwd
+pwd ;
+pwd ;;
+pwd ; ls ;
+pwd ; |
+pwd <
+pwd >
+pwd >>
+pwd ><
+pwd <>
+pwd <> ls
+
+lasds sdaf vxc zxcv \ sdcv sdsf 'adsf 
+pwd \ls
+\pwd
+\p\w\d
+\p\w\d\
+
+pwd\
+
+pwd \\
+pwd \
+pwd\
+
+pwd ()
+
+
+pwd ls
+ls ; ls
+pwd ; pwd
+pwd ;; pwd
+pwd > 
+pwd <    ;
+pwd .  
+pwd > pwd
+
+
+pwd ;   
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.1/adapter/codelldb terminal-agent --port=
+
+pwd ;     
+
+pwd ;       
+ls ;      
+
+ls      ;             ;
+pwd ;         |
+
+pwd ; ls
+pwd wdpw pdw pdwp fdj jdssdkl sdfhkjjfsdh sdafkhb asfd 
+leaks minishell
+
+pwd ; pwd
+pwd ; ls
+ls > pwd
+pwd < pwd
+pwd ; pwd ; pwd pwd pdw pwd ; pwd pwd ; pwd          pwd ; ls
+pwd "        asd qweqe "
+
+pwd "        asd qweqe "
+
+pwd "        asd qweqe "
+pwd ; pwd pwd pwd ; pwd 
+pwd " 123 "
+echo " 123 "
+echo 1 '' 3
+echo 1 2 3 '' 5
+echo 1 2 3 '' 4
+echo 1 2 3 ' ' 5
+echo $HOME
+ehco "              $HOME"
+echo  "                 $HOME "              $PWD
+export
+unset HOME
+echo $HOME
+
+pwd
+unset HOME
+echo $HOME
+
+unset HOME
+echo $HOME
+
+ls\ 
+pwd \ 
+pwd \ ls pwd 
+pwd ; pwd
+pwd ; pwd
+pwd ;;
+pwd ; |
+pwd " '
+pwd ' '
+
+echo "~"
+~
+pwd ~
+ls ~
+
+pwd ; pwd
+ls ; ls
+pwd 123
+ls src
+ls src $HOME
+ls src $HOME
+
+ls "sr"c
+ls "sr" c
+ls "srcs"
+ls "src"s
+ls "src"
+ls "src" 
+ls "src" s
+
+ls ~
+pwd ~
+ls ~/123
+ls ~/123/alex ; pwd
+ls ~/exercise
+ls ~/exercise/Minishell
+ls "~"
+pwd '~'
+ls '~'
+ls ~
+unset HOME
+cd ~
+
+unset HOME
+cd ~
+
+unset HOME
+cd ~
+
+ls
+pwd
+unset HOME
+cd ~
+pwd
+
+unset HOME
+echo $HOME
+pwd
+pwd ; ls
+ls > pwd
+pwd > ls
+pwd
+echo $HOME
+cd
+cd ~
+pwd
+export HOME=~/123
+cd ~
+pwd
+cd
+pwd
+cd ~
+pwd
+unset HOME
+cd ~
+pwd
+cd exercise
+cd Minishell
+ls
+pwd
+pwd

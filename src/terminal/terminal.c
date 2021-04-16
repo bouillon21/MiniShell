@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/15 05:54:37 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/16 05:07:01 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,20 @@ void	manager_cmd(t_all *all)
 
 void	launch_command(t_all *all)
 {
+	t_token		*head;
+
+	head = all->token;
 	add_history(all);
 	if (parse_string(all))
+	{
+		all->token = head;
 		while(all->token->next)
 		{
 			if (all->token->command)		// КОСТЫЛЬ ОТ БУЛКИ :)
 				manager_cmd(all);
 			all->token = all->token->next;
 		}
+	}
 	clear_token(all);
 	all->flag = 0;
 	free(all->string);

@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 04:26:52 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/15 06:29:10 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/16 06:41:41 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*parse_dollar(char *str, int i, t_all *all)
 	char	*tmp;
 	int		j;
 	int		diff;
+	t_list	*tmp_list;
 
 	j = i;
 	if (ft_isdigit(str[i]))
@@ -26,14 +27,16 @@ char	*parse_dollar(char *str, int i, t_all *all)
 		i++;
 	diff = i - j;
 	tmp = ft_substr(str, j, i - j);
-	value = ft_strdup(env_srh(all, tmp)->content->value);
+	tmp_list = env_srh(all, tmp);
 	free(tmp);
 	while (diff-- > 0)
 		delete_from_array(j, str);
-	return (value);
+	if (!tmp_list)
+		return (ft_strdup(""));
+	return (ft_strdup(tmp_list->content->value));
 }
 
-int		double_quote_start(int start, t_all *all)
+int	double_quote_start(int start, t_all *all)
 {
 	char	*insert;
 
@@ -41,7 +44,7 @@ int		double_quote_start(int start, t_all *all)
 	while (all->string[start] != '\"')
 	{
 		if (all->string[start] == '$' && (all->string[start + 1] != '\n'
-			|| all->string[start + 1] != ' '))
+				|| all->string[start + 1] != ' '))
 		{
 			delete_from_array(start, all->string);
 			insert = parse_dollar(all->string, start, all);
