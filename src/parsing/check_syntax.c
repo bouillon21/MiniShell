@@ -6,13 +6,13 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 04:03:05 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/15 04:19:43 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/16 05:30:45 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		remove_double_quotes(char *str, int i)
+int	remove_double_quotes(char *str, int i)
 {
 	delete_from_array(i, str);
 	while (str[i] != '\"')
@@ -27,9 +27,9 @@ int		remove_double_quotes(char *str, int i)
 	return (1);
 }
 
-int		remove_quotes(char *str)
+int	remove_quotes(char *str)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (str[++i] != '\n' && str[i] != '\0')
@@ -52,26 +52,26 @@ int		remove_quotes(char *str)
 	return (1);
 }
 
-int		validate_syntax(char *str, int i, char symb, t_all *all) // сюда пришел уже следующий элемент от того, что
-{																// мы валидируем
+int	validate_syntax(char *str, int i, char symb, t_all *all)
+{
 	if (symb == '>' && str[i] == '>')
 		delete_from_array(i, str);
 	if (symb == ';')
 	{
-		if(!check_semicolons(str, i, all))
+		if (!check_semicolons(str, i, all))
 			return (0);
 	}
-	else if(symb == '>')
+	else if (symb == '>')
 	{
 		if (!check_redirect_in_file(str, i, all))
 			return (0);
 	}
-	else if(symb == '<')
+	else if (symb == '<')
 	{
 		if (!check_redirect_from_file(str, i, all))
 			return (0);
 	}
-	else if(symb == '|')
+	else if (symb == '|')
 	{
 		if (!check_pipe(str, i, all))
 			return (0);
@@ -79,29 +79,29 @@ int		validate_syntax(char *str, int i, char symb, t_all *all) // сюда при
 	return (1);
 }
 
-int		check_syntax(t_all *all)
+int	check_syntax(t_all *all, int i)
 {
 	char	*copy;
-	int		i;
 	char	symb;
 
-	i = 0;
 	copy = ft_strdup(all->string);
 	if (!remove_quotes(copy))
 	{
 		error_message("quotes are not closed", all);
+		free(copy);
 		return (0);
 	}
-	skip_space(i, copy);
-	while (copy[i] != '\n')
+	skip_space(i + 1, copy);
+	while (copy[++i] != '\n')
 	{
 		symb = 0;
-		if (ft_strchr("><;|", copy[i]))
+		if (ft_strchr("><;|", copy[i]) && copy[i - 1] != '\\')
 			symb = *ft_strchr("><;|", copy[i]);
-		if (symb != 0)
-			if (!(validate_syntax(copy, i + 1, symb, all)))
-				return (0);
-		i++;
+		if (symb != 0 && !(validate_syntax(copy, i + 1, symb, all)))
+		{
+			free(copy);
+			return (0);
+		}
 	}
 	free(copy);
 	return (1);

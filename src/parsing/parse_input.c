@@ -6,15 +6,11 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/15 05:05:54 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/16 05:40:01 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/** 
-**	TODO: fix problem with |____ ;    \n|
-*/
 
 int		check_quotes(int i, int flag, char *str)
 {
@@ -29,13 +25,14 @@ int		check_quotes(int i, int flag, char *str)
 	return (flag);
 }
 
-int		count_args(t_all *all, int i)
+void	count_args(t_all *all, int i)
 {
-	int flag;
-	int words;
+	int	flag;
+	int	words;
 
 	words = 3;
 	flag = 0;
+	skip_space(i, all->string);
 	while (all->string[i])
 	{
 		flag = check_quotes(i, flag, all->string);
@@ -51,48 +48,35 @@ int		count_args(t_all *all, int i)
 		}
 		i++;
 	}
-	if (flag != 0)
-		return (-1);
-	return (words);
+	all->token->args = ft_calloc(sizeof(char*), words);
+	all->token->args[0] = ft_strdup("minishell");
 }
 
 int		parse_string(t_all *all)
 {
 	int i;
-	int k;
-	t_token	*head;
 
-	head = all->token;
 	i = 0;
-	all->string[ft_strlen(all->string) + 1] = '\0';
-	if (!check_syntax(all))
+	// all->string[ft_strlen(all->string) + 1] = '\0';
+	if (!check_syntax(all, -1))
 		return (0);
 	while (all->string[i] != '\0' && all->string[i] != '\n')
 	{
-		i = skip_space(i, all->string);
-		k = count_args(all, i);
-		if (k == -1)
-		{
-			printf("wtf\n");
-			return (0);
-		}
-		all->token->args = ft_calloc(sizeof(char*), k);
-		all->token->args[0] = ft_strdup("minishell");
+		count_args(all, i);
 		if (!all->token->prev || !ft_strchr("><r",all->token->prev->separate))
 			i = fill_command(all, i);
 		if (!i)
 			return (0);
 		if (!all->token->separate)
-		{
-			// i = search_flags(all, i);
 			i = fill_args(all, i);
-		}
 		else
+		{
 			all->token->args[1] = NULL;
-		i++;
+			i++;
+		}
 		all->token->next = create_new_token(all->token);
 		all->token = all->token->next;
+		skip_space(i, all->string);
 	}
-	all->token = head;
 	return (1);
 }
