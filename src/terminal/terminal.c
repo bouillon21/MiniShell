@@ -109,7 +109,7 @@ void	manager_cmd(t_all *all)
 	else if (ft_strcmp(all->token->command, "exit") == 0)
 		exit (1);
 	else
-		exec(all->token->args, all, all->token->command);
+		exec(all);
 }
 
 void	launch_command(t_all *all)
@@ -119,7 +119,10 @@ void	launch_command(t_all *all)
 		while(all->token->next)
 		{
 			if (all->token->command)		// КОСТЫЛЬ ОТ БУЛКИ :)
+			{
+				ft_pipe(all);
 				manager_cmd(all);
+			}
 			all->token = all->token->next;
 		}
 	clear_token(all);

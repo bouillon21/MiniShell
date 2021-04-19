@@ -41,7 +41,7 @@ void	open_apk(char *path, char **argv, t_all *all)
 	forks = wait(&forks);
 }
 
-char	*defin_dir(t_all *all, char **complete_cmd)
+char	*defin_dir(t_all *all)
 {
 	int	a;
 	char	**path_bin;
@@ -70,22 +70,18 @@ char	*defin_dir(t_all *all, char **complete_cmd)
 	return (tmp);
 }
 
-void	exec(char **argv, t_all *all, char *cmd)
+void	exec(t_all *all)
 {
-	int		a;
 	char	*line;
-	char	**path_bin;
-	char	*tmp;
-	char	*cmd1;
 // cделать защиту от null ?? Команды может и не быть в случае редиректов.
 // переделать в all
-	a = -1;
-	line = defin_dir(all, &cmd1);
+	line = defin_dir(all);
 	if (line)
 	{
-		open_apk(line, argv, all);
+		open_apk(line, all->token->args, all);
 		free(line);
 	}
 	else
-		open_apk(all->token->command, argv, all);
+		open_apk(all->token->command, all->token->args, all);
+
 }
