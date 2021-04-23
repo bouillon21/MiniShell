@@ -32,6 +32,7 @@ typedef struct s_token
 	char			**args;
 	char			**flags;
 	char			separate;
+	int				pipe[2];
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
@@ -82,6 +83,9 @@ typedef struct s_all
 	char			*string;
 	char			*static_home;
 	///////test//////////
+	int				pipe[2];
+	int				oldpipe[2];
+	// int				pid;
 	int				in;
 	int				out;
 }					t_all;
@@ -140,7 +144,9 @@ int			check_redirect_from_file(char *str, int i, t_all *all);
 int			check_pipe(char *str, int i, t_all *all);
 void		insert_inside(char *str, int pos, t_all *all, int flag);
 char		*parse_dollar(char *str, int i, t_all *all);
+void		ft_echo(t_all *all);
 
 void	ft_pipe(t_all *all);
+void	fd_close(int fd);
 
 #endif
