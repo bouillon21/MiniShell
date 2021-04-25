@@ -67,6 +67,50 @@ void	minishell_history(t_all *all)
 		write(all->fd, "\n", 1);
 }
 
+int	check_digit(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isdigit(line[i]))
+			return (1);
+		i++;
+	}
+	return (-1);
+}
+
+void	shell_level(t_all *all)
+{
+	t_list	*env;
+	int		tmp;
+
+	env = env_srh(all, "SHLVL");
+	if (!env || env->content->value == NULL)
+		env_add(all, "SHLVL", "1");
+	else
+	{
+		if (check_digit(env->content->value))
+		{
+			tmp = ft_atoi(env->content->value);
+			if (tmp == 999)
+				env_add(all, "SHLVL", "");
+			else if (tmp < 0)
+				env_add(all, "SHLVL", "0");
+			else if (tmp < 1000)
+				env_add(all, "SHLVL", ft_itoa(tmp + 1));
+			else
+			{
+				error_message("shell level (1000) too high, resetting to 1", all);//переделать ввывод ошибок
+				env_add(all, "SHLVL", "1");
+			}
+		}
+		else
+			env_add(all, "SHLVL", "1");
+	}
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	t_all all;
@@ -77,6 +121,7 @@ int main(int argc, char **argv, char **envp)
 	all.hist = create_new_list(0);
 	minishell_history(&all);
 	get_save_env(&all, envp);
+	shell_level(&all);
 	signal(SIGINT, handle_sigint);
 	main_loop(&all);
 }
