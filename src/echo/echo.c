@@ -21,7 +21,8 @@ void	ft_echo(t_all *all)
 
 	i = 1;
 	flag = 0;
-	if (!ft_strncmp(all->token->args[1], "-n", 2) && qwe(all->token->args[1]))
+	if (all->token->args[1] && !ft_strncmp(all->token->args[1], "-n", 2)
+		&& qwe(all->token->args[1]))
 		flag = 1;
 	if (flag)
 		i++;
