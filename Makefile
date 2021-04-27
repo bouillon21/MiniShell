@@ -64,6 +64,7 @@ SRCS		=	main.c\
 				${PATH_EXPORT}export.c\
 				${PATH_REDIR_PIPE}pipe.c\
 				${PATH_ECHO}echo.c\
+				${PATH_EXPORT}unset.c\
 
 OBJS		= ${SRCS:.c=.o}
 

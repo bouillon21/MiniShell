@@ -94,7 +94,7 @@ void	add_history(t_all *all)
 	all->hist = all->hist->next;
 }
 
-void	manager_cmd(t_all *all)
+void	manager_cmd(t_all *all, int flag)
 {
 	if (ft_strcmp(all->token->command, "env") == 0)
 		printf_env(all);
@@ -106,9 +106,11 @@ void	manager_cmd(t_all *all)
 		ft_pwd();
 	else if (ft_strcmp(all->token->command, "unset") == 0)
 		ft_uset(all);
+	else if (ft_strcmp(all->token->command, "echo") == 0)
+		ft_echo(all);
 	else if (ft_strcmp(all->token->command, "exit") == 0)
 		exit (1);
-	else
+	else if (flag == 1)
 		exec(all);
 }
 
@@ -121,16 +123,21 @@ void	launch_command(t_all *all)
 	if (parse_string(all))
 	{
 		all->token = head;
-		while(all->token->next)
+		while(all->token)
 		{
-			if (all->token->command)		// КОСТЫЛЬ ОТ БУЛКИ :)
+			if (all->token->separate == '|')
 			{
-				ft_pipe(all);
-				manager_cmd(all);
+				pipe(all->token->pipe);
+				if (all->token->command)		// КОСТЫЛЬ ОТ БУЛКИ :)
+					exec(all);
 			}
+			else
+				if (all->token->command)
+					manager_cmd(all, 1);
 			all->token = all->token->next;
 		}
 	}
+	all->token = head;
 	clear_token(all);
 	all->flag = 0;
 	free(all->string);

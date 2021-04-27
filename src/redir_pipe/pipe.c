@@ -1,24 +1,32 @@
 #include "minishell.h"
 
+void	fd_close(int fd)
+{
+	if (fd > 0 && fd != 0 && fd != 1)
+		close(fd);
+}
+
 void	ft_pipe(t_all *all)
 {
-	pid_t	pid;
-	int		fd[2];
-
-	pipe(fd);
-	pid = fork();
-	if (pid == 0)
+	if (all->token->prev == 0)
 	{
-		close(fd[1]);
-		dup2(fd[0], 0);
-		all->in = fd[0];
-		close(fd[0]);
+		dup2(all->token->pipe[1], 1);
+		fd_close(all->token->pipe[0]);
+		fd_close(all->token->pipe[1]);
 	}
+	else if (all->token->prev && all->token->next && all->token->separate == '|')
+	{
+		dup2(all->token->prev->pipe[0], 0);
+		dup2(all->token->pipe[1], 1);
+		fd_close(all->token->pipe[0]);
+		fd_close(all->token->pipe[1]);
+		fd_close(all->token->prev->pipe[0]);
+		fd_close(all->token->prev->pipe[1]);
+	} 
 	else
 	{
-		close(fd[0]);
-		dup2(fd[1], 1);
-		all->out = fd[1];
-		close(fd[1]);
+		dup2(all->token->prev->pipe[0], 0);
+		fd_close(all->token->prev->pipe[0]);
+		fd_close(all->token->prev->pipe[1]);
 	}
 }

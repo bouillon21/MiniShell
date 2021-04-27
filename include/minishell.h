@@ -134,7 +134,7 @@ char		**env_join_test(t_list *env);
 char		**separation_line(char *line);
 t_list		*copy_list(t_list *env);
 void		ft_uset(t_all *all);
-void		manager_cmd(t_all *all);
+void		manager_cmd(t_all *all, int flag);
 int			fill_command(t_all *all, int i);
 int			fill_args(t_all *all, int start);
 int			check_syntax(t_all *all, int i);

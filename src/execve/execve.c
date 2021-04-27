@@ -32,11 +32,23 @@ void	open_apk(char *path, char **argv, t_all *all)
 	forks = fork();
 	if (forks == 0)
 	{
+		printf("");
+		ft_pipe(all);
 		env_copy = env_join(env);
 		terminal_off(all);
-		execve(path, argv, env_copy);
-		error_message("command not found", all);
+		if (!path)
+			manager_cmd(all, -1);
+		else
+		{
+			execve(path, argv, env_copy);
+			error_message("command not found", all);
+		}
 		exit(1);
+	}
+	if (all->token->prev)
+	{
+		fd_close(all->token->prev->pipe[0]);
+		fd_close(all->token->prev->pipe[1]);
 	}
 	forks = wait(&forks);
 }
@@ -74,14 +86,19 @@ void	exec(t_all *all)
 {
 	char	*line;
 // cделать защиту от null ?? Команды может и не быть в случае редиректов.
-// переделать в all
-	line = defin_dir(all);
-	if (line)
-	{
-		open_apk(line, all->token->args, all);
-		free(line);
-	}
-	else
-		open_apk(all->token->command, all->token->args, all);
 
+	if (ft_strcmp(all->token->command, "export") == 0
+		|| ft_strcmp(all->token->command, "cd") == 0)
+		open_apk(NULL, all->token->args, all);
+	else
+	{
+		line = defin_dir(all);
+		if (line)
+		{
+			open_apk(line, all->token->args, all);
+			free(line);
+		}
+		else
+			open_apk(all->token->command, all->token->args, all);
+	}
 }
