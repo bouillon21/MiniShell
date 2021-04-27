@@ -85,6 +85,7 @@ void	shell_level(t_all *all)
 {
 	t_list	*env;
 	int		tmp;
+	char	*t;
 
 	env = env_srh(all, "SHLVL");
 	if (!env || env->content->value == NULL)
@@ -99,7 +100,11 @@ void	shell_level(t_all *all)
 			else if (tmp < 0)
 				env_add(all, "SHLVL", "0");
 			else if (tmp < 1000)
-				env_add(all, "SHLVL", ft_itoa(tmp + 1));
+			{
+				t = ft_itoa(tmp + 1);
+				env_add(all, "SHLVL", t);
+				free(t);
+			}
 			else
 			{
 				error_message("shell level (1000) too high, resetting to 1", all);//переделать ввывод ошибок
