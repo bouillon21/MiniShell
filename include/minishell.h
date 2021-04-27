@@ -32,6 +32,7 @@ typedef struct s_token
 	char			**args;
 	char			**flags;
 	char			separate;
+	int				pipe[2];
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
@@ -81,6 +82,12 @@ typedef struct s_all
 	char			*old_string;
 	char			*string;
 	char			*static_home;
+	///////test//////////
+	int				pipe[2];
+	int				oldpipe[2];
+	// int				pid;
+	int				in;
+	int				out;
 }					t_all;
 
 void		handle_sigint(int sig);
@@ -106,7 +113,7 @@ void		printf_env(t_all *all);
 char		*env_srh_edit(t_list **head, char *need,
 				char *changes);
 t_list		*env_srh(t_all	*all, char *need);
-void		exec(char **argv, t_all *all, char *cmd);
+void		exec(t_all *all);
 char		**env_join(t_list *env);
 char		*verify_dir(char *path, char *cmd);
 void		free_array(char ***mas);
@@ -137,5 +144,9 @@ int			check_redirect_from_file(char *str, int i, t_all *all);
 int			check_pipe(char *str, int i, t_all *all);
 void		insert_inside(char *str, int pos, t_all *all, int flag);
 char		*parse_dollar(char *str, int i, t_all *all);
+void		ft_echo(t_all *all);
+
+void	ft_pipe(t_all *all);
+void	fd_close(int fd);
 
 #endif

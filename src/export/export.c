@@ -72,40 +72,6 @@ int	valid_export(char *arg)
 	return(0);
 }
 
-void	ft_uset(t_all *all)
-{
-	int	i;
-	int	flag;
-	t_list	*env;
-	t_list	*tmp;
-
-	i = 0;
-	while (all->token->args[++i])
-	{
-		flag = 0;
-		env = all->env;
-		tmp = env;
-		while (tmp)
-		{
-			if (ft_strcmp(tmp->content->key, all->token->args[i]) == 0)
-			{
-				if (flag)
-					env->next = tmp->next;
-				else
-					all->env = tmp->next;
-				free(tmp->content->key);
-				free(tmp->content->value);
-				free(tmp->content);
-				free(tmp);
-				break;
-			}
-			flag = 1;
-			env = tmp;
-			tmp = tmp->next;
-		}
-	}
-}
-
 void	export(t_all *all)//  не по норме +3 строки
 {
 	int	i;
