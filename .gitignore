@@ -58,3 +58,4 @@ include/.DS_Store
 minishell
 minishell_history
 pipe_test.c
+redir_test.c
