@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int		press_left(t_all *all)
+int	press_left(t_all *all)
 {
 	if (all->cursor.current_pos > all->cursor.start_pos)
 	{
@@ -22,7 +22,7 @@ int		press_left(t_all *all)
 	return (1);
 }
 
-int		press_right(t_all *all)
+int	press_right(t_all *all)
 {
 	if (all->cursor.current_pos < all->cursor.end_pos)
 	{
@@ -43,7 +43,7 @@ void	press_down_end_hist(t_all *all)
 	refresh_cursor(all, ft_strlen(all->string));
 }
 
-int		press_down(t_all *all)
+int	press_down(t_all *all)
 {
 	if (all->hist->next)
 		all->hist = all->hist->next;
@@ -55,8 +55,8 @@ int		press_down(t_all *all)
 		free(all->string);
 		if (all->hist->string[ft_strlen(all->hist->string) - 1] == '\n')
 		{
-				all->string = ft_substr(all->hist->string, 0,
-				ft_strlen(all->hist->string) - 1);
+			all->string = ft_substr(all->hist->string, 0,
+					ft_strlen(all->hist->string) - 1);
 		}
 		else
 			all->string = ft_strdup(all->hist->string);
@@ -65,7 +65,7 @@ int		press_down(t_all *all)
 	}
 	else if (all->flag == 1)
 		press_down_end_hist(all);
-	return(1);
+	return (1);
 }
 
 int	check_key(char *str, t_all *all)

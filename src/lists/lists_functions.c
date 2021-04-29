@@ -14,29 +14,20 @@
 
 void	clear_loop(t_token **token)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if ((*token)->command)
 	{
-		// printf("command - %s\n", (*token)->command);
 		clear_buf(&(*token)->command);
 	}
 	if ((*token)->args)
 		while ((*token)->args[++i])
-		{
-			// printf("args - %s\n", (*token)->args[i]);
 			clear_buf(&(*token)->args[i]);
-		}
 	if ((*token)->flags)
 		while ((*token)->flags[++i])
-		{
-			// printf("flags - %s\n", (*token)->flags[i]);
 			clear_buf(&(*token)->flags[i]);
-		}
-		// write(1, "\n", 1);
 	free((*token)->args);
-	// free((*token)->flags);
 }
 
 void	clear_token(t_all *all)
@@ -55,7 +46,7 @@ void	clear_token(t_all *all)
 
 t_token	*create_new_token(t_token *token)
 {
-	t_token *new_token;
+	t_token	*new_token;
 
 	new_token = malloc(sizeof(t_token));
 	new_token->separate = 0;
@@ -67,9 +58,9 @@ t_token	*create_new_token(t_token *token)
 	return (new_token);
 }
 
-t_list_hist *create_new_list(t_list_hist *hist)
+t_list_hist	*create_new_list(t_list_hist *hist)
 {
-	t_list_hist *new_list;
+	t_list_hist	*new_list;
 
 	new_list = malloc(sizeof(t_list_hist));
 	new_list->string = NULL;

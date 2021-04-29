@@ -2,7 +2,7 @@
 
 int	qwe(char *str)
 {
-	int i;
+	int	i;
 
 	i = 2;
 	while (str[i])
@@ -11,7 +11,7 @@ int	qwe(char *str)
 			return (0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
 void	ft_echo(t_all *all)
