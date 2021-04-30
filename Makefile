@@ -41,6 +41,8 @@ PATH_REDIR_PIPE	=	src/redir_pipe/
 PATH_ECHO	=	src/echo/
 
 PATH_MANEGER	=	src/
+	
+PATH_SHLVL	=	src/shlvl/
 
 SRCS		=	main.c\
 				src/utils.c\
@@ -68,6 +70,7 @@ SRCS		=	main.c\
 				${PATH_ECHO}echo.c\
 				${PATH_EXPORT}unset.c\
 				${PATH_MANEGER}manager_cmd.c\
+				${PATH_SHLVL}shlvl.c\
 
 OBJS		= ${SRCS:.c=.o}
 

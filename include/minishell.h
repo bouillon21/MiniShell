@@ -148,7 +148,7 @@ void		ft_echo(t_all *all);
 void		launch_command(t_all *all);
 void		add_history(t_all *all);
 void		redir(t_all *all);
-
+void		shell_level(t_all *all);
 
 void	ft_pipe(t_all *all);
 void	fd_close(int fd);
