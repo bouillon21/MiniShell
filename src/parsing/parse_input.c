@@ -69,10 +69,7 @@ int	parse_string(t_all *all)
 		if (!all->token->separate)
 			i = fill_args(all, i);
 		else
-		// {
 			all->token->args[1] = NULL;
-			// i++;
-		// }
 		all->token->next = create_new_token(all->token);
 		all->token = all->token->next;
 		skip_space(i, all->string);
