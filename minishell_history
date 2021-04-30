@@ -3769,6 +3769,205 @@ pwd
 pwd
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+pwd
+ls
+pwd ; pwd
+pwd | cat
+ls | grep l | grep u
+ls | grep l 
+ls | grep l | grep u
+exit
+
+ls
+
+
+ls
+
+pwd
+
+pwd
+
+pwd
+
+pwd
+
+pwd
+
+pwd
+ls \
+ls \\
+ls \\
+ls \\pwd
+cd ~
+pwd
+unset HOME
+cd 123
+pwd
+cd ~
+pwd
+set HOME=~/123
+export HOME=~/123
+cd ~
+pwd
+jhgfdkjfkuffkhkguyygouiygvkujfgkhglkhlshglkjdrshgldshlfjklhsdfljkhsdfkhljsdfiuuyioertuoywerouhrdgsjkhdfgsklsfdlhkdfgskljkhjldfgshkljdgsflgdfsoiphsdgfuhorgsehiuerwthjkllhjkgsdfljhsdfjhlkfghjlgfdsiouhbvdlhjkfdgshjlsdfopiuhertoipuygerohiusgrlhj;sdfglhjdsfghjl;dgfs
+jhgfdkjfkuffkhkguyygouiygvkujfgkhglkhlshglkjdrshgldshlfjklhsdfljkhsdfkhljsdfiuuyioertuoywerouhrdgsjkhdfgsklsfdlhkdfgskljkhjldfgshkljdgsflgdfsoiphsdgfuhorgsehiuerwthjkllhjkgsdfljhsdfjhlkfghjlgfdsiouhbvdlhjkfdgshjlsdfopiuhertoipuygerohiusgrlhj;sdfglhjdsfghjl;dgfs
+ls | grep u | grep l
+ls | rev 
+ls | rev | cat -e
+ls | rev | grep ftw 
+ls | grep u 
+ls | grep u | cat -e
+pwd
+ls
+ls | grep u 
+ls | grep u | cat -e
+ls | grev | cat -e
+ls | grev | cat -e
+exit
+
+ls | rev | cat -e
+ls | rev | wc -c
+
+ls | grep u 
+
+ls | grep u | grep l
+
+ls | rev | pwd
+pwd asdasdasdas
+ls adasdsadasd
+bash
+cat
+minishell
+cat
+1m🔥minishell🔥$ [0m7cat
+kwdlaskdasd
+
+[1;31m🔥minishell🔥$ [0m7[1;33me[1;92mx[1;36mi[1;34mt
+[0m./minishell
+
+
+cat
+ls
+minishell
+
+lkasjdkasd
+exit
+
+minishell
+exit
+
+
+ls > out | cat 
+ls > out | cat -e
+ls > out | cat -e | pwd
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.1/adapter/codelldb terminal-agent --port=
+
+ls | grep u
+
+ls | grep u
+
+ls | grep u
+
+ls | grep u
+
+ls | grep i
+
+ls | grep u
+
+ls | grep u
+ls | grep u | grep i
+ls | grep u | grep u
+
+ls | grep u | grep u
+
+ls | grep u | grep u
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.1/adapter/codelldb terminal-agent --port=
+
+ls | grep u | grep u
+
+ls | grep u | grep i
+
+ls | grep u | grep i
+asdas
+
+ls | grep u | grep i
+
+ls | rev | cat 
+ls | rev | cat | ls
+ls | rev | cat | ls | ls
+ls | rev | cat | ls | ls | ls
+ls | rev | cat | pwd
+ls | ls | ls | ls | ls | ls | ls
+ls \\
+ls \;
+ls \\
+ls\ 
+ls\ 
+
+ls | grep u | cat
+ls | grep u | cat -e
+ls | grep u 
+ls | grep u | cat -e
+
+ls > pwd
+ls > 123123
+pwd ; pwd
+pwd ; pwd ; pwd pwd pwd
+
+ls
+pwd
+ls pwd
+pwd
+echo 123
+ls | grep i
+ls | grep i | grep u
+ls | rev | rev | cat -e
+ls | rev |  cat -e
+
+ls | grep i | grep u
+
+ls > out
+
+ls > out
+ls > out
+
+
+ls > out
+
+ls > out
+
+ls > out
+
+ls > pwd
+
+ls > out
+
+ls > out
+
+ls > out
+
+ls > out
+
+ls > out
+
+ls\ 
+
+ls > out
+
+ls > out
+
+ls src
+
+ls src
+
+ls src
+
+ls src
+ls > out
+=======
+>>>>>>> origin/ZectorJay_test_branch
 ls | ls
 ls | ls | ls | ls
 ls | ls | ls | ls | cat -
@@ -4240,6 +4439,7 @@ cat -e < uuu
 
 cat -e < uuu
 ls | cat
+<<<<<<< HEAD
 =======
 pwd
 ls
@@ -4436,4 +4636,147 @@ ls src
 
 ls src
 ls > out
+>>>>>>> origin/ZectorJay_test_branch
+=======
+>>>>>>> origin/bouillon
+
+ls > out
+pwd >> out
+
+ls > out
+
+ls > out
+pwd | echo
+pwd | cat
+ls > out | cat
+ls > out | cat out
+cat out
+
+
+ls > out
+cat out
+cat out
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.2/adapter/codelldb terminal-agent --port=
+
+ls > out
+ls src
+
+cat out
+ls > out
+cat out
+pwd >> out
+cat out
+cat < out
+cat > out > out2
+echo 123 > out
+cat out
+cat out
+
+echo 123 > out
+cat out
+cat out
+echo 123 >> out
+echo 123 >> out
+cat out
+echo 123 > out
+cat out
+echo 123 >> out
+echo 123 > out
+cat out
+cat out > out2
+cat out2
+cat out2
+
+echo 123 >> out
+
+echo 123 >> out
+
+echo 123 >> out
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.2/adapter/codelldb terminal-agent --port=
+
+echo 123 >> out
+
+echo 123 >> out
+
+echo 123 >> out
+cat out
+cat out
+echo 123 >> out
+cat out
+cat out
+
+pwd > out
+cat out
+pwd >> out
+cat out
+ls > out
+cat out
+
+pwd > out
+cat out
+pwd >> out
+cat out
+ls > out
+cat out
+cat out
+cat out
+ls > out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+pwd > out
+cat out
+cat out
+cat out
+pwd >> out
+cat out
+cat out
+cat out
+cat out
+ls ; ls
+pwd ; pwd
+pwd ; pwd
+pwd ; pwd ; pwd
+pwd ; pwd ; pwd ; pwd
+ls | cat -e
+ls | ls | ls |cat -e
+
+ls | rev | cat -e
+pwd ; pwd ; pwd
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.2/adapter/codelldb terminal-agent --port=
+
+pwd ; pwd ; pwd
+
+pwd ; pwd
+
+pwd ; pwd
+
+pwd ; pwd
+leaks minishell
+
+pwd ; pwd
+pwd ; pwd ; pwd
 >>>>>>> origin/ZectorJay_test_branch

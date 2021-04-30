@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/27 18:01:20 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/30 20:19:23 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void	build_string(t_all *all, char *str)
 void	add_history(t_all *all)
 {
 	char *tmp;
-
+	
+	all->in = -1;
+	all->out = -1;
 	if (all->string[ft_strlen(all->string) - 1] != '\n')
 	{
 		tmp = all->string;
@@ -145,8 +147,6 @@ void	launch_command(t_all *all)
 	t_token		*head;
 
 	head = all->token;
-	all->in = -1;
-	all->out = -1;
 	add_history(all);
 	if (parse_string(all))
 	{
@@ -154,10 +154,10 @@ void	launch_command(t_all *all)
 		while(all->token)
 		{
 			redir(all);
-			if (all->token->separate && all->token->separate != '\n')
+			if (all->token->separate == '\0' && all->token->separate != '\n')
 			{
 				pipe(all->token->pipe);
-				if (all->token->command)		// КОСТЫЛЬ ОТ БУЛКИ :)
+				if (all->token->command)
 					exec(all);
 			}
 			else
@@ -168,8 +168,6 @@ void	launch_command(t_all *all)
 	}
 	all->token = head;
 	clear_token(all);
-	all->flag = 0;
-	free(all->string);
 }
 
 void	read_input(t_all *all)
