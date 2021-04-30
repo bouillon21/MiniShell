@@ -4437,3 +4437,143 @@ cat -e < uuu
 cat -e < uuu
 ls | cat
 >>>>>>> origin/bouillon
+
+ls > out
+pwd >> out
+
+ls > out
+
+ls > out
+pwd | echo
+pwd | cat
+ls > out | cat
+ls > out | cat out
+cat out
+
+
+ls > out
+cat out
+cat out
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.2/adapter/codelldb terminal-agent --port=
+
+ls > out
+ls src
+
+cat out
+ls > out
+cat out
+pwd >> out
+cat out
+cat < out
+cat > out > out2
+echo 123 > out
+cat out
+cat out
+
+echo 123 > out
+cat out
+cat out
+echo 123 >> out
+echo 123 >> out
+cat out
+echo 123 > out
+cat out
+echo 123 >> out
+echo 123 > out
+cat out
+cat out > out2
+cat out2
+cat out2
+
+echo 123 >> out
+
+echo 123 >> out
+
+echo 123 >> out
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.2/adapter/codelldb terminal-agent --port=
+
+echo 123 >> out
+
+echo 123 >> out
+
+echo 123 >> out
+cat out
+cat out
+echo 123 >> out
+cat out
+cat out
+
+pwd > out
+cat out
+pwd >> out
+cat out
+ls > out
+cat out
+
+pwd > out
+cat out
+pwd >> out
+cat out
+ls > out
+cat out
+cat out
+cat out
+ls > out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+cat out
+pwd > out
+cat out
+cat out
+cat out
+pwd >> out
+cat out
+cat out
+cat out
+cat out
+ls ; ls
+pwd ; pwd
+pwd ; pwd
+pwd ; pwd ; pwd
+pwd ; pwd ; pwd ; pwd
+ls | cat -e
+ls | ls | ls |cat -e
+
+ls | rev | cat -e
+pwd ; pwd ; pwd
+ /Users/hmickey/.vscode/extensions/vadimcn.vscode-lldb-1.6.2/adapter/codelldb terminal-agent --port=
+
+pwd ; pwd ; pwd
+
+pwd ; pwd
+
+pwd ; pwd
+
+pwd ; pwd
+leaks minishell
+
+pwd ; pwd
+pwd ; pwd ; pwd

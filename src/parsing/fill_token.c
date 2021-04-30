@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 21:52:52 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/30 19:16:40 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/30 20:02:53 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ int	fill_args(t_all *all, int start)
 	if (ft_strchr("><;|\n", all->string[start]))
 		all->token->separate = *ft_strchr("><;|\n", all->string[start]);
 	if (all->token->separate == '>' && all->string[start + 1] == '>')
+	{
+		start++;
 		all->token->separate = 'r';
+	}
 	return (start);
 }
