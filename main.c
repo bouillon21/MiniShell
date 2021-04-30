@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 13:17:10 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/30 21:34:36 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/30 21:49:33 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	error_message(char *message, t_all *all)
 
 void	minishell_history(t_all *all)
 {
-	int ret;
-	t_list_hist *head;
+	int			ret;
+	t_list_hist	*head;
 
 	head = all->hist;
 	ret = 1;
-	all->fd = open("minishell_history", O_RDWR |
-	O_CREAT, 0755 | O_APPEND);
+	all->fd = open("minishell_history", O_RDWR
+			| O_CREAT, 0755 | O_APPEND);
 	if (!all->fd)
 		error_message("fail to create minishell_history file", all);
 	while (ret)
@@ -67,60 +67,11 @@ void	minishell_history(t_all *all)
 		write(all->fd, "\n", 1);
 }
 
-int	check_digit(char *line)
+int	main(int argc, char **argv, char **envp)
 {
-	int	i;
+	t_all	all;
 
-	i = 0;
-	while (line[i])
-	{
-		if (!ft_isdigit(line[i]))
-			return (1);
-		i++;
-	}
-	return (-1);
-}
-
-void	shell_level(t_all *all)
-{
-	t_list	*env;
-	int		tmp;
-	char	*t;
-
-	env = env_srh(all, "SHLVL");
-	if (!env || env->content->value == NULL)
-		env_add(all, "SHLVL", "1");
-	else
-	{
-		if (check_digit(env->content->value))
-		{
-			tmp = ft_atoi(env->content->value);
-			if (tmp == 999)
-				env_add(all, "SHLVL", "");
-			else if (tmp < 0)
-				env_add(all, "SHLVL", "0");
-			else if (tmp < 1000)
-			{
-				t = ft_itoa(tmp + 1);
-				env_add(all, "SHLVL", t);
-				free(t);
-			}
-			else
-			{
-				error_message("shell level (1000) too high, resetting to 1", all);//переделать ввывод ошибок
-				env_add(all, "SHLVL", "1");
-			}
-		}
-		else
-			env_add(all, "SHLVL", "1");
-	}
-}
-
-int main(int argc, char **argv, char **envp)
-{
-	t_all all;
 	all.env = NULL;
-
 	errno = 0;
 	all.flag = 0;
 	all.token = create_new_token(0);
