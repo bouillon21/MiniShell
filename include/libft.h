@@ -17,10 +17,9 @@
 
 typedef struct s_env_data
 {
-	char	*key;
-	char	*value;
+	char			*key;
+	char			*value;
 }					t_env_data;
-
 
 typedef struct s_list
 {

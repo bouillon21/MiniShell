@@ -16,7 +16,7 @@
 # include <dirent.h>
 # include <errno.h>
 # include <string.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
 
 # define RESET			"\033[0m"
 # define RED			"\033[1;31m"
@@ -82,10 +82,8 @@ typedef struct s_all
 	char			*old_string;
 	char			*string;
 	char			*static_home;
-	///////test//////////
 	int				pipe[2];
 	int				oldpipe[2];
-	// int				pid;
 	int				in;
 	int				out;
 }					t_all;
@@ -149,8 +147,7 @@ void		launch_command(t_all *all);
 void		add_history(t_all *all);
 void		redir(t_all *all);
 void		shell_level(t_all *all);
-
-void	ft_pipe(t_all *all);
-void	fd_close(int fd);
+void		ft_pipe(t_all *all);
+void		fd_close(int fd);
 
 #endif
