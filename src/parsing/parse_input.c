@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:58:24 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/16 05:40:01 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/30 19:14:22 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int		parse_string(t_all *all)
 	int i;
 
 	i = 0;
-	// all->string[ft_strlen(all->string) + 1] = '\0';
 	if (!check_syntax(all, -1))
 		return (0);
 	while (all->string[i] != '\0' && all->string[i] != '\n')
@@ -70,10 +69,10 @@ int		parse_string(t_all *all)
 		if (!all->token->separate)
 			i = fill_args(all, i);
 		else
-		{
+		// {
 			all->token->args[1] = NULL;
-			i++;
-		}
+			// i++;
+		// }
 		all->token->next = create_new_token(all->token);
 		all->token = all->token->next;
 		skip_space(i, all->string);
