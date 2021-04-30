@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cshelli <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 15:54:04 by cshelli           #+#    #+#             */
-/*   Updated: 2020/07/26 15:54:07 by cshelli          ###   ########.fr       */
+/*   Updated: 2021/04/30 21:58:51 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 
-int		ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	while (*s1 != '\0' && *s2 != '\0')
 	{
