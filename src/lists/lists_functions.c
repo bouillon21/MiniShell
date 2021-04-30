@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:32:13 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/11 19:48:25 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/27 18:01:00 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	clear_token(t_all *all)
 	{
 		tmp = all->token;
 		clear_loop(&all->token);
-		all->token = all->token->prev;
+		all->token = all->token->next;
 		free(tmp);
 	}
 	all->token = create_new_token(0);
