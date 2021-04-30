@@ -33,7 +33,12 @@ void	open_apk(char *path, char **argv, t_all *all)
 	if (forks == 0)
 	{
 		printf("");
-		ft_pipe(all);
+		if (all->token->separate != '<')
+			ft_pipe(all);
+		dup2(all->out, 1);
+		dup2(all->in, 0);
+		fd_close(all->in);
+		fd_close(all->out);
 		env_copy = env_join(env);
 		terminal_off(all);
 		if (!path)

@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-int		check_quotes(int i, int flag, char *str)
+int	check_quotes(int i, int flag, char *str)
 {
 	if (str[i] == '\"' && flag == 0)
 		return (1);
 	else if (str[i] == '\'' && flag == 0)
 		return (2);
-	else if (str[i] == '\"' && str[i -1] != '\\'&& flag == 1)
+	else if (str[i] == '\"' && str[i - 1] != '\\' && flag == 1)
 		return (0);
 	else if (str[i] == '\'' && flag == 2)
 		return (0);
@@ -38,23 +38,23 @@ void	count_args(t_all *all, int i)
 		flag = check_quotes(i, flag, all->string);
 		if (ft_strchr(";\n\0", all->string[i]) && flag == 0)
 			break ;
-		else if(all->string[i] == ' ' && flag == 0)
+		else if (all->string[i] == ' ' && flag == 0)
 		{
 			while (all->string[i] == ' ')
 				i++;
 			if (ft_strchr(";><|\n\0", all->string[i]))
-				break;
+				break ;
 			words++ && i--;
 		}
 		i++;
 	}
-	all->token->args = ft_calloc(sizeof(char*), words);
+	all->token->args = ft_calloc(sizeof(char *), words);
 	all->token->args[0] = ft_strdup("minishell");
 }
 
-int		parse_string(t_all *all)
+int	parse_string(t_all *all)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!check_syntax(all, -1))
@@ -62,7 +62,7 @@ int		parse_string(t_all *all)
 	while (all->string[i] != '\0' && all->string[i] != '\n')
 	{
 		count_args(all, i);
-		if (!all->token->prev || !ft_strchr("><r",all->token->prev->separate))
+		if (!all->token->prev || !ft_strchr("><r", all->token->prev->separate))
 			i = fill_command(all, i);
 		if (!i)
 			return (0);

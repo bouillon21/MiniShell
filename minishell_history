@@ -3768,6 +3768,7 @@ pwd
 
 pwd
 
+<<<<<<< HEAD
 pwd
 ls
 pwd ; pwd
@@ -3963,3 +3964,476 @@ ls src
 
 ls src
 ls > out
+=======
+ls | ls
+ls | ls | ls | ls
+ls | ls | ls | ls | cat -
+ls | ls | ls | ls | cat -e
+ls | ls | ls | ls | grep src
+
+> ls
+> ls
+ls
+
+ls
+> ls
+> ls
+
+> ls
+
+> ls
+
+ls <
+ls >
+ls > asd
+
+ls > asd
+
+ls > asd
+> ls > ls
+> ls > ls > ls
+
+ls > ls > cat> 
+ls > ls > cat> ds
+
+ls | grep u | grep i
+
+ls | grep u | grep i
+ls | grep u 
+ls | wc | cat -e
+ls | cat -e | cat -e
+
+> 
+> dsa
+ls
+ls > qa
+
+fghgfhfg fg
+ls ; pwd
+./ls
+pwd
+ls
+./ls
+./minishell
+
+
+./ls
+ls
+./ls
+./11
+11
+ls
+./a.out
+export
+export adel=fdgdg
+export
+unset adel
+export
+echo hello > pwd
+echo hello | pwd
+echo hello | pwd
+echo hello | cat -e
+export
+
+ls > wer
+
+ls > bbb
+
+ls > bbb
+
+ls > bbb
+
+ls > bbb
+
+ls > bbb
+
+ls > bbb
+ls | cat -e
+ls | cat | cat -e
+ls >  mmm
+
+ls >  mmm
+
+ls qwer
+
+ls qwer
+
+ls >  mmm
+
+ls >  mmm
+
+ls >  mmm
+
+ls >  
+ls >  mmm
+
+ls >  mmm
+ls >  m
+
+ls < sa
+ls
+ls < mm
+ls < mmm
+ls < mmm
+
+ls < mmm
+ls < mm
+ls < mm
+
+ls < mm
+ls < mmds
+
+ls >  vvvvv
+
+ls >  vvvvv
+
+ls >  vvvvv
+
+ls >  vvvvv
+
+ls
+ls > qq > ww
+
+ls > qq
+ls > asdasd
+ls > asdasd | cat -e
+
+ls > asdasd
+ls > asdasd
+
+ls > asdasd
+
+ls > asdasd
+
+ls > asdasd
+
+ls > asdasd
+ls > asdasd
+
+
+ls > tt
+ls | cat -e | ere
+ls | cat -e > ere
+ls | cat -e > ere
+
+ls | cat -e > ere
+ls > tt
+ls | cat -e
+
+ls | cat -e > ere
+
+ls | cat -e > ere
+
+ls | cat -e > ere
+
+ls > op
+export > fff
+cat < fff
+car
+cat
+
+cat
+
+scs
+car
+
+cat < ttt
+
+
+env > rrr
+> rrr
+echo > rrr
+cat > rrr
+cat > rrr
+
+cat tt
+cat rr
+
+cat rr
+
+cat rr
+echo d
+echo rr
+ls
+ls | cat 
+cat rr
+
+cat rr
+
+cat rr
+
+ls
+
+cat tt
+cat rr
+
+cat rr
+cat < rr
+grep L < rr
+
+grep L < rr
+
+grep L < rr
+
+grep L < rr
+
+grep L < rr
+
+grep L < rr
+
+ls >ewewew
+ls >ewewew | cat -e
+
+ls >ewewew | cat -e
+ls >ewewew > qwe
+
+ls >ewewew > qwe
+ls >ewewew | cat -e
+
+ls >ewewew | cat -e
+ls >ewewew | cat -e
+ls >ewewew | cat -e
+
+ls | cat -e
+ls >ewewew | cat -e
+
+ls | cat -e
+ls | cat -e > mmmm
+ls >ewewew > asd
+ls >ewewew > asd
+
+
+export
+export wqeq
+export
+export wqeq=111
+export
+export wqeq+=dsds111
+export
+
+export
+export qwe
+export
+
+export qwe
+ls
+export qwe=123213123
+ls
+export qwe
+export qwe=adsasdsad
+export
+export qwe+=123
+export
+
+export qwe+=123
+export
+
+pwd
+
+
+
+ls
+cat rr
+cat qwe
+cat qwe -e
+cat -e  qwe 
+cat qwe -e
+cat qwe -e
+cat qwe
+cat -e qwe
+cat -e 
+cat -e 
+
+cat -e qwe
+cat -e qwe
+
+cat -e qwe > ppp
+ls > ppp
+
+ls > ppp
+cat -e qwe > ppp
+
+cat < qwe
+
+cat -e qwe > ppp
+cat -e qwe >vvvvvvv
+
+ls > zzz > lll 
+
+ls > tyt | cat -e
+ls < adadasda
+
+ls < adadasda
+ls
+ls <sda
+ls < zzz
+ls < zz
+
+ls < zz
+cat < zz
+cat < zzz
+cat < zzz
+
+
+cat < zzz
+
+ls
+cat
+
+cat < zzz
+cat < zzz
+
+
+cat < zzz
+
+cd ../..
+pwd
+cd -
+
+pwd > rrr
+ls > rrr
+
+ls > op
+
+ls > op
+pwd > op
+
+pwd > op
+
+pwd > op
+
+pwd > op
+pwd > op
+
+cat < pp
+cat < pp
+
+ls > qwe
+
+ls > qwe
+
+ls > qwe
+cat < qwe
+
+ls > qwe
+
+ls > qwe
+ls > qwe > rrr
+
+ls > qwe
+
+ls > qwe
+ls > qwe > qv
+cat qwe
+cat we
+cat < qwe
+cat < we
+
+cat < we
+
+grep src < we
+
+grep src we
+grep src > we
+grep src qwe > we
+grep src we > we
+grep src we 
+grep src we 
+
+grep src we
+grep src qwe
+grep src we
+ls > qwe
+grep src we
+grep src we
+grep src we > lllll
+
+ls > qqqq > xxxx
+
+
+ls | cat
+ls | cat -e
+ls | cat -e > uuu
+
+cat < we
+
+cat < qwe
+
+cat < qwe
+cat < we
+
+cat < we
+
+ls | cat
+ls | cat -e
+
+ls | cat -e
+
+
+ls | cat -e
+
+ls | cat -e
+ls | cat -e > vbvbv
+
+ls | cat -e
+ls | cat -e
+
+ls | cat -e
+ls | cat -e
+
+cat -e < qwe
+
+cat -e < we
+
+cat -e < we
+
+cat -e < we
+
+cat -e < we
+
+cat -e < we
+
+cat -e < we
+
+cat -e < we > ttttr
+
+
+grep src we > qwe
+
+ls > tytyt
+cat -e < ytyt
+
+ls | car
+ls | cat
+
+ls | cat
+ls | cat -e
+
+ls | cat -e > lololo
+
+
+ls | cat
+ls | cat > 12354
+cat < 2354
+cat < 12354
+
+cat < qqq
+cat < qqq
+cat < qqqq
+
+cat < qqqq
+cat < qqq
+
+ls | cat
+
+ls | cat
+
+ls | cat
+ls | cat
+
+ls | cat
+cat -e < uuu
+
+cat -e < uuu
+ls | cat
+>>>>>>> origin/bouillon

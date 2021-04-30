@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int		press_up(t_all *all)
+int	press_up(t_all *all)
 {
-	int len;
+	int	len;
 
 	if (all->hist->prev)
 	{
@@ -31,20 +31,21 @@ int		press_up(t_all *all)
 		write(1, all->string, ft_strlen(all->string));
 		all->flag = 1;
 	}
-	return(1);
+	return (1);
 }
 
-int		press_del(char *str, t_all *all)
+int	press_del(char *str, t_all *all)
 {
 	all->cursor.end_pos--;
 	delete_from_array(all->cursor.current_pos, all->string);
 	tputs(tgetstr("dc", 0), 1, ft_putchar);
-	return(1);
+	return (1);
 }
 
-int		press_backspace(char *str, t_all *all)
+int	press_backspace(char *str, t_all *all)
 {
 	if (all->cursor.current_pos > 0)
+	{
 		if (all->string[0] != '\0' && all->string[0] != 0 && all->string)
 		{
 			all->cursor.end_pos--;
@@ -52,11 +53,12 @@ int		press_backspace(char *str, t_all *all)
 			delete_from_array(all->cursor.current_pos, all->string);
 			tputs(tgetstr("le", 0), 1, ft_putchar);
 			tputs(tgetstr("dc", 0), 1, ft_putchar);
-		}	
-	return(1);
+		}
+	}
+	return (1);
 }
 
-int		ctrl_l(t_all *all)
+int	ctrl_l(t_all *all)
 {
 	tputs(tgetstr("cl", 0), 1, ft_putchar);
 	write(1, "\n", 1);
@@ -65,7 +67,7 @@ int		ctrl_l(t_all *all)
 	return (1);
 }
 
-int		check_key2(char *str, t_all *all)
+int	check_key2(char *str, t_all *all)
 {
 	if (ft_strnstr(str, "\e[A", ft_strlen(str)))
 		return (press_up(all));
@@ -73,8 +75,8 @@ int		check_key2(char *str, t_all *all)
 		ctrl_d_exit(all);
 	else if (ft_strnstr(str, "\004", ft_strlen(str)))
 		return (1);
-	if(ft_strnstr(str, "\f", ft_strlen(str)))
-		return(ctrl_l(all));
+	if (ft_strnstr(str, "\f", ft_strlen(str)))
+		return (ctrl_l(all));
 	if (all->string[0] != 0 && ft_strnstr(str, "\e[3~", ft_strlen(str)))
 		return (press_del(str, all));
 	if (ft_strnstr(str, "\x7f", ft_strlen(str)))
