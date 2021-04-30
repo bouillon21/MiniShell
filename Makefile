@@ -6,7 +6,7 @@
 #    By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 15:52:53 by hmickey           #+#    #+#              #
-#    Updated: 2021/04/12 21:52:49 by hmickey          ###   ########.fr        #
+#    Updated: 2021/04/16 05:09:32 by hmickey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,14 @@ PATH_PWD	=	src/pwd/
 
 PATH_EXPORT	=	src/export/
 
+PATH_REDIR_PIPE	=	src/redir_pipe/
+
+PATH_ECHO	=	src/echo/
+
+PATH_MANEGER	=	src/
+	
+PATH_SHLVL	=	src/shlvl/
+
 SRCS		=	main.c\
 				src/utils.c\
 				${PATH_CD}cd.c\
@@ -53,8 +61,16 @@ SRCS		=	main.c\
 				${PATH_PARSE}parse_input.c\
 				${PATH_PARSE}fill_token.c\
 				${PATH_PARSE}quote.c\
+				${PATH_PARSE}double_quote.c\
+				${PATH_PARSE}check_syntax.c\
+				${PATH_PARSE}validate_syntax.c\
 				${PATH_LISTS}lists_functions.c\
 				${PATH_EXPORT}export.c\
+				${PATH_REDIR_PIPE}pipe_redir.c\
+				${PATH_ECHO}echo.c\
+				${PATH_EXPORT}unset.c\
+				${PATH_MANEGER}manager_cmd.c\
+				${PATH_SHLVL}shlvl.c\
 
 OBJS		= ${SRCS:.c=.o}
 

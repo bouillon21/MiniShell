@@ -2,16 +2,16 @@
 
 void	get_save_env(t_all *all, char **envp)
 {
-	int		i;
-	char	*tmp;
+	int			i;
+	char		*tmp;
 	t_env_data	*data;
 
 	i = 0;
 	while (envp && envp[i])
 	{
-		data = ft_calloc(sizeof(t_env_data),1);
+		data = ft_calloc(sizeof(t_env_data), 1);
 		data->key = ft_substr(envp[i], 0,
-			ft_strlen(envp[i]) - ft_strlen(ft_strchr(envp[i], '=')));
+				ft_strlen(envp[i]) - ft_strlen(ft_strchr(envp[i], '=')));
 		data->value = NULL;
 		tmp = ft_strchr(envp[i], '=');
 		if (tmp)
@@ -32,19 +32,19 @@ t_list	*env_srh(t_all	*all, char *need)
 	while (env)
 	{
 		if (ft_strcmp(env->content->key, need) == 0)
-			return(env);
+			return (env);
 		env = env->next;
 	}
-	return(NULL);
+	return (NULL);
 }
 
 void	env_add(t_all *all, char *need, char *content)
 {
-	t_list	*env;
+	t_list		*env;
 	t_env_data	*data;
 
 	env = env_srh(all, need);
-	if(env == NULL)
+	if (env == NULL)
 	{
 		data = malloc(sizeof(t_env_data));
 		data->key = ft_strdup(need);
@@ -65,7 +65,7 @@ void	env_add(t_all *all, char *need, char *content)
 
 char	**env_join(t_list *env)
 {
-	int	i;
+	int		i;
 	char	**env_copy;
 	char	*tmp;
 

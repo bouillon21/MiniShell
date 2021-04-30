@@ -2,7 +2,7 @@
 
 void	string_to_lower(char **mas)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (mas[0][++i] != 0)
@@ -24,18 +24,24 @@ void	free_array(char ***mas)
 
 char	**separation_line(char *line)
 {
-	char **mas;
+	char	**mas;
+	int		len;
 
 	mas = ft_calloc(sizeof(char *), 3);
-	mas[0] = ft_substr(line, 0, 
-				ft_strlen(line) - ft_strlen(ft_strchr(line, '=')));
-	mas[1] = ft_strdup(ft_strchr(line, '=') + 1);
-	return(mas);
+	len = ft_strlen(line) - ft_strlen(ft_strchr(line, '='));
+	if (ft_strnstr(line, "+=", ft_strlen(line)))
+		len--;
+	mas[0] = ft_substr(line, 0, len);
+	if ((ft_strchr(line, '=') + 1) != NULL)
+		mas[1] = ft_strdup(ft_strchr(line, '=') + 1);
+	else
+		mas[1] = ft_strdup("");
+	return (mas);
 }
 
 t_list	*copy_list(t_list *env)
 {
-	t_list	*export;
+	t_list		*export;
 	t_env_data	*data;
 
 	export = NULL;

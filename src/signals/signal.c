@@ -6,18 +6,18 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:43:17 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/12 16:01:20 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/15 00:18:05 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void handle_sigint(int sig)
+void	handle_sigint(int sig)
 {
 	pid_t	pid;
-	int status;
-	
-	pid = waitpid(-1, &status, WNOHANG);
+	int		status;
+
+	wait(&status);
 	if (status != 0)
 		write(1, "\n", 1);
 }
@@ -25,10 +25,10 @@ void handle_sigint(int sig)
 void	ctrl_d_exit(t_all *all)
 {
 	pid_t	pid;
-	int status;
+	int		status;
 
 	pid = waitpid(-1, &status, WNOHANG);
-	clear_buf(&g_string);
+	clear_buf(&all->string);
 	write(1, YELLOW, ft_strlen(YELLOW));
 	write(1, "e", 1);
 	write(1, LIGHT_GREEN, ft_strlen(LIGHT_GREEN));

@@ -8,10 +8,10 @@ int	move_path(t_all *all, char *path)
 	if (chdir(path) == -1)
 	{
 		error_message("No such file or directory", all);
-		return(-1);
+		return (-1);
 	}
 	env_add(all, "PWD", getcwd(buf, 1024));
-	return(0);
+	return (0);
 }
 
 void	cd(t_all *all)

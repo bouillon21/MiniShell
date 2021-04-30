@@ -6,49 +6,33 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 17:37:49 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/12 20:53:11 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/16 05:25:55 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		skip_space(int start)
+int	skip_space(int start, char *str)
 {
-	int i;
+	int	i;
 
 	i = start;
-	while (g_string[i] == ' ')
-		delete_from_array(i);
+	while (str[i] == ' ')
+		delete_from_array(i, str);
 	return (start);
 }
 
-int		ecranisation(int start)
+int	ecranisation(int start, char *str)
 {
-	return (++start);
-}
-
-int		double_quote_start(int start)
-{
-	while (g_string[start] != '\"')
-	{
-		if (g_string[start] == '$')
-			;								//	ТУТ БУДЕТ ВЫТАСКИВАТЬСЯ ТО, ЧТО ЛЕЖИТ В $
-		start++;
-		if (g_string[start] == '\n')
-			exit(0);						// ТУТ СДЕЛАТЬ ОШИБКУ!! ЪУЪ!!!!
-	}
-	delete_from_array(start);
+	delete_from_array(start, str);
 	return (start);
 }
 
-int		single_quote_start(int start)
+int	single_quote_start(int start, char *str)
 {
-	while (g_string[start] != '\'')
-	{
+	delete_from_array(start, str);
+	while (str[start] != '\'')
 		start++;
-		if (g_string[start] == '\n')
-			exit(0);						// ТУТ СДЕЛАТЬ ОШИБКУ!! ЪУЪ!!!!
-	}
-	delete_from_array(start);
-	return (++start);
+	delete_from_array(start, str);
+	return (start);
 }

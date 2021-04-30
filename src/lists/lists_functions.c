@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:32:13 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/11 19:48:25 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/30 20:14:24 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,20 @@
 
 void	clear_loop(t_token **token)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if ((*token)->command)
 	{
-		// printf("command - %s\n", (*token)->command);
 		clear_buf(&(*token)->command);
 	}
 	if ((*token)->args)
 		while ((*token)->args[++i])
-		{
-			// printf("args - %s\n", (*token)->args[i]);
 			clear_buf(&(*token)->args[i]);
-		}
 	if ((*token)->flags)
 		while ((*token)->flags[++i])
-		{
-			// printf("flags - %s\n", (*token)->flags[i]);
 			clear_buf(&(*token)->flags[i]);
-		}
-		// write(1, "\n", 1);
 	free((*token)->args);
-	// free((*token)->flags);
 }
 
 void	clear_token(t_all *all)
@@ -47,15 +38,17 @@ void	clear_token(t_all *all)
 	{
 		tmp = all->token;
 		clear_loop(&all->token);
-		all->token = all->token->prev;
+		all->token = all->token->next;
 		free(tmp);
 	}
+	all->flag = 0;
+	free(all->string);
 	all->token = create_new_token(0);
 }
 
 t_token	*create_new_token(t_token *token)
 {
-	t_token *new_token;
+	t_token	*new_token;
 
 	new_token = malloc(sizeof(t_token));
 	new_token->separate = 0;
@@ -67,9 +60,9 @@ t_token	*create_new_token(t_token *token)
 	return (new_token);
 }
 
-t_list_hist *create_new_list(t_list_hist *hist)
+t_list_hist	*create_new_list(t_list_hist *hist)
 {
-	t_list_hist *new_list;
+	t_list_hist	*new_list;
 
 	new_list = malloc(sizeof(t_list_hist));
 	new_list->string = NULL;
