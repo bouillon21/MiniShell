@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 13:17:10 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/14 21:40:06 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/30 21:49:33 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	error_message(char *message, t_all *all)
 
 void	minishell_history(t_all *all)
 {
-	int ret;
-	t_list_hist *head;
+	int			ret;
+	t_list_hist	*head;
 
 	head = all->hist;
 	ret = 1;
-	all->fd = open("minishell_history", O_RDWR |
-	O_CREAT, 0755 | O_APPEND);
+	all->fd = open("minishell_history", O_RDWR
+			| O_CREAT, 0755 | O_APPEND);
 	if (!all->fd)
 		error_message("fail to create minishell_history file", all);
 	while (ret)
@@ -67,11 +67,12 @@ void	minishell_history(t_all *all)
 		write(all->fd, "\n", 1);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_all all;
-	all.env = NULL;
+	t_all	all;
 
+	all.env = NULL;
+	errno = 0;
 	all.flag = 0;
 	all.token = create_new_token(0);
 	all.hist = create_new_list(0);
