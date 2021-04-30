@@ -145,6 +145,10 @@ int			check_pipe(char *str, int i, t_all *all);
 void		insert_inside(char *str, int pos, t_all *all, int flag);
 char		*parse_dollar(char *str, int i, t_all *all);
 void		ft_echo(t_all *all);
+void		launch_command(t_all *all);
+void		add_history(t_all *all);
+void		redir(t_all *all);
+
 
 void	ft_pipe(t_all *all);
 void	fd_close(int fd);
