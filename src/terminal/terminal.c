@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:40:59 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/30 20:19:23 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/30 20:56:49 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	launch_command(t_all *all)
 		while(all->token)
 		{
 			redir(all);
-			if (all->token->separate == '\0' && all->token->separate != '\n')
+			if (all->token->separate && all->token->separate != '\n')
 			{
 				pipe(all->token->pipe);
 				if (all->token->command)

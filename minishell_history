@@ -4577,3 +4577,220 @@ leaks minishell
 
 pwd ; pwd
 pwd ; pwd ; pwd
+
+ls > out
+cat out
+ls >> out
+cat out
+
+echo " $PWD "
+echo ' $PWD '
+
+$?
+cd qwdewq
+$?
+
+$?
+pwd sdacx
+ls wefwe
+$?
+
+ls
+pwd
+
+ls
+pwd
+$?
+
+$?
+exit
+
+ls
+pwd
+ls 123
+
+cd 12321edas
+unset HOME
+cd
+pwd
+sdd
+pwd ; pwd
+
+ls
+ls 123
+ls wedsad
+pwd aslfcvdsfgv
+cd asdasd
+unset HOME
+cd
+
+pwd
+ls
+ls 123ewd
+
+ls 123213
+
+cd qeqwe
+
+cd 123qwe
+$?
+
+$?
+
+$?
+echo $?
+$?
+$?
+$?
+echo $?
+cd wqdeqwe
+$?
+
+cd wqdeqwe
+$?
+$?
+$?
+$?
+$?
+$?
+echo $?
+echo $?
+echo $?
+echo $?
+
+ls qwdasd
+echo $?
+
+cd asdasd
+echo $?
+$?
+
+$?
+
+$?
+ls qweewqe
+$?
+echo $?
+
+ls qweqwe
+echo $?
+
+cd sdadasd
+echo $?
+
+echo $?
+cd wdqwedqwe
+echo $?
+$?
+$?
+$?
+$?
+
+$?
+$?
+$?
+
+cd ewdasd
+
+ls
+ls sadsad
+$?
+$?
+
+echo $?
+cd asdasdasd
+echo $?
+cd asdasdasd
+zxc
+$?
+
+cd qdasd
+
+cd asdasdasd
+
+cdsd asdasd
+cd asdasd
+asdsawqe
+
+cd asdasd
+$?
+$?
+$?
+cd asdasd
+echo $?
+echo $?
+echo $?
+cd ewqdeqw
+$?
+$?
+$?
+
+cd dsasd
+$?
+$?
+$?
+$?
+$?
+cat < zxczxc
+
+cat < 123asd
+
+./minishell
+echo $?
+32
+
+$?
+$?
+qeweqwe
+
+ls qweqwe
+echo $?
+echo $?
+$?
+$?
+
+echo $?
+ls asdasd
+$?
+$?
+cd qweewq
+$?
+sdasdasd
+$?
+
+ls 213
+echo $?
+$?
+$?
+
+ls $?
+ls $?
+pwd $?
+$?
+pwd ; pwd
+
+ls $?
+$?
+
+cd qwe123
+$?
+$?
+$?
+$?
+dsfhudsihfksdaf
+ls -qweasd
+ls -9
+echo $?
+echo $?
+$?
+
+ls
+echo $?
+$?
+$?
+cd qwe
+$?
+echo $? 123
+pwd " $? 123 "
+echo " $? 123 "
+echo ' $? 123 '

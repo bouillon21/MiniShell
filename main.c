@@ -6,7 +6,7 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 13:17:10 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/14 21:40:06 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/30 21:34:36 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int main(int argc, char **argv, char **envp)
 	t_all all;
 	all.env = NULL;
 
+	errno = 0;
 	all.flag = 0;
 	all.token = create_new_token(0);
 	all.hist = create_new_list(0);

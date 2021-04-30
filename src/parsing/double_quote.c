@@ -6,11 +6,24 @@
 /*   By: hmickey <hmickey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 04:26:52 by hmickey           #+#    #+#             */
-/*   Updated: 2021/04/16 06:41:41 by hmickey          ###   ########.fr       */
+/*   Updated: 2021/04/30 21:36:02 by hmickey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*parse_question_mar(t_all *all, int i)
+{
+	char	*err;
+
+	delete_from_array(i, all->string);
+	if (errno)
+		err = ft_itoa(errno);
+	else
+		return (ft_strdup("0"));
+	errno = 0;
+	return (err);
+}
 
 char	*parse_dollar(char *str, int i, t_all *all)
 {
@@ -23,6 +36,8 @@ char	*parse_dollar(char *str, int i, t_all *all)
 	j = i;
 	if (ft_isdigit(str[i]))
 		return (NULL);
+	if (str[i] == '?')
+		return (parse_question_mar(all, i));
 	while (ft_isalnum(str[i]))
 		i++;
 	diff = i - j;
