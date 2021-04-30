@@ -40,6 +40,8 @@ PATH_REDIR_PIPE	=	src/redir_pipe/
 
 PATH_ECHO	=	src/echo/
 
+PATH_MANEGER	=	src/
+
 SRCS		=	main.c\
 				src/utils.c\
 				${PATH_CD}cd.c\
@@ -62,9 +64,10 @@ SRCS		=	main.c\
 				${PATH_PARSE}validate_syntax.c\
 				${PATH_LISTS}lists_functions.c\
 				${PATH_EXPORT}export.c\
-				${PATH_REDIR_PIPE}pipe.c\
+				${PATH_REDIR_PIPE}pipe_redir.c\
 				${PATH_ECHO}echo.c\
 				${PATH_EXPORT}unset.c\
+				${PATH_MANEGER}manager_cmd.c\
 
 OBJS		= ${SRCS:.c=.o}
 

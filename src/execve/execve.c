@@ -2,7 +2,7 @@
 
 char	*verify_dir(char *path, char *cmd)
 {
-	DIR	*direct;
+	DIR				*direct;
 	struct dirent	*dir_file;
 
 	direct = opendir(path);
@@ -14,12 +14,24 @@ char	*verify_dir(char *path, char *cmd)
 		if (ft_strncmp(dir_file->d_name, cmd, ft_strlen(cmd) + 4) == 0)
 		{
 			closedir(direct);
-			return (ft_strjoin("/./",dir_file->d_name));
+			return (ft_strjoin("/./", dir_file->d_name));
 		}
 		dir_file = readdir(direct);
 	}
 	closedir(direct);
-	return(NULL);
+	return (NULL);
+}
+
+void	pipe_redir(t_all *all)
+{
+	printf("");
+	if (all->token->separate != '<')
+		ft_pipe(all);
+	dup2(all->out, 1);
+	dup2(all->in, 0);
+	fd_close(all->in);
+	fd_close(all->out);
+	terminal_off(all);
 }
 
 void	open_apk(char *path, char **argv, t_all *all)
@@ -32,15 +44,8 @@ void	open_apk(char *path, char **argv, t_all *all)
 	forks = fork();
 	if (forks == 0)
 	{
-		printf("");
-		if (all->token->separate != '<')
-			ft_pipe(all);
-		dup2(all->out, 1);
-		dup2(all->in, 0);
-		fd_close(all->in);
-		fd_close(all->out);
+		pipe_redir(all);
 		env_copy = env_join(env);
-		terminal_off(all);
 		if (!path)
 			manager_cmd(all, -1);
 		else
@@ -60,7 +65,7 @@ void	open_apk(char *path, char **argv, t_all *all)
 
 char	*defin_dir(t_all *all)
 {
-	int	a;
+	int		a;
 	char	**path_bin;
 	char	*line;
 	char	*tmp;
@@ -90,7 +95,6 @@ char	*defin_dir(t_all *all)
 void	exec(t_all *all)
 {
 	char	*line;
-// cделать защиту от null ?? Команды может и не быть в случае редиректов.
 
 	if (ft_strcmp(all->token->command, "export") == 0
 		|| ft_strcmp(all->token->command, "cd") == 0)
